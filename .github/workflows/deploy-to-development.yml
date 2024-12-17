@@ -1,0 +1,49 @@
+name: Deploy Action to Development
+on:
+  pull_request:
+    branches:
+      - development
+
+jobs:
+  run-on-dev-env:
+    name: Run on DEVELOPMENT Environment
+    runs-on: ubuntu-latest
+    environment:
+      name: DEVELOPMENT
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: "8.x" # Set this to your .NET version
+
+      - name: Print Start Message
+        run: echo "Starting pre-merge checks for DEVELOPMENT environment..."
+
+      - name: Simulate Building Solution
+        run: |
+          echo "Building solution..."
+          # Uncomment the following line for real .NET build:
+          # dotnet build
+          sleep 2
+          echo "Solution build completed successfully!"
+
+      - name: Simulate Running Tests
+        run: |
+          echo "Running tests in DEVELOPMENT environment..."
+          # Uncomment the following line for real .NET tests:
+          # dotnet test
+          sleep 2
+          echo "All tests passed successfully!"
+
+      - name: Deployment Readiness Check
+        run: |
+          echo "Performing deployment readiness check for DEVELOPMENT environment..."
+          sleep 2
+          echo "DEVELOPMENT environment readiness check completed successfully!"
+
+      - name: Final Message
+        run: echo "All checks passed. Ready to merge into development!"
