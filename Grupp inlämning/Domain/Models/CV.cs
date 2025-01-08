@@ -8,7 +8,7 @@
         public DateTime CreatedAt { get; set; }
 
         public User User { get; set; }
-        public ContactDetails ContactDetails { get; set; }
+        public ContactDetail ContactDetails { get; set; }
         public ICollection<WorkExperience> WorkExperiences { get; set; } = new List<WorkExperience>();
         public ICollection<Education> Educations { get; set; } = new List<Education>();
         public ICollection<Skill> Skills { get; set; } = new List<Skill>();
