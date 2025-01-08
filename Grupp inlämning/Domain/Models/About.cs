@@ -12,7 +12,7 @@ namespace Domain.Models
         [Required]
         public Guid Id { get; set; }
         public string Description { get; set; }
-        public int CvId { get; set; }
+        public Guid CvId { get; set; }
         public CV Cv { get; set; }
 
         public About(Guid id, string description)
