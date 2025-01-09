@@ -1,6 +1,6 @@
 ﻿namespace Domain.Models
 {
-    public class ContactDetails
+    public class ContactDetail
     {
         public Guid Id { get; set; }
         public Guid CVId { get; set; }
@@ -10,11 +10,11 @@
         public string Address { get; set; }
         public int ZipCode { get; set; }
 
-        public ContactDetails()
+        public ContactDetail()
         {
         }
 
-        public ContactDetails(Guid id, Guid cvId, string name, string email, string phone, string address, int zipCode)
+        public ContactDetail(Guid id, Guid cvId, string name, string email, string phone, string address, int zipCode)
         {
             Id = id;
             CVId = cvId;
