@@ -15,7 +15,7 @@
         {
         }
 
-        public ContactDetail(Guid id, Guid cvId, string name, string email, string phone, string address, int zipCode)
+        public ContactDetail(Guid id, Guid cvId, string name, string email, string phone, string address, int zipCode, CV Cv)
         {
             Id = id;
             CVId = cvId;
@@ -24,6 +24,7 @@
             Phone = phone;
             Address = address;
             ZipCode = zipCode;
+            CV = Cv;
         }
     }
 }
