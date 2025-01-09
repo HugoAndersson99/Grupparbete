@@ -9,6 +9,7 @@
         public string Phone { get; set; }
         public string Address { get; set; }
         public int ZipCode { get; set; }
+        public CV CV { get; set; }
 
         public ContactDetail()
         {
