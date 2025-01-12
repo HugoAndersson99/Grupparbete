@@ -1,0 +1,20 @@
+.header {
+  position: absolute;
+  top: 13px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.header-logo {
+  width: 40px; 
+  height: 40px; 
+  margin-right: 10px; 
+  object-fit: contain; 
+}
+
+.header-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: black;
+}
