@@ -9,6 +9,7 @@ namespace Domain.Models
         public string Description { get; set; }
         public Guid CvId { get; set; }
         public CV Cv { get; set; }
+        public About() { }
 
         public About(Guid id, string description)
         {

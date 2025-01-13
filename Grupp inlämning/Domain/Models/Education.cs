@@ -15,6 +15,7 @@ namespace Domain.Models
         public DateTime EndDate { get; set; }
         public Guid CvId { get; set; }
         public CV Cv { get; set; }
+        public Education() {}
         public Education(Guid id, string schoolName, string degree, string fieldOfStudy, string city, string description, DateTime startDate, DateTime endDate)
         {
             Id = id;
