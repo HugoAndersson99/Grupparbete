@@ -15,15 +15,11 @@ namespace Infrastructure
             {
                 options.UseSqlServer(connectionstring);
             });
-
-            services.AddScoped<IRepository<About>, GenericRepository<About>>();
-            services.AddScoped<IRepository<ContactDetail>, GenericRepository<ContactDetail>>();
-            services.AddScoped<IRepository<CV>, GenericRepository<CV>>();
-            services.AddScoped<IRepository<Education>, GenericRepository<Education>>();
-            services.AddScoped<IRepository<Skill>, GenericRepository<Skill>>();
-            services.AddScoped<IRepository<User>, GenericRepository<User>>();
-            services.AddScoped<IRepository<WorkExperience>, GenericRepository<WorkExperience>>();
-
+            
+            services.AddScoped<ICvRepository, CvRepository>();
+            
+            services.AddScoped<IUserRepository, UserRepository>();
+            
             return services;
         }
     }
