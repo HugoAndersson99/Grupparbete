@@ -1,7 +1,4 @@
-﻿using Application.Interfaces.RepositoryInterfaces;
-using Domain.Models;
-using Infrastructure.Databases;
-using Infrastructure.Repositories;
+﻿using Infrastructure.Databases;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
