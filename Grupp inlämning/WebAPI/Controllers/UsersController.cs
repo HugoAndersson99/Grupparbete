@@ -1,5 +1,7 @@
 ﻿using Application.Commands.Users.Add;
 using Application.Dtos;
+using Application.Queries.Users.Get.GetAll;
+using Application.Queries.Users.Get.GetById;
 using Application.Queries.Users.Login;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -19,12 +21,27 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
+        [Route("getUserById/{id}")]
+        public async Task<IActionResult> GetUserById(Guid id)
+        {
+            var result = await mediator.Send(new GetUserByIdQuery(id));
+
+            if (!result.IsSuccess)
+            {
+                return NotFound(new { message = result.Message, errors = result.ErrorMessage });
+            }
+
+            return Ok(new { message = result.Message, data = result.Data });
+        }
+
+
+        [HttpGet]
         [Route("getAllUsers")]
         public async Task<IActionResult> GetAllUsers()
         {
             var result = await mediator.Send(new GetAllUsersQuery());
 
-            if (!result.IsSuccessfull)
+            if (!result.IsSuccess)
             {
                 return BadRequest(new { message = result.Message, errors = result.ErrorMessage });
             }
