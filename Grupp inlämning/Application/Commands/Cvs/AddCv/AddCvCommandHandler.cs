@@ -1,5 +1,4 @@
-﻿
-using Application.Dtos;
+﻿using Application.Dtos;
 using Application.Interfaces.RepositoryInterfaces;
 using Domain.Models;
 using MediatR;
@@ -31,7 +30,6 @@ namespace Application.Commands.Cvs.Add
 
             try
             {
-                // Kontrollera om användaren finns
                 var user = await _userRepository.GetUserByIdAsync(cvDto.UserId);
                 if (user == null)
                 {
@@ -39,7 +37,6 @@ namespace Application.Commands.Cvs.Add
                     return OperationResult<CvDto>.Failure("User not found.");
                 }
 
-                // Skapa en ny instans av CV baserat på CvDto
                 var cv = new CV
                 {
                     Id = Guid.NewGuid(),
@@ -49,7 +46,6 @@ namespace Application.Commands.Cvs.Add
                     User = user
                 };
 
-                // Lägg till CV via repository
                 var addResult = await _cvRepository.AddAsync(cv);
                 if (!addResult.IsSuccess)
                 {
@@ -59,7 +55,6 @@ namespace Application.Commands.Cvs.Add
 
                 _logger.LogInformation("Successfully added CV with Id: {CVId} for UserId: {UserId}", cv.Id, cvDto.UserId);
 
-                // Omvandla till CvDto för utdata
                 var resultDto = new CvDto
                 {
                     Id = cv.Id,
