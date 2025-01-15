@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Dtos;
+using Domain.Models;
+using MediatR;
 
 namespace Application.Commands.Users.Add
 {
-    internal class AddNewUserCommand
+    public class AddNewUserCommand : IRequest<OperationResult<User>>
     {
+        public AddNewUserCommand(UserDto newUser)
+        {
+            NewUser = newUser;
+        }
+
+        public UserDto NewUser { get; set; }
     }
 }
