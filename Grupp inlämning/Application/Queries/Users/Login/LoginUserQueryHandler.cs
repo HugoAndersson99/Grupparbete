@@ -22,13 +22,15 @@ namespace Application.Queries.Users.Login
         {
             try
             {
-                var user = await _userRepository.GetUserByEmailAsync(request.LoginUser.Email);
+                var userResult = await _userRepository.GetUserByEmailAsync(request.LoginUser.Email);
 
-                if (user == null)
+                if (!userResult.IsSuccess || userResult.Data == null)
                 {
                     _logger.LogWarning("Invalid login attempt for email: {Email}", request.LoginUser.Email);
                     return OperationResult<string>.Failure("Invalid email or password");
                 }
+
+                var user = userResult.Data;
 
                 if (!BCrypt.Net.BCrypt.Verify(request.LoginUser.PasswordHash, user.PasswordHash))
                 {
@@ -48,5 +50,6 @@ namespace Application.Queries.Users.Login
                 return OperationResult<string>.Failure($"An error occurred: {ex.Message}");
             }
         }
+
     }
 }

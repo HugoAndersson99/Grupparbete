@@ -23,7 +23,6 @@ namespace Application.Queries.Users.Get.GetById
         {
             string cacheKey = $"User_{request.Id}";
 
-            // Check if user is in cache
             if (_cache.TryGetValue(cacheKey, out User cachedUser))
             {
                 _logger.LogInformation("Returning cached user with Id: {UserId}", request.Id);
@@ -34,14 +33,12 @@ namespace Application.Queries.Users.Get.GetById
 
             try
             {
-                // Fetch user from repository
                 var result = await _userRepository.GetUserByIdAsync(request.Id);
 
                 if (result.IsSuccess && result.Data != null)
                 {
                     _logger.LogInformation("Successfully retrieved user with Id: {UserId}", request.Id);
 
-                    // Cache the retrieved user
                     _cache.Set(cacheKey, result.Data, TimeSpan.FromMinutes(5));
                     _logger.LogInformation("User cached with Id: {UserId}", request.Id);
 
