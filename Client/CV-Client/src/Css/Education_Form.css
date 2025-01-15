@@ -1,0 +1,36 @@
+.input-fields-3{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px;
+    gap: 10px;
+}
+.input-group-3{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: calc(50% - 1rem);
+    box-sizing: border-box;
+}
+#beskrivning-skola-container textarea {
+    background-color: #EBEAEA;
+    border: none;
+    border-radius: 5px;
+    height: 150px;
+    resize: none;
+    box-sizing: border-box;
+    padding: 10px;
+    text-align: left;
+    vertical-align: top;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.9s ease, color 0.9s ease;
+}
+#beskrivning-skola-container textarea:hover{
+    background-color:#F0E56B;
+    transition: background-color 0.9s ease, color 0.9s ease;
+}
+#beskrivning-skola-container textarea:focus{
+    background-color:#F0E56B;
+    transition: background-color 0.9s ease, color 0.9s ease;
+}
