@@ -66,9 +66,30 @@ namespace Infrastructure.Repositories
             }
         }
 
-        public async Task<User> GetUserByEmailAsync(string email)
+        public async Task<User> GetUserByIdAsync(Guid id)
         {
-            return await _database.Users.FirstOrDefaultAsync(u => u.Email == email);
+            _logger.LogInformation("Attempting to retrieve user with Id: {UserId}", id);
+
+            try
+            {
+                var user = await _database.Users.FirstOrDefaultAsync(u => u.Id == id);
+
+                if (user == null)
+                {
+                    _logger.LogWarning("No user found with Id: {UserId}", id);
+                }
+                else
+                {
+                    _logger.LogInformation("Successfully retrieved user with Id: {UserId}", id);
+                }
+
+                return user;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while retrieving user with Id: {UserId}", id);
+                throw;
+            }
         }
 
         public async Task<OperationResult<User>> LoginUserAsync(string email, string password)
