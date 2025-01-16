@@ -66,7 +66,32 @@ namespace Infrastructure.Repositories
             }
         }
 
-        public async Task<User> GetUserByIdAsync(Guid id)
+        public async Task<OperationResult<User>> GetUserByEmailAsync(string email)
+        {
+            _logger.LogInformation("Attempting to retrieve user with Email: {Email}", email);
+
+            try
+            {
+                var user = await _database.Users.FirstOrDefaultAsync(u => u.Email == email);
+
+                if (user == null)
+                {
+                    _logger.LogWarning("No user found with email: {Email}", email);
+                    return OperationResult<User>.Failure("User not found");
+                }
+
+                _logger.LogInformation("Successfully retrieved user with email: {Email}", email);
+                return OperationResult<User>.Success(user);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while retrieving user with email: {Email}", email);
+                return OperationResult<User>.Failure($"An error occurred: {ex.Message}");
+            }
+        }
+
+
+        public async Task<OperationResult<User>> GetUserByIdAsync(Guid id)
         {
             _logger.LogInformation("Attempting to retrieve user with Id: {UserId}", id);
 
@@ -77,20 +102,19 @@ namespace Infrastructure.Repositories
                 if (user == null)
                 {
                     _logger.LogWarning("No user found with Id: {UserId}", id);
-                }
-                else
-                {
-                    _logger.LogInformation("Successfully retrieved user with Id: {UserId}", id);
+                    return OperationResult<User>.Failure("User not found");
                 }
 
-                return user;
+                _logger.LogInformation("Successfully retrieved user with Id: {UserId}", id);
+                return OperationResult<User>.Success(user);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "An error occurred while retrieving user with Id: {UserId}", id);
-                throw;
+                return OperationResult<User>.Failure($"An error occurred: {ex.Message}");
             }
         }
+
 
         public async Task<OperationResult<User>> LoginUserAsync(string email, string password)
         {
