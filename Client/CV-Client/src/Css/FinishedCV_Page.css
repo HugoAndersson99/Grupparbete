@@ -1,0 +1,24 @@
+.finished-page-container{
+  display: grid;
+  min-height: 200vh;
+}
+
+
+
+.page-text{
+  text-align: center;
+  font-family: "Inter" , serif;
+  font-weight: 800;
+  font-size: 25px;
+}
+
+.page-content{
+  justify-self: center;
+}
+
+.pdf-button{
+  display: flex;
+  gap: 1rem;
+  justify-self: center;
+}
+

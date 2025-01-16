@@ -1,20 +1,20 @@
 .header {
-  position: absolute;
-  top: 13px;
-  left: 20px;
   display: flex;
   align-items: center;
+  width: 100%;
+  padding: 1rem;
+  font-family: "Inter" , serif;
+  font-weight: 800;
+  font-size: 16px;
+  
+  ;
+  
 }
 
 .header-logo {
   width: 40px; 
   height: 40px; 
-  margin-right: 10px; 
   object-fit: contain; 
-}
-
-.header-text {
-  font-size: 24px;
-  font-weight: bold;
-  color: black;
+  margin-left: 20px; 
+  margin-right: 10px;
 }
