@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../Components/Header';
 import '../Css/FinishedCV_Page.css'
-import cv from '../assets/Images/CV.png';
+import CV from '../assets/Images/Mock upm CV.png'
 import CreateCV_Button from '../Components/CreateCV_Button';
 import MittKonto_Button from '../Components/MittKonto_Button';
 
@@ -22,12 +22,12 @@ const FinishedCV_Page = () => {
     </div>
     
     <div className='page-content'>
-      <img src={cv} alt='CV' className='cv-pic' />
+      <img src={CV} alt='CV' className='cv-pic' />
     </div>
 
     <div className='pdf-button'>
     <CreateCV_Button text="Ladda ned pdf" />
-    <MittKonto_Button text="Till mitt konto" onClick={() => navigate('/MittKonto')}/>
+    <MittKonto_Button text="Till mitt konto" onClick={() => navigate("/Mitt_Konto")}/>
     </div>
     
 

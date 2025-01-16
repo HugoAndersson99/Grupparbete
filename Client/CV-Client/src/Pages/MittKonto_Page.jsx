@@ -1,10 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import CreateCV_Button from '../Components/CreateCV_Button';
 import '../Css/MittKonto_Page.css';
 
 const MittKonto_Page = () => {
+const navigate = useNavigate();
+
   return (
     <div className="mitt-konto-page">
       <div className="half-circle"></div>
@@ -20,7 +23,7 @@ const MittKonto_Page = () => {
             <CreateCV_Button
               className="create-cv-button"
               text="Skapa nytt CV"
-              onClick={() => navigate('/Create_CV')}
+              onClick={() => navigate('/Build_CV')}
             />
           </div>
           <div className="cv-list">

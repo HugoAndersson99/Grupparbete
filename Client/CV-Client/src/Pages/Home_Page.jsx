@@ -22,7 +22,7 @@ const Home_Page = () => {
         <Header />
         <div className='header-buttons'>
         <LoggaIn_Button text="Logga In" onClick={() => navigate('/Login')}/>
-        <CreateCV_Button text="Skapa CV" onClick={() => navigate('/Create_CV')} />
+        <CreateCV_Button text="Skapa CV" onClick={() => navigate('/Build_CV')} />
         </div>
 
       </div>
@@ -31,7 +31,7 @@ const Home_Page = () => {
         <div className="home-content">
           <h1>Skapa Ditt CV<br />Med Hjälp Av<br />AI!</h1>
           <p>Antagligen den bästa hjälpen<br />du kan få på nätet.</p>
-          <CreateCV_Button text="Skapa CV" onClick={() => navigate('/Create_CV')} />
+          <CreateCV_Button text="Skapa CV" onClick={() => navigate('/Build_CV')} />
         </div>
         <img src={diagram} alt="Diagram" className="home-chart" />
       </section>
@@ -61,7 +61,7 @@ const Home_Page = () => {
         <div className="feature feature-left">
           <div className="feature-text">
             <h1>Inbyggd AI <br />Hjälper Dig Med <br />Vad Du Ska<br /> Skriva!</h1>
-            <CreateCV_Button text="Skapa CV" onClick={() => navigate('/Create_CV')} />
+            <CreateCV_Button text="Skapa CV" onClick={() => navigate('/Build_CV')} />
           </div>
           <img src={screen} alt="Screen" className="feature-icon" />
         </div>
@@ -70,7 +70,7 @@ const Home_Page = () => {
           <img src={folder} alt="Folder" className="feature-icon" />
           <div className="feature-text">
             <h1>Färdiga Mallar<br /> Låter Dig Välja<br /> Din Optimala<br /> Stil!</h1>
-            <CreateCV_Button text="Skapa CV" onClick={() => navigate('/Create_CV')} />
+            <CreateCV_Button text="Skapa CV" onClick={() => navigate('/Build_CV')} />
           </div>
         </div>
       </section>
