@@ -45,7 +45,7 @@ namespace Application.Commands.Cvs.Add
                     Title = cvDto.Title,
                     UserId = cvDto.UserId,
                     PdfUrl = cvDto.PdfUrl,
-                    User = user
+                    User = user.Data
                 };
 
                 var addResult = await _cvRepository.AddAsync(cv);
