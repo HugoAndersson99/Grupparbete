@@ -4,6 +4,8 @@ import Home_Page from './Pages/Home_Page.jsx';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Register_Page from './Pages/Register_Page.jsx';
 import Build_CV_Page from './Pages/Build_CV_Page.jsx';
+import MittKonto_Page from './Pages/MittKonto_Page.jsx';
+import FinishedCV_Page from './Pages/FinishedCV_Page.jsx';
 function App() {
   
 
@@ -13,6 +15,8 @@ function App() {
       <Route path="/Login" element={<Login_Page />} />
       <Route path="/Register" element={<Register_Page />} />
       <Route path="/Build_CV" element={<Build_CV_Page />} />
+      <Route path="/Mitt_Konto" element={<MittKonto_Page />}/>
+      <Route path="/Finish" element={<FinishedCV_Page />}/>
     </Routes>
     
   )

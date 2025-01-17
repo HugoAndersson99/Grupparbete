@@ -1,0 +1,89 @@
+.mitt-konto-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 120vh;
+  box-sizing: border-box;
+}
+
+
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  text-align: center;
+}
+
+.welcome-text {
+  font-size: 40px;
+  margin-top: 20px;
+  font-family: "Inter" , serif;
+  font-weight: 800;
+}
+
+
+
+.cv-section {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.cv-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.cv-title {
+  font-size: 24px;
+  text-align: left;
+  font-family: "Inter" , serif;
+  font-weight: 800;
+}
+
+
+
+.cv-list {
+  margin-top: 20px;
+}
+
+.cv-list ul {
+  list-style-type: none;
+  padding: 0;
+  width: 180px;
+}
+
+.cv-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  font-weight: 800;
+}
+
+.cv-item span {
+  font-size: 16px;
+  font-family: "Inter" , serif;
+}
+
+
+
+.delete-button {
+  background-color: transparent;
+  color: #ff4d4d;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 800;
+}

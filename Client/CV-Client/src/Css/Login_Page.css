@@ -1,42 +1,51 @@
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
 
 
-.login-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background: linear-gradient(to bottom right, #ffffff, #e4c2fe);
-    font-family: Arial, sans-serif;
-    color: #333;
-    position: relative;
+.header-container {
+  justify-content: left;  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
 }
+
+.half-circle {
+    position: fixed; 
+    top: 0; 
+    left: -400px; 
+    width: 860px; 
+    height: 830px; 
+    background: rgba(199, 125, 234, 0.7);
+    border-top-right-radius: 100%; 
+    border-top-left-radius: 100%; 
+    border-bottom-left-radius: 100%; 
+    filter: blur(200px); 
+    z-index: -1; 
+  }
+
+
+
 
 
 .login-box {
     display: grid;
+    justify-self: center;
     grid-template-rows: 1fr 2fr 1fr;
     width: 705px;
     height: 406px;
-    background-color: #f3e38a; 
+    background-color: #F0E56B; 
     border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     padding: 40px;
     position: relative;
-    gap: 20px;
+    gap: 5px;
 }
 
 
 .login-title {
-    font-size: 32px;
-    font-weight: bold;
+    font-family: "Inter" , serif;
+    font-weight: 800;
+    font-size: 48;
     margin: 0;
-    color: #333;
+    ;
 
     
     display: flex;
@@ -61,10 +70,12 @@ html, body {
     width: 100%;
 }
 
-.login-label {
-    font-size: 14px;
+.login-box h2 {
+    font-family: "Inter" , serif;
+    font-weight: 800;
+    font-size: 20px;
     margin-bottom: 5px;
-    color: black;
+    ;
 }
 
 .login-input {
@@ -86,9 +97,10 @@ html, body {
     color: black;
     border: none;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 20px;
     cursor: pointer;
-    font-weight: bold;
+    font-family: "Inter" , serif;
+    font-weight: 800;
     margin-top: 10px;
     align-self: flex-start; 
 }
@@ -100,8 +112,9 @@ html, body {
 
 .login-footer {
     grid-row: 3;
-    font-size: 14px;
-    font-weight: bold;
+    font-size: 20px;
+    font-family: "Inter" , serif;
+    font-weight: 800;
     color: #555;
     text-align: center;
     align-self: center; 
@@ -111,5 +124,5 @@ html, body {
 .login-link {
     color: #C77DEA;
     cursor: pointer;
-    text-decoration: underline;
+    
 }
