@@ -1,14 +1,14 @@
 import React from 'react';
 import '../Css/Contact_Information_Form.css'
 
-function Contact_Information_Form ({ profilePicture, handleImageUpload}) {
+function Contact_Information_Form ({ profilePicture, handleImageUpload, handleInputChange, name, address, zip_code, phoneNumber, email, linkedin, otherLink}) {
 
     return (
-      <form className = "Contact_Information-Form">
+      <div className = "Contact_Information-Form">
 
         <div className = "picture-section">
-          <img className="profile-picture" src={profilePicture} alt="Profile" />
-          <label htmlFor="upload-image" className="custom-image-upload-button">
+          <img className = "profile-picture" src = {profilePicture} alt="Profile" />
+          <label htmlFor = "upload-image" className = "custom-image-upload-button">
             Ladda upp bild
           </label>
           <input
@@ -23,43 +23,92 @@ function Contact_Information_Form ({ profilePicture, handleImageUpload}) {
         <div className = "input-fields-1">
           
           <div className = "input-group-1">
-            <label for = "name">Namn</label>
-            <input type = "text" id = "name" placeholder = "Namn"></input>
+            <label htmlFor = "name">Namn</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Namn"
+              value={name}
+              onChange={handleInputChange}
+            />
           </div>
 
           <div className = "input-group-1">
-            <label for = "adress">Adress</label>
-            <input type = "text" id = "adress" placeholder = "Adress"></input>
+            <label htmlFor = "adress">Adress</label>
+            <input 
+              type = "text" 
+              id = "adress" 
+              name="address"
+              placeholder = "Adress"
+              value={address}
+              onChange={handleInputChange}
+            />
           </div>
 
           <div className = "input-group-1">
-            <label for = "postnummer">Postnummer</label>
-            <input type = "number" id = "postnummer" placeholder = "Postnummer"></input>
+            <label htmlFor = "postnummer">Postnummer</label>
+            <input 
+              type = "number" 
+              id = "postnummer" 
+              name="zip-code"
+              placeholder = "Postnummer"
+              value={zip_code}
+              onChange={handleInputChange}
+            />
           </div>
 
           <div className = "input-group-1">
-            <label for = "telefonnummer">Telefonnummer</label>
-            <input type = "tel" id = "telefonnummer" placeholder = "Telefonnummer"></input>
+            <label htmlFor = "telefonnummer">Telefonnummer</label>
+            <input 
+              type = "tel" 
+              id = "telefonnummer" 
+              name="phoneNumber"
+              placeholder = "Telefonnummer"
+              value={phoneNumber}
+              onChange={handleInputChange}
+            />
           </div>
 
           <div className = "input-group-1">
-            <label for = "e-mail">E-mail</label>
-            <input type = "email" id = "e-mail" placeholder = "E-mail"></input>
+            <label htmlFor = "e-mail">E-mail</label>
+            <input 
+              type = "email" 
+              id = "e-mail"
+              name="email"
+              placeholder = "E-mail"
+              value={email}
+              onChange={handleInputChange}
+            />
           </div>
 
           <div className = "input-group-1">
-            <label for = "linkedIn">LinkedIn</label>
-            <input type = "text" id = "linkedin" placeholder = "LinkedIn-URL"></input>
+            <label htmlFor = "linkedIn">LinkedIn</label>
+            <input 
+              type = "text" 
+              id = "linkedin" 
+              name="linkedin"
+              placeholder = "LinkedIn-URL"
+              value={linkedin}
+              onChange={handleInputChange}
+            />
           </div>
 
           <div className = "input-group-1" id = "länk-container">
-            <label for = "länk">Annan länk</label>
-            <input type = "text" id = "länk" placeholder = "Annan URL"></input>
+            <label htmlFor = "länk">Annan länk</label>
+            <input 
+            type = "text" 
+            id = "länk"
+            name="otherLink" 
+            placeholder = "Annan URL"
+            value={otherLink}
+            onChange={handleInputChange}
+            />
           </div>
 
         </div>
 
-      </form>
+      </div>
     );
 };
 

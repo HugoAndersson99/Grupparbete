@@ -8,23 +8,12 @@
 }
 .form-section, .CV-section{
     height:100vh;
-    width: 100%;
+    width: 100%;  
 }
 .form-section{
    background: rgb(255, 255, 255);
    overflow: scroll;
    overflow-x: hidden;
-}
-.CV-section{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgb(255, 255, 255);
-}
-.CV-mall {
-    width: 50%;
-    max-width: 800px;
-    height: auto;
 }
 ::-webkit-scrollbar{
     background: linear-gradient(180deg, #F0E56B, #C77DEA); 
@@ -186,6 +175,24 @@ i{
 
 /*--------------------------------------------------CV Section--------------------------------------------------*/
  
+.CV-section{
+    background: radial-gradient(18% 10% at 33% 15%, #b4a616 40%, transparent 50%), 
+    radial-gradient(18% 10% at 53% 30%, #b4a616 40%, transparent 50%),
+    radial-gradient(5% 270% at 43% 45%, #b4a616 40%, transparent 50%),
+    radial-gradient(18% 10% at 33% 60%, #b4a616 40%, transparent 50%), 
+    radial-gradient(18% 10% at 53% 85%, #b4a616 40%, transparent 50%) #f3f0e0;
+    background-size: 100px 100px;
+    overflow: hidden; 
+}
+.CV-modell-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+
 
 
 
