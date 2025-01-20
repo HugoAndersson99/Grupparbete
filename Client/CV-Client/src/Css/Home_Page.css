@@ -1,0 +1,178 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box; 
+}
+
+.half-circle {
+  position: fixed; 
+  top: 0; 
+  left: -400px; 
+  width: 860px; 
+  height: 830px; 
+  background: rgba(199, 125, 234, 0.7);
+  border-top-right-radius: 100%; 
+  border-top-left-radius: 100%; 
+  border-bottom-left-radius: 100%; 
+  filter: blur(200px); 
+  z-index: -1; 
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+
+
+.home {
+  margin-top: 100px;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  padding: 2rem;
+}
+
+.home-content {
+  max-width: 50%;
+  margin-right: 10rem; 
+}
+
+.home-content h1 {
+  font-family: "Inter" , serif;
+  font-weight: 800;
+  font-size: 48px;
+  margin-bottom: 1rem; 
+}
+
+.home-content p {
+  font-family: "Inter" , serif;
+  font-weight: 400;
+  font-size: 20px;
+  margin-top: 1rem;
+  display: block;
+  margin: 0.5rem 0; 
+}
+
+.home-chart {
+  max-width: 40%;
+  height: auto;
+  margin-left: 1rem; 
+}
+
+
+.testimonials-title {
+  font-family: "Inter" , serif;
+  font-weight: 800;
+  font-size: 40px;
+  text-align: center;
+  margin-top: 175px;
+}
+
+.testimonials {
+  padding: 4rem 2rem;
+  background: #F0E56B;
+  text-align: center;
+  max-width: 80%;
+  margin: 0 auto;
+  border-radius: 8px;
+}
+
+.testimonials-grid {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.testimonial {
+  background: #C77DEA;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  margin: 0.5rem;
+  max-width: 30%;
+}
+
+
+.review-name {
+  font-family: "Inter" , serif;
+  font-weight: 800;
+  font-size: 20px;
+  margin-top: 50px;
+}
+
+.review-text{
+  font-family: "Inter" , serif;
+  font-weight: 800;
+  font-size: 16px;
+  display: block;
+  font-weight: bold;
+  
+}
+
+.testimonial .avatar {
+  width: 99px;
+  height: 99px;
+  border-radius: 50%;
+  
+}
+
+.testimonial img{
+  top: 910px;
+  position: absolute;
+  margin-left: -50px;
+}
+
+.features {
+  display: block;
+  padding: 4rem 2rem;
+  text-align: center;
+  margin-top: 100px;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.feature-left {
+  justify-content: center;
+  text-align: left;
+}
+
+.feature-right {
+  justify-content: center;
+  text-align: right;
+  margin-top: 3rem; 
+}
+
+.feature-text {
+  font-family: "Inter" , serif;
+  font-weight: 800;
+  font-size: 30px;
+  flex: 1;
+  max-width: 30%;
+  margin: 0 1rem;
+  }
+
+.feature-icon {
+  max-width: 20%;
+  height: auto;
+  margin: 0 1rem;
+}
+
+

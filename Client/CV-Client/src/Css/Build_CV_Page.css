@@ -1,0 +1,200 @@
+
+/*----------Both Screens----------*/
+
+.container{
+    display:flex;
+    width: 100%;
+    font-family: Arial, sans-serif;
+}
+.form-section, .CV-section{
+    height:100vh;
+    width: 100%;  
+}
+.form-section{
+   background: rgb(255, 255, 255);
+   overflow: scroll;
+   overflow-x: hidden;
+}
+::-webkit-scrollbar{
+    background: linear-gradient(180deg, #F0E56B, #C77DEA); 
+}
+input{
+    background-color: #EBEAEA;
+    border: none;
+    border-radius: 5px;
+    height: 50px;
+    width: auto;
+    font-size: 16px;
+    transition: background-color 0.9s ease, color 0.9s ease;
+}
+input:hover{
+    background-color: #F0E56B;
+    transition: background-color 0.9s ease, color 0.9s ease;
+}
+input:focus{
+    background-color: #F0E56B;
+    transition: background-color 0.9s ease, color 0.9s ease;
+}
+label{
+    font-size: 16px;
+}
+.section-breaker{
+    background-color: rgb(82, 82, 82);
+    height: 2px;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/*--------------------------------------------------Form Section--------------------------------------------------*/
+
+/*----------Kontaktuppgifter-section----------*/
+
+.header-section-1{
+    margin: 10px;
+    gap: 10px;
+    font-size: 40px;
+    font-family: "Inria Serif", serif;
+}
+
+/*----------Arbetslivserfarenhet-section----------*/
+
+.header-section-2{
+    margin: 10px;
+    gap: 10px;
+    font-size: 40px;
+    font-family: "Inria Serif", serif;
+}
+
+/*----------Utbildning-section----------*/
+
+.header-section-3{
+    margin: 10px;
+    gap: 10px;
+    font-size: 40px;
+    font-family: "Inria Serif", serif;
+}
+
+/*----------Kompetenser-section----------*/
+
+.header-section-4{
+    margin: 10px;
+    gap: 10px;
+    font-size: 40px;
+    font-family: "Inria Serif", serif;
+}
+
+/*----------Om mig-section----------*/
+
+.header-section-5{
+    margin: 10px;
+    gap: 10px;
+    font-size: 40px;
+    font-family: "Inria Serif", serif;
+}
+
+/*----------Submit CV section----------*/
+
+.submit-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+.submit_CV-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 5px;
+    padding-left: 80px;
+    padding-right: 80px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #F0E56B;
+    font-size: 16px;
+    transition: background-color 0.9s ease, color 0.9s ease;
+}
+.submit_CV-button:hover{
+    color: #FFFFFF;
+    background-color: #C77DEA;
+    cursor: pointer;
+    transition: background-color 0.9s ease, color 0.9s ease;
+}
+
+/*----------Add new input group and AI Button section----------*/
+
+.add_new_input_fields-section{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #C77DEA;
+    font-weight: bold;
+    margin: 10px;
+    gap: 10px;
+}
+.add_new_input_fields-link:hover{
+    color: #F0E56B;
+    cursor: pointer;
+}
+.AI-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 5px;
+    background-color: #C77DEA;
+    color: #FFFFFF;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.9s ease, color 0.9s ease;
+}
+.AI-button:hover{
+    background-color: #F0E56B;
+    color: black;
+    cursor: pointer;
+    transition: background-color 0.9s ease, color 0.9s ease;
+}
+#add_new_input_fields-About_Me-section{
+    display: flex;
+    justify-content: flex-end;
+}
+i{
+    margin-left: 10px;
+    font-size: 30px;
+    transition: transform 2s ease, color 0.3s ease;
+}
+.AI-button:hover i {
+    animation: none;
+    transform: rotate(360deg) scale(1.2);
+    color: black;
+    transition: transform 2s ease, color 0.3s ease;
+}
+
+/*--------------------------------------------------CV Section--------------------------------------------------*/
+ 
+.CV-section{
+    background: radial-gradient(18% 10% at 33% 15%, #b4a616 40%, transparent 50%), 
+    radial-gradient(18% 10% at 53% 30%, #b4a616 40%, transparent 50%),
+    radial-gradient(5% 270% at 43% 45%, #b4a616 40%, transparent 50%),
+    radial-gradient(18% 10% at 33% 60%, #b4a616 40%, transparent 50%), 
+    radial-gradient(18% 10% at 53% 85%, #b4a616 40%, transparent 50%) #f3f0e0;
+    background-size: 100px 100px;
+    overflow: hidden; 
+}
+.CV-modell-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+
+
+
+
+
+

@@ -30,12 +30,14 @@ namespace Application.Commands.Cvs.Add
 
             try
             {
-                var user = await _userRepository.GetUserByIdAsync(cvDto.UserId);
-                if (user == null)
+                var userResult = await _userRepository.GetUserByIdAsync(cvDto.UserId);
+                if (userResult == null || userResult.Data == null)
                 {
                     _logger.LogWarning("Cannot add CV. User with Id {UserId} not found.", cvDto.UserId);
                     return OperationResult<CvDto>.Failure("User not found.");
                 }
+
+                var user = userResult.Data;
 
                 var cv = new CV
                 {
@@ -43,7 +45,7 @@ namespace Application.Commands.Cvs.Add
                     Title = cvDto.Title,
                     UserId = cvDto.UserId,
                     PdfUrl = cvDto.PdfUrl,
-                    User = user.Data
+                    User = user
                 };
 
                 var addResult = await _cvRepository.AddAsync(cv);

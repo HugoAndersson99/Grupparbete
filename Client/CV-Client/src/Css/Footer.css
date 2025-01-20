@@ -1,0 +1,33 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  background: #F0E56B;
+  padding: 16px 32px;
+  font-family: "Inter" , serif;
+  width: 1050px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+.footer-section {
+  flex: 1;
+  margin-left: 70px;
+}
+
+.footer-section h4 {
+  text-align: left;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section li {
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+

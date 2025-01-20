@@ -8,12 +8,15 @@ function Login_Page() {
 
   return (
     <div className='login-container'>
+      <div className="half-circle"></div>
+      <div className='header-container'>
       <Header />
+      </div>
       <div className='login-box'>
-        <h2 className='login-title'>Logga in</h2>
-        <label htmlFor='email'>Email</label>
+        <h1 className='login-title'>Logga in</h1>
+        <h2 htmlFor='email'>Email</h2>
         <input type='email' id='email' placeholder='Email' className='login-input'/>
-        <label htmlFor="password">Lösenord</label>
+        <h2 htmlFor="password">Lösenord</h2>
         <input type="password" id="password" placeholder="Lösenord" className="login-input" />
         <button className="login-button">Fortsätt</button>
       </div>

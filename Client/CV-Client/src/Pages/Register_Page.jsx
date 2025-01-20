@@ -5,21 +5,25 @@ import '../Css/Register_Page.css';
 function Register_Page() {
   return (
     <div className='register-container'>
+      <div className="half-circle"></div>
+      <div className='header-container'>
       <Header />
+      </div>
+      
       <div className='register-box'>
-        <h2 className='register-title'>Registrera dig</h2>
-        <label htmlFor='email'>Email</label>
+        <h1 className='register-title'>Registrera dig!</h1>
+        <h2 htmlFor='email'>Email</h2>
         <input type='email' id='email' placeholder='Email' className='register-input' />
-        <label htmlFor='password'>Lösenord</label>
+        <h2 htmlFor='password'>Lösenord</h2>
         <input type='password' id='password' placeholder='Lösenord' className='register-input' />
-        <label htmlFor='repeat-password'>Upprepa Lösenord</label>
+        <h2 htmlFor='repeat-password'>Upprepa Lösenord</h2>
         <input
           type='password'
           id='repeat-password'
           placeholder='Upprepa Lösenord'
           className='register-input'
         />
-        <button className='register-button'>Registrera</button>
+        <button className='register-button'>Fortsätt</button>
       </div>
     </div>
   );
