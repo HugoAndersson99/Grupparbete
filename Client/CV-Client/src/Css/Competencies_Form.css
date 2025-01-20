@@ -36,10 +36,10 @@
 }
 
 .level-bar {
-    display: flex; /* Flexbox for easy horizontal alignment */
-    justify-content: space-between; /* Space between buttons */
+    display: flex; 
+    justify-content: space-between;
     border-radius: 5px;
-    background-color: #F0E56B; /* Background color for the bar */
+    background-color: #F0E56B;
 
     height: 50px;
     width: auto;
