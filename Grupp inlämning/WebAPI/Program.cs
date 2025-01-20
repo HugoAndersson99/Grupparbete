@@ -1,8 +1,10 @@
+using Application;
 using Infrastructure;
 using Infrastructure.Databases;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Text;
 
 namespace WebAPI
@@ -44,6 +46,33 @@ namespace WebAPI
                 });
             });
 
+            builder.Services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Grupp Tre", Version = "v1" });
+
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "Authorize wit hyour bearer token that generates when you login",
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer"
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id= "Bearer"
+                            }
+                        },
+                        Array.Empty<string>()
+                    }
+                });
+            });
+
 
             //builder.Services.AddControllers();
             builder.Services.AddControllers(options =>
@@ -59,8 +88,7 @@ namespace WebAPI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            //builder.Services.AddApplication();
-            builder.Services.AddInfrastructure(builder.Configuration.GetConnectionString("DefaultConnection"));
+            builder.Services.AddApplication().AddInfrastructure(builder.Configuration.GetConnectionString("DefaultConnection"));
             builder.Services.AddDbContext<Database>();
 
             builder.Services.AddLogging(builder =>
