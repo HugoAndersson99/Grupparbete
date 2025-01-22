@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Microsoft.Extensions.DependencyInjection;
 using System.Text;
 
 namespace WebAPI
@@ -15,8 +16,19 @@ namespace WebAPI
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            // Add CORS
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowFrontend", policy =>
+                {
+                    policy.WithOrigins("http://localhost:5173") 
+                          .AllowAnyMethod()
+                          .AllowAnyHeader()
+                          .AllowCredentials(); 
+                });
+            });
 
+            // Add services to the container.
             var jwtSettings = builder.Configuration.GetSection("JwtSettings");
             byte[] secretkey = Encoding.ASCII.GetBytes(jwtSettings["SecretKey"]!);
 
@@ -24,7 +36,6 @@ namespace WebAPI
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-
             }).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
@@ -52,7 +63,7 @@ namespace WebAPI
 
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
-                    Description = "Authorize wit hyour bearer token that generates when you login",
+                    Description = "Authorize with your bearer token that generates when you login",
                     Type = SecuritySchemeType.Http,
                     Scheme = "bearer"
                 });
@@ -73,8 +84,6 @@ namespace WebAPI
                 });
             });
 
-
-            //builder.Services.AddControllers();
             builder.Services.AddControllers(options =>
             {
                 options.CacheProfiles.Add("DefaultCache", new CacheProfile()
@@ -83,8 +92,8 @@ namespace WebAPI
                     Location = ResponseCacheLocation.Any,
                 });
             });
+
             builder.Services.AddMemoryCache();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
@@ -95,9 +104,12 @@ namespace WebAPI
             {
                 builder.AddConsole();
                 builder.AddDebug();
-
             });
+
             var app = builder.Build();
+
+            // Konfigurera CORS i pipeline
+            app.UseCors("AllowFrontend"); 
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -106,10 +118,9 @@ namespace WebAPI
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 
