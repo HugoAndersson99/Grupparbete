@@ -21,6 +21,7 @@ namespace Application.Queries.Cvs.GetById
 
         public async Task<OperationResult<CV>> Handle(GetCvByIdQuery request, CancellationToken cancellationToken)
         {
+           
             string cacheKey = $"CV_{request.Id}";
 
             if (_cache.TryGetValue(cacheKey, out CV cachedCV))
