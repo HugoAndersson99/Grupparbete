@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Microsoft.Extensions.DependencyInjection;
 using System.Text;
+using Infrastructure.Configurations;
 
 namespace WebAPI
 {
@@ -103,6 +104,8 @@ namespace WebAPI
             builder.Services.AddApplication().AddInfrastructure(builder.Configuration.GetConnectionString("DefaultConnection"));
             builder.Services.AddDbContext<Database>();
 
+            builder.Services.Configure<BlobSettings>(builder.Configuration.GetSection("BlobSettings"));
+
             builder.Services.AddLogging(builder =>
             {
                 builder.AddConsole();
@@ -120,6 +123,7 @@ namespace WebAPI
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
 
             //app.UseHttpsRedirection();
 
