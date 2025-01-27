@@ -7,16 +7,14 @@ import Competencies_Form from '../Components/Competencies_Form.jsx';
 import About_Me_Form from '../Components/About_Me_Form.jsx';
 import Contact_Information_Form from '../Components/Contact_Information_Form.jsx';
 import CV_Modell from '../Components/CV_Modell.jsx';
-
+import { useNavigate } from "react-router-dom";
 
 function Make_CV_Page() {
-  
-  const [profilePicture, setProfilePicture] = useState(Picture_model);
-  const [workExperienceCount, setWorkExperienceCount] = useState(1);
-  const [educationCount, setEducationCount] = useState(1)
-  const [competenciesCount, setCompetenciesCount] = useState(1);
 
-  {/* Contact Information */}
+  const navigate = useNavigate();
+  const [profilePicture, setProfilePicture] = useState(Picture_model);
+
+  {/*--------------------Contact information-Section--------------------*/}
   const [name, setName] = useState("Katt Kattson");
   const [address, setAddress] = useState("Göterborg gatan 45");
   const [zip_code, setZip_Code] = useState("690 05");
@@ -25,31 +23,21 @@ function Make_CV_Page() {
   const [linkedin, setLinkedIn] = useState("www.linkedIn.se");
   const [otherLink, setOtherLink] = useState("www.minadress.se");
 
-  {/* About Me information */}
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setProfilePicture(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  {/*--------------------About Me-Section--------------------*/}
   const [about_Me, setAbout_Me] = useState("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nec tortor sed metus fermentum tincidunt. Nam accumsan libero id malesuada dignissim.Mauris dictum convallis ipsum id tincidunt. Nulla facilisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam auctor sapien sed justo convallis, vitae interdum sapien dapibus. Sed nec semper justo. Curabitur varius magna in ipsum malesuada, quis accumsan felis ornare. Integer quis ipsum ac justo pulvinar vulputate sed in risus. Vivamus eget lacus pharetra, volutpat est vel, pretium arcu.");
 
-  {/* Education information*/}
-  const [job_title, setJob_title] = useState("Lärare");
-  const [job_employer, setJob_employer] = useState("Hageby Skolan");
-  const [job_city, setJob_city] = useState("Gävle");
-  const [job_start_date, setJob_start_date] = useState("12-05-2013");
-  const [job_end_date, setJob_end_date] = useState("14-06-2024");
-  const [job_description, setJob_description] = useState("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nec tortor sed metus fermentum tincidunt. Nam accumsan libero id malesuada dignissim.");
-
-  {/* Work-experience information*/}
-  const [education_school, setEducation_school] = useState("Linköpings Universitet");
-  const [education_program, setEducation_program] = useState("Socionom");
-  const [education_start_date, setEducation_start_date] = useState("12-05-2013");
-  const [education_end_date, setEducation_end_date] = useState("14-06-2024");
-  const [education_description, setEducation_description] = useState("Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
-
-  {/* Competencies information*/}
-  const [competence_name, setCompetence_name] = useState("C#");
-  const [competence_level, setCompetence_level] = useState("");
-  const [competence_description, setCompetence_description] = useState("Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
-  
-
-  {/* Function to update props when input changes */}
+  {/* Function to update props when input changes for Contact Information and About Me*/}
   const handleInputChange = (inputEvent) => {
     const { name, value } = inputEvent.target;
     switch (name) {
@@ -77,143 +65,163 @@ function Make_CV_Page() {
       case 'about_Me':
         setAbout_Me(value);
         break;
-      case 'job_title':
-        setJob_title(value);
-        break;
-      case 'job_employer':
-        setJob_employer(value);
-        break;
-      case 'job_city':
-        setJob_city(value);
-        break;
-      case 'job_start_date':
-        setJob_start_date(value);
-        break;
-      case 'job_end_date':
-        setJob_end_date(value);
-        break;
-      case 'job_description':
-        setJob_description(value);
-        break;
-      case 'education_school':
-        setEducation_school(value);
-        break;
-      case 'education_program':
-        setEducation_program(value);
-        break;
-      case 'education_start_date':
-        setEducation_start_date(value);
-        break;
-      case 'education_end_date':
-        setEducation_end_date(value);
-        break;
-      case 'education_description':
-        setEducation_description(value);
-        break;
-      case 'competence_name':
-        setCompetence_name(value);
-        break;
-      case 'competence_level':
-        setCompetence_level(value);
-        break;
-      case 'competence_description':
-        setCompetence_description(value);
-        break;
       default:
         break;
     }
   };
 
-  const handleAddWorkExperience = () => 
-  {
-    setWorkExperienceCount(workExperienceCount + 1);
+  {/*--------------------Work-experience-Section--------------------*/}
+  const [work_Experiences, setWork_Experiences] = useState([
+    { 
+      job_title: "Lärare", 
+      job_employer: "Haga Skolan", 
+      job_city: "Norrköping", 
+      job_start_date: "12-03-2010", 
+      job_end_date: "30-11-2021", 
+      job_description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit." 
+    }
+  ]);
+  const handleInputChange_For_Work_Experiences = (e, index) => {
+    const { name, value } = e.target;
+    const new_Work_Experiences = [...work_Experiences];
+    new_Work_Experiences[index][name] = value;
+    setWork_Experiences(new_Work_Experiences);
   };
-  const handleRemoveWorkExperience = () => 
-  {
-    setWorkExperienceCount(workExperienceCount - 1);
+  const handleAdd_Work_Experiences = () => {
+    setWork_Experiences([
+      ...work_Experiences,
+      { job_title: '', job_employer: '', job_city: '', job_start_date: '', job_end_date: '', job_description: '' }
+    ]);
+  };
+  const handleRemove_Work_Experiences = () => {
+    if (work_Experiences.length > 0) {
+      setWork_Experiences(work_Experiences.slice(0, work_Experiences.length - 1));
+    }
   };
 
-  const handleAddEducation = () => 
-  {
-    setEducationCount(educationCount + 1);
+  {/*--------------------Education-Section--------------------*/}
+  const [education_Experiences, setEducation_Experiences] = useState([
+    { 
+      education_school: "Socionom", 
+      education_program: "Linköpings Universitet", 
+      education_start_date: "12-03-2010", 
+      education_end_date: "30-11-2021", 
+      education_description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit." 
+    }
+  ]);
+  const handleInputChange_For_Education_Experiences = (e, index) => {
+    const { name, value } = e.target;
+    const new_education_Experiences = [...education_Experiences];
+    new_education_Experiences[index][name] = value;
+    setEducation_Experiences(new_education_Experiences);
   };
-  const handleRemoveEducation = () => 
-    {
-      setEducationCount(educationCount - 1);
-    };
+  const handleAdd_Education_Experiences = () => {
+    setEducation_Experiences([
+      ...education_Experiences,
+      { education_school: '', education_program: '', education_start_date: '', education_end_date: '', education_description: ''}
+    ]);
+  };
+  const handleRemove_Education_Experiences = () => {
+    if (education_Experiences.length > 0) {
+      setEducation_Experiences(education_Experiences.slice(0, education_Experiences.length - 1));
+    }
+  };
+
+  {/*--------------------Competencies-Section--------------------*/}
+  const [competencies_Experiences, setCompetencies_Experiences] = useState([
+    { 
+      competence_name: "C#", 
+      competence_level: "", 
+      competence_description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", 
+    }
+  ]);
+  const handleInputChange_For_Competencies_Experiences = (e, index) => {
+    const { name, value } = e.target;
+    const new_competencies_Experiences = [...competencies_Experiences];
+    new_competencies_Experiences[index][name] = value;
+    setCompetencies_Experiences(new_competencies_Experiences);
+  };
+  const handleAdd_Competencies_Experiences = () => {
+    setCompetencies_Experiences([
+      ...competencies_Experiences,
+      { competence_name: "", competence_level: "", competence_description: ""}
+    ]);
+  };
+  const handleRemove_Competencies_Experiences = () => {
+    if (competencies_Experiences.length > 0) {
+      setCompetencies_Experiences(competencies_Experiences.slice(0, competencies_Experiences.length - 1));
+    }
+  };
+
+  {/*--------------------Utility-Section--------------------*/}
+
+  const [leftSide_Color, setLeftSide_Color] = useState("#F3A2B1");
+  const [leftSide_ProfileImage_Color, setLeftSide_ProfileImage_Color] = useState("#8C292C");
+  const [leftSide_Name_Color, setLeftSide_Name_Color] = useState("#FFFFFF");
+  const [leftSide_Headers_Color, setLeftSide_Headers_Color] = useState("#FFFFFF");
+  const [leftSide_Border_Color, setLeftSide_Border_Color] = useState("#8C292C");
+  const [leftSide_ContactInformation_Text_Color, setLeftSide_ContactInformation_Text_Color] = useState("#EEF2CF");
+  const [leftSide_ContactInformation_Logos_Color, setLeftSide_ContactInformation_Logos_Color] = useState("#8C292C");
+  const [leftSide_Education_Header_Color, setLeftSide_Education_Header_Color] = useState("#8C292C");
+  const [leftSide_EducationInformation_Color, setLeftSide_EducationInformation_Color] = useState("#EEF2CF");
   
-  const handleAddCompetence = () =>
-  {
-    setCompetenciesCount(competenciesCount + 1);
-  };
-  const handleRemoveCompetence = () =>
-    {
-      setCompetenciesCount(competenciesCount - 1);
-    };
+  const [rightSide_Color, setRightSide_Color] = useState("#C1EADA");
+  const [rightSide_Border_Color, setRighSide_Border_Color] = useState("#778C79");
+  const [rightSide_Header_Text_Color, setRightSide_Header_Text_Color] = useState("#FFFFFF");
+  const [rightSide_Header_Background_Color, setRightSide_Header_Background_Color] = useState("#778C79");
+  const [rightSide_Header_Shadow_Color, setrightSide_Header_Shadow_Color] = useState("#000000");
+  const [rightSide_AboutMe_Color, setrightSide_AboutMe_Color] = useState("#59574A");
+  const [rightSide_Work_Title_Color, setRightSide_Work_Title_Color] = useState("#59574A");
+  const [rightSide_Work_Information_Color, setRightSide_Work_Information_Color] = useState("#59574A");
+  const [rightSide_Work_Description_Color, setRightSide_Work_Description_Color] = useState("#59574A");
+  const [rightSide_Competence_Skill, setRightSide_Competence_Skill] = useState("#59574A");
+  const [rightSide_Competence_Description, setRightSide_Competence_Description] = useState("#59574A");
+  const [rightSide_Competence_Level_Background, setRightSide_Competence_Level_Background] = useState("#EEF2CF");
+  const [rightSide_Competence_Level_Foreground, setRightSide_Competence_Level_Foreground] = useState("#F2CFBB");
+  
 
-  const renderWorkExperienceForms = () => 
-  {
-    const forms = [];
-    for (let numberOfForms = 0; numberOfForms < workExperienceCount; numberOfForms++) 
-    {
-      forms.push(<Work_Experience_Form 
-        key={numberOfForms} 
-        job_title={job_title}
-        job_employer={job_employer}
-        job_city={job_city}
-        job_start_date={job_start_date}
-        job_end_date={job_end_date}
-        job_description={job_description}
-        handleInputChange={handleInputChange}
-        />);
-    }
-    return forms;
-  };
+  const handleSubmitCV = () => {
+    navigate("/Finish", {
+      state: {
+        profilePicture,
+        name,
+        address,
+        zip_code,
+        phoneNumber,
+        email,
+        linkedin,
+        otherLink,
+        about_Me,
+        work_Experiences,
+        education_Experiences,
+        competencies_Experiences,
+        leftSide_Color,
+        leftSide_ProfileImage_Color,
+        leftSide_Name_Color,
+        leftSide_Headers_Color,
+        leftSide_Border_Color,
+        leftSide_ContactInformation_Text_Color,
+        leftSide_ContactInformation_Logos_Color,
+        leftSide_Education_Header_Color,
+        leftSide_EducationInformation_Color,
 
-  const renderEducationForms = () => 
-  {
-    const forms = [];
-    for (let numberOfForms = 0; numberOfForms < educationCount; numberOfForms++) 
-    {
-      forms.push(<Education_Form 
-        key={numberOfForms} 
-        education_school={education_school}
-        education_program={education_program}
-        education_start_date={education_start_date}
-        education_end_date={education_end_date}
-        education_description={education_description}
-        handleInputChange={handleInputChange}
-        />);
-    }
-    return forms;
-  };
-
-  const renderCompetenciesForms = () =>
-  {
-    const forms = [];
-    for (let numberOfForms = 0; numberOfForms < competenciesCount; numberOfForms++) 
-    {
-      forms.push(<Competencies_Form 
-        key={numberOfForms} 
-        competence_name={competence_name}
-        competence_level={competence_level}
-        competence_description={competence_description}
-        handleInputChange={handleInputChange}
-      />);
-    }
-    return forms;
+        rightSide_Color,
+        rightSide_Border_Color,
+        rightSide_Header_Text_Color,
+        rightSide_Header_Background_Color,
+        rightSide_Header_Shadow_Color,
+        rightSide_AboutMe_Color,
+        rightSide_Work_Title_Color,
+        rightSide_Work_Information_Color,
+        rightSide_Work_Description_Color,
+        rightSide_Competence_Skill,
+        rightSide_Competence_Description,
+        rightSide_Competence_Level_Background,
+        rightSide_Competence_Level_Foreground
+      },
+    });
   };
 
-  const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setProfilePicture(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
 
   return (
     <div className = "container">
@@ -252,13 +260,24 @@ function Make_CV_Page() {
             Arbetslivserfarenhet
           </h1>
 
-          {renderWorkExperienceForms()}
+          {work_Experiences.map((experience, index) => (
+            <Work_Experience_Form
+              key={index}
+              job_title={experience.job_title}
+              job_employer={experience.job_employer}
+              job_city={experience.job_city}
+              job_start_date={experience.job_start_date}
+              job_end_date={experience.job_end_date}
+              job_description={experience.job_description}
+              handleInputChange_For_Work_Experiences={(e) => handleInputChange_For_Work_Experiences(e, index)}
+            />
+          ))}
 
           <div className="add_new_input_fields-section">
-            <p className="add_new_input_fields-link" onClick = {handleAddWorkExperience}>
+            <p className="add_new_input_fields-link" onClick = {handleAdd_Work_Experiences}>
               + Lägg till ytterligare erfarenhet
             </p>
-            <p className="add_new_input_fields-link" onClick = {handleRemoveWorkExperience}>
+            <p className="add_new_input_fields-link" onClick = {handleRemove_Work_Experiences}>
               - Ta bort erfarenhet
             </p>
             <button className="AI-button">
@@ -277,13 +296,23 @@ function Make_CV_Page() {
             Utbildning
           </h1>
 
-          {renderEducationForms()}
+          {education_Experiences.map((experience, index) => (
+            <Education_Form
+              key={index}
+              education_school={experience.education_school}
+              education_program={experience.education_program}
+              education_start_date={experience.education_start_date}
+              education_end_date={experience.education_end_date}
+              education_description={experience.education_description}
+              handleInputChange_For_Education_Experiences={(e) => handleInputChange_For_Education_Experiences(e, index)}
+            />
+          ))}
 
           <div className = "add_new_input_fields-section">
-            <p className = "add_new_input_fields-link" onClick={handleAddEducation}>
+            <p className = "add_new_input_fields-link" onClick={handleAdd_Education_Experiences}>
               + Lägg till ytterliggare erfarenhet
             </p>
-            <p className="add_new_input_fields-link" onClick = {handleRemoveEducation}>
+            <p className="add_new_input_fields-link" onClick = {handleRemove_Education_Experiences}>
               - Ta bort erfarenhet
             </p>
             <button className = "AI-button">
@@ -302,13 +331,21 @@ function Make_CV_Page() {
             Kompetenser
           </h1>
           
-          {renderCompetenciesForms()}
+          {competencies_Experiences.map((experience, index) => (
+            <Competencies_Form
+              key={index}
+              competence_name={experience.competence_name}
+              competence_level={experience.competence_level}
+              competence_description={experience.competence_description}
+              handleInputChange_For_Competencies_Experiences={(e) => handleInputChange_For_Competencies_Experiences(e, index)}
+            />
+          ))}
 
           <div className = "add_new_input_fields-section">
-            <p className = "add_new_input_fields-link" onClick={handleAddCompetence}>
+            <p className = "add_new_input_fields-link" onClick={handleAdd_Competencies_Experiences}>
               + Lägg till ytterliggare erfarenhet
             </p>
-            <p className="add_new_input_fields-link" onClick = {handleRemoveCompetence}>
+            <p className="add_new_input_fields-link" onClick = {handleRemove_Competencies_Experiences}>
               - Ta bort erfarenhet
             </p>
             <button className = "AI-button">
@@ -342,7 +379,8 @@ function Make_CV_Page() {
 
         <div className = "submit-button-container">
 
-          <button className = "submit_CV-button">
+
+          <button className = "submit_CV-button" onClick={handleSubmitCV}>
             Färdig!
           </button>
 
@@ -352,7 +390,210 @@ function Make_CV_Page() {
 
       {/*------------------------------CV-mall------------------------------*/}
       <div className = "CV-section">
-        
+
+        <div className = "color_picker-section">
+
+          <div className="color-picker">
+            <input
+              type="color"
+              id="leftSide-color"
+              value={leftSide_Color}
+              onChange={(e) => setLeftSide_Color(e.target.value)}
+            />
+          </div>
+
+          <div className="color-picker">
+            <input
+              type="color"
+              id="leftSide-Border-color"
+              value={leftSide_Border_Color}
+              onChange={(e) => setLeftSide_Border_Color(e.target.value)}
+            />
+          </div>
+
+          <div className="color-picker">
+            <input
+              type="color"
+              id="leftSide-ProfileImage"
+              value={leftSide_ProfileImage_Color}
+              onChange={(e) => setLeftSide_ProfileImage_Color(e.target.value)}
+            />
+          </div>
+
+          <div className="color-picker">
+            <input
+              type="color"
+              id="leftSide-Name"
+              value={leftSide_Name_Color}
+              onChange={(e) => setLeftSide_Name_Color(e.target.value)}
+            />
+          </div>
+
+          <div className="color-picker">
+            <input
+              type="color"
+              id="leftSide-Headers"
+              value={leftSide_Headers_Color}
+              onChange={(e) => setLeftSide_Headers_Color(e.target.value)}
+            />
+          </div>
+
+          <div className="color-picker">
+            <input
+              type="color"
+              id="leftSide-ContactInformation-Text"
+              value={leftSide_ContactInformation_Text_Color}
+              onChange={(e) => setLeftSide_ContactInformation_Text_Color(e.target.value)}
+            />
+          </div>
+
+          <div className="color-picker">
+            <input
+              type="color"
+              id="leftSide-ContactInformation-Logos"
+              value={leftSide_ContactInformation_Logos_Color}
+              onChange={(e) => setLeftSide_ContactInformation_Logos_Color(e.target.value)}
+            />
+          </div>
+
+          <div className="color-picker">
+            <input
+              type="color"
+              id="leftSide-Education-Header"
+              value={leftSide_Education_Header_Color}
+              onChange={(e) => setLeftSide_Education_Header_Color(e.target.value)}
+            />
+          </div>
+
+          <div className="color-picker">
+            <input
+              type="color"
+              id="leftSide-Education-Information"
+              value={leftSide_EducationInformation_Color}
+              onChange={(e) => setLeftSide_EducationInformation_Color(e.target.value)}
+            />
+          </div>
+
+          <div className="color-picker">
+            <input
+              type="color"
+              id="rightSide-color"
+              value={rightSide_Color}
+              onChange={(e) => setRightSide_Color(e.target.value)}
+            />
+          </div>
+
+          <div className="color-picker">
+            <input
+              type="color"
+              id="rightSide-Border-color"
+              value={rightSide_Border_Color}
+              onChange={(e) => setRighSide_Border_Color(e.target.value)}
+            />
+          </div>
+
+          <div className="color-picker">
+            <input
+              type="color"
+              id="rightSide-Header-Text-color"
+              value={rightSide_Header_Text_Color}
+              onChange={(e) => setRightSide_Header_Text_Color(e.target.value)}
+            />
+          </div>
+
+          <div className="color-picker">
+            <input
+              type="color"
+              id="rightSide-Header-Background-color"
+              value={rightSide_Header_Background_Color}
+              onChange={(e) => setRightSide_Header_Background_Color(e.target.value)}
+            />
+          </div>
+
+          <div className="color-picker">
+            <input
+              type="color"
+              id="rightSide-Header-Shadow-color"
+              value={rightSide_Header_Shadow_Color}
+              onChange={(e) => setrightSide_Header_Shadow_Color(e.target.value)}
+            />
+          </div>
+
+          <div className="color-picker">
+            <input
+              type="color"
+              id="rightSide-AboutMe-color"
+              value={rightSide_AboutMe_Color}
+              onChange={(e) => setrightSide_AboutMe_Color(e.target.value)}
+            />
+          </div>
+
+          <div className="color-picker">
+            <input
+              type="color"
+              id="rightSide-Work-Title-color"
+              value={rightSide_Work_Title_Color}
+              onChange={(e) => setRightSide_Work_Title_Color(e.target.value)}
+            />
+          </div>
+
+          <div className="color-picker">
+            <input
+              type="color"
+              id="rightSide-Work-Information-color"
+              value={rightSide_Work_Information_Color}
+              onChange={(e) => setRightSide_Work_Information_Color(e.target.value)}
+            />
+          </div>
+
+          <div className="color-picker">
+            <input
+              type="color"
+              id="rightSide-Work-Description-color"
+              value={rightSide_Work_Description_Color}
+              onChange={(e) => setRightSide_Work_Description_Color(e.target.value)}
+            />
+          </div>
+
+          <div className="color-picker">
+            <input
+              type="color"
+              id="rightSide-Competence-Skill-color"
+              value={rightSide_Competence_Skill}
+              onChange={(e) => setRightSide_Competence_Skill(e.target.value)}
+            />
+          </div>
+
+          <div className="color-picker">
+            <input
+              type="color"
+              id="rightSide-Competence-Descriptioncolor"
+              value={rightSide_Competence_Description}
+              onChange={(e) => setRightSide_Competence_Description(e.target.value)}
+            />
+          </div>
+
+
+          <div className="color-picker">
+            <input
+              type="color"
+              id="rightSide-Competence-Level-Background-color"
+              value={rightSide_Competence_Level_Background}
+              onChange={(e) => setRightSide_Competence_Level_Background(e.target.value)}
+            />
+          </div>
+
+          <div className="color-picker">
+            <input
+              type="color"
+              id="rightSide-Competence-Level-Foreground-color"
+              value={rightSide_Competence_Level_Foreground}
+              onChange={(e) => setRightSide_Competence_Level_Foreground(e.target.value)}
+            />
+          </div>
+
+        </div>
+
         <div className = "CV-modell-section">
           <CV_Modell 
             profilePicture={profilePicture} 
@@ -364,20 +605,33 @@ function Make_CV_Page() {
             linkedin={linkedin}
             otherLink={otherLink}
             about_Me={about_Me}
-            job_title={job_title}
-            job_employer={job_employer}
-            job_city={job_city}
-            job_start_date={job_start_date}
-            job_end_date={job_end_date}
-            job_description={job_description}
-            education_school={education_school}
-            education_program={education_program}
-            education_start_date={education_start_date}
-            education_end_date={education_end_date}
-            education_description={education_description}
-            competence_name={competence_name}
-            competence_level={competence_level}
-            competence_description={competence_description}
+            work_Experiences={work_Experiences}
+            education_Experiences={education_Experiences}
+            competencies_Experiences={competencies_Experiences}
+            
+            leftSide_Color={leftSide_Color}
+            leftSide_ProfileImage_Color={leftSide_ProfileImage_Color}
+            leftSide_Name_Color={leftSide_Name_Color}
+            leftSide_Headers_Color={leftSide_Headers_Color}
+            leftSide_Border_Color = {leftSide_Border_Color}
+            leftSide_ContactInformation_Text_Color={leftSide_ContactInformation_Text_Color}
+            leftSide_ContactInformation_Logos_Color={leftSide_ContactInformation_Logos_Color}
+            leftSide_Education_Header_Color={leftSide_Education_Header_Color}
+            leftSide_EducationInformation_Color={leftSide_EducationInformation_Color}
+
+            rightSide_Color={rightSide_Color}
+            rightSide_Border_Color = {rightSide_Border_Color}
+            rightSide_Header_Text_Color={rightSide_Header_Text_Color}
+            rightSide_Header_Background_Color={rightSide_Header_Background_Color}
+            rightSide_Header_Shadow_Color={rightSide_Header_Shadow_Color}
+            rightSide_AboutMe_Color={rightSide_AboutMe_Color}
+            rightSide_Work_Title_Color={rightSide_Work_Title_Color}
+            rightSide_Work_Information_Color={rightSide_Work_Information_Color}
+            rightSide_Work_Description_Color={rightSide_Work_Description_Color}
+            rightSide_Competence_Skill={rightSide_Competence_Skill}
+            rightSide_Competence_Description={rightSide_Competence_Description}
+            rightSide_Competence_Level_Background={rightSide_Competence_Level_Background}
+            rightSide_Competence_Level_Foreground={rightSide_Competence_Level_Foreground}
           />
         </div>
       </div>

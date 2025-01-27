@@ -1,7 +1,17 @@
 import React from 'react';
 import '../Css/Work_Experience_Form.css'
 
-function Work_Experience_Form ({job_title, job_employer, job_city, job_start_date, job_end_date, job_description, handleInputChange}) {
+
+function Work_Experience_Form ({
+    job_title, 
+    job_employer, 
+    job_city, 
+    job_start_date, 
+    job_end_date, 
+    job_description, 
+    handleInputChange_For_Work_Experiences
+}) {
+    
     return (
 
         <div className="work-experience-form">
@@ -16,7 +26,7 @@ function Work_Experience_Form ({job_title, job_employer, job_city, job_start_dat
                         name = "job_title"
                         placeholder="Jobbtitel" 
                         value={job_title}
-                        onChange={handleInputChange}
+                        onChange={handleInputChange_For_Work_Experiences}
                     />
                 </div>
 
@@ -28,7 +38,7 @@ function Work_Experience_Form ({job_title, job_employer, job_city, job_start_dat
                     name = "job_employer"
                     placeholder="Arbetsgivare" 
                     value={job_employer}
-                    onChange={handleInputChange}
+                    onChange={handleInputChange_For_Work_Experiences}
                     />
                 </div>
 
@@ -40,7 +50,7 @@ function Work_Experience_Form ({job_title, job_employer, job_city, job_start_dat
                     name = "job_city"
                     placeholder="Postnummer"
                     value={job_city}
-                    onChange={handleInputChange} 
+                    onChange={handleInputChange_For_Work_Experiences} 
                     />
                 </div>
 
@@ -54,7 +64,7 @@ function Work_Experience_Form ({job_title, job_employer, job_city, job_start_dat
                     name ="job_start_date"
                     placeholder="21-4-19" 
                     value={job_start_date}
-                    onChange={handleInputChange}
+                    onChange={handleInputChange_For_Work_Experiences}
                     />
                 </div>
 
@@ -66,7 +76,7 @@ function Work_Experience_Form ({job_title, job_employer, job_city, job_start_dat
                     name ="job_end_date"
                     placeholder="13-3-15" 
                     value={job_end_date}
-                    onChange={handleInputChange}
+                    onChange={handleInputChange_For_Work_Experiences}
                     />
                 </div>
 
@@ -77,7 +87,7 @@ function Work_Experience_Form ({job_title, job_employer, job_city, job_start_dat
                     name ="job_description"
                     placeholder="Beskrivning"
                     value={job_description}
-                    onChange={handleInputChange}
+                    onChange={handleInputChange_For_Work_Experiences}
                     />
                 </div>
                 

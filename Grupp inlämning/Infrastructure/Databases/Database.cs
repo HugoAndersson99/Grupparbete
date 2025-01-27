@@ -8,7 +8,7 @@ namespace Infrastructure.Databases
         public Database(DbContextOptions<Database> options) : base(options) { }
 
         public DbSet<User> Users { get; set; }
-       public DbSet<CV> CVs { get; set; }
+        public DbSet<CV> CVs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

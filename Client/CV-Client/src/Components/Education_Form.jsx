@@ -1,7 +1,14 @@
 import React from 'react';
 import '../Css/Education_Form.css'
 
-function Education_Form ({handleInputChange, education_school, education_program, education_start_date, education_end_date, education_description}) {
+function Education_Form ({
+    education_school, 
+    education_program, 
+    education_start_date, 
+    education_end_date, 
+    education_description,
+    handleInputChange_For_Education_Experiences
+}) {
     return (
         <div className = "Education-form">
 
@@ -15,7 +22,7 @@ function Education_Form ({handleInputChange, education_school, education_program
                     name = "education_school"
                     placeholder = "Skola"
                     value={education_school}
-                    onChange={handleInputChange}
+                    onChange={handleInputChange_For_Education_Experiences}
                 />
                 </div>
 
@@ -27,7 +34,7 @@ function Education_Form ({handleInputChange, education_school, education_program
                     name = "education_program"
                     placeholder = "Utbildning "
                     value={education_program}
-                    onChange={handleInputChange}
+                    onChange={handleInputChange_For_Education_Experiences}
                 />
                 </div>
 
@@ -39,7 +46,7 @@ function Education_Form ({handleInputChange, education_school, education_program
                     name = "education_start_date"
                     placeholder = "12-2-12"
                     value={education_start_date}
-                    onChange={handleInputChange}
+                    onChange={handleInputChange_For_Education_Experiences}
                 />
                 </div>
 
@@ -51,7 +58,7 @@ function Education_Form ({handleInputChange, education_school, education_program
                     name = "education_end_date"
                     placeholder = "21-4-19"
                     value={education_end_date}
-                    onChange={handleInputChange}
+                    onChange={handleInputChange_For_Education_Experiences}
                 />
                 </div>
 
@@ -63,7 +70,7 @@ function Education_Form ({handleInputChange, education_school, education_program
                     name = "education_description"
                     placeholder = "Beskrivning"
                     value={education_description}
-                    onChange={handleInputChange}
+                    onChange={handleInputChange_For_Education_Experiences}
                 />
                 </div>
 

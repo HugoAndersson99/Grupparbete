@@ -9,11 +9,11 @@
     flex-direction: row;
     width: 100%;
     height: 100%;
-    max-width: 794px;
-    max-height: 1123px;
+    width: 794px;
+    height: 1123px;
     font-family: "Inria Serif", serif;
     box-sizing: border-box;
-    background-color: aqua;
+    background-color: rgb(253, 0, 0);
     box-shadow: 45px 45px 50px rgba(0, 0, 0, 0.5);
 
 }
@@ -35,13 +35,17 @@
     display: flex;
     justify-content: center;
     margin-top: 20px;
+
 }
 .profile-image img{
-    height: 200px;
-    width: 200px;
+    max-height: 200px;
+    max-width: 200px;
     border-radius: 50%;
-    object-fit: cover;
+    object-fit:cover;
     border: 4px solid rgba(140,41,44,255);
+    width: 100%;
+    height: 100%;
+
 }
 .name-CV{
     display: flex;
@@ -65,7 +69,7 @@
     display: flex;
     justify-content: center;
     font-size: 24px;
-    color: white;
+    color: rgb(255, 255, 255);
     margin-top: 20px;
 }
 .contact-information-CV{
@@ -100,14 +104,15 @@ h3{
     padding-left: 5px;
     padding-right: 5px;
     font-size: 16px;
-    gap: 2px;
+    gap: 5px;
     color: rgba(238,242,207,255);
     margin-left: 10px;
     margin-right: 10px;
+    margin-bottom: 20px;
 }
 .education_program-CV{
     font-size: 20px;
-    color: rgba(140,41,44,255) ;
+    color: rgba(140,41,44,255);
 }
 .education_school-CV{
     font-style: italic;
@@ -135,8 +140,6 @@ h3{
     word-wrap: break-word;
     word-break: break-word;
     flex-wrap: wrap;
-    flex-wrap: wrap;
-    
 }
 .right_side-CV-header{
     display: block;
@@ -146,6 +149,7 @@ h3{
     text-shadow: 2px 2px 4px black;
     font-size: 24px;
     margin-top: 20px;
+    padding-left: 10px;
     --s: 80px;
     --c1: rgba(119,140,121,255);
     --c2: rgba(238,242,207,255);
@@ -160,7 +164,8 @@ h3{
         radial-gradient(var(--_g) 0    75%,var(--_c)) 0 0/var(--_s),
         repeating-conic-gradient(var(--c1) 0 25%,#0000 0 50%) 0 0/var(--_s),
         radial-gradient(var(--_c)) 0 calc(var(--s)/2)/var(--s) var(--s)
-        var(--c1);
+        var(--c1)
+    ;  
 }
 
 .about_Me-CV{
@@ -169,7 +174,7 @@ h3{
     color: rgba(89,87,74,255);
     padding-left: 10px;
     padding-right: 10px;
-    margin-bottom: 10p;
+    margin-bottom: 10px;
 }
 
 .work-experience-CV{
@@ -202,6 +207,7 @@ h3{
 
 .competencies-CV{
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
     margin-top: 20px;
     font-size: 16px;
@@ -216,12 +222,16 @@ h3{
     flex-direction: row;
     align-items: center;    
     gap: 10px; 
-}
 
+}
+.competence_description{
+    margin-bottom: 10px;
+}
 #competence_name {
     font-size: 24px;
     white-space: nowrap;
 }
+
 .level_bar {
     width: 100%;
     height: 20px;
