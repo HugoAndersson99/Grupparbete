@@ -101,7 +101,8 @@ namespace WebAPI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddApplication().AddInfrastructure(builder.Configuration.GetConnectionString("DefaultConnection"));
+            var azureStorageConnectionString = builder.Configuration.GetConnectionString("AzureStorage");
+            builder.Services.AddApplication().AddInfrastructure(builder.Configuration.GetConnectionString("DefaultConnection"), azureStorageConnectionString);
             builder.Services.AddDbContext<Database>();
 
             builder.Services.Configure<BlobSettings>(builder.Configuration.GetSection("BlobSettings"));
