@@ -22,7 +22,7 @@ namespace WebAPI
             {
                 options.AddPolicy("AllowFrontend", policy =>
                 {
-                    policy.WithOrigins("http://localhost:5173", "http://localhost:5174") 
+                    policy.WithOrigins("http://localhost:5173", "http://localhost:5174" , "https://grupparbete-topaz.vercel.app/") 
                           .AllowAnyMethod()
                           .AllowAnyHeader()
                           .AllowCredentials(); 
