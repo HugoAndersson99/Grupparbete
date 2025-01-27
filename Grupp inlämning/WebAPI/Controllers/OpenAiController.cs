@@ -46,13 +46,12 @@ namespace WebAPI.Controllers
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
 
             int maxRetries = 5;
-            int retryDelay = 1000; // Initial delay in milliseconds
+            int retryDelay = 1000;
 
             for (int retry = 0; retry < maxRetries; retry++)
             {
                 try
                 {
-                    // Make the POST request
                     var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
                     HttpResponseMessage response = await _httpClient.PostAsync(apiUrl, content);
 
@@ -63,13 +62,11 @@ namespace WebAPI.Controllers
                     }
                     else if (response.StatusCode == (HttpStatusCode)429)
                     {
-                        // Handle rate limiting: wait and retry
                         await Task.Delay(retryDelay);
-                        retryDelay *= 2; // Exponential backoff
+                        retryDelay *= 2;
                     }
                     else
                     {
-                        // Handle other non-success status codes
                         string errorBody = await response.Content.ReadAsStringAsync();
                         return new ObjectResult($"OpenAI API error: {response.StatusCode}, {errorBody}")
                         {
@@ -89,7 +86,6 @@ namespace WebAPI.Controllers
                 }
             }
 
-            // If all retries fail
             return new StatusCodeResult(StatusCodes.Status500InternalServerError);
         }
     }

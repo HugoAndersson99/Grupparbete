@@ -14,7 +14,6 @@ namespace Infrastructure.Databases
         {
             base.OnModelCreating(modelBuilder);
 
-            // Relationen mellan User och CV
             modelBuilder.Entity<CV>()
                 .HasOne(cv => cv.User)
                 .WithMany(user => user.CVs)

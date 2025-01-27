@@ -49,7 +49,6 @@ namespace TestProject.UsersTests.LogInUserTests
             Assert.IsTrue(result.IsSuccess);
             Assert.AreEqual("mockToken", result.Data);
 
-            // Verify GenerateJwtToken was called with correct user
             A.CallTo(() => _fakeTokenHelper.GenerateJwtToken(user)).MustHaveHappenedOnceExactly();
         }
 

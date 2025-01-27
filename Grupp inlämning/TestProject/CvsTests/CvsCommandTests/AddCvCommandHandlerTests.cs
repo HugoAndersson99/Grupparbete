@@ -22,7 +22,7 @@ namespace TestProject.CvsTests.CvsCommandTests
             _mockUserRepository = A.Fake<IUserRepository>();
             _mockCvRepository = A.Fake<ICvRepository>();
             _mockLogger = A.Fake<ILogger<AddCvCommandHandler>>();
-            _handler = new AddCvCommandHandler(_mockCvRepository, _mockUserRepository ,_mockLogger);
+            _handler = new AddCvCommandHandler(_mockCvRepository, _mockUserRepository, _mockLogger);
         }
 
         [Test]
@@ -72,7 +72,7 @@ namespace TestProject.CvsTests.CvsCommandTests
 
             // Mockar att användaren inte finns
             A.CallTo(() => _mockUserRepository.GetUserByIdAsync(userId))
-                .Returns(Task.FromResult<OperationResult<User>>(null)); // Simulerar att användaren inte hittas
+                .Returns(Task.FromResult<OperationResult<User>>(null));
 
             // Act
             var result = await _handler.Handle(command, CancellationToken.None);

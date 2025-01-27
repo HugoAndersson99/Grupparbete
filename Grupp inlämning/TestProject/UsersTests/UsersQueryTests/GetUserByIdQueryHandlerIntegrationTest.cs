@@ -1,12 +1,12 @@
 ﻿using Application.Interfaces.RepositoryInterfaces;
 using Application.Queries.Users.Get.GetById;
 using Domain.Models;
-using Infrastructure.Repositories;
 using Infrastructure.Databases;
+using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace TestProject.UsersTests.UsersQueryTests
 {
@@ -50,7 +50,6 @@ namespace TestProject.UsersTests.UsersQueryTests
             _dbContext.Users.Add(user);
             await _dbContext.SaveChangesAsync();
 
-            // Add CV to cache
             string cacheKey = $"CV_{userId}";
             _cache.Set(cacheKey, user, TimeSpan.FromMinutes(5));
 
@@ -68,7 +67,7 @@ namespace TestProject.UsersTests.UsersQueryTests
         public async Task Handle_ShouldReturnSuccess_WhenUserIsNotInCache_ButExistsInDatabase()
         {
             // Arrange
-            var userId = Guid.NewGuid(); 
+            var userId = Guid.NewGuid();
             var user = new User { Id = userId, Email = "jane.smith@example.com", PasswordHash = "12345" };
             _dbContext.Users.Add(user);
             await _dbContext.SaveChangesAsync();
