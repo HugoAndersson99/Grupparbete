@@ -8,6 +8,7 @@ import About_Me_Form from '../Components/About_Me_Form.jsx';
 import Contact_Information_Form from '../Components/Contact_Information_Form.jsx';
 import CV_Modell from '../Components/CV_Modell.jsx';
 import { useNavigate } from "react-router-dom";
+import { chatWithAI } from '../Services/OpenAI_API.jsx';
 
 function Make_CV_Page() {
 
@@ -81,6 +82,14 @@ function Make_CV_Page() {
       job_description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit." 
     }
   ]);
+
+  const handleJobDescriptionChange = (index, newDescription) => {
+    const updatedWorkExperiences = work_Experiences.map((experience, i) =>
+      i === index ? { ...experience, job_description: newDescription } : experience
+    );
+    setWork_Experiences(updatedWorkExperiences);
+  };
+
   const handleInputChange_For_Work_Experiences = (e, index) => {
     const { name, value } = e.target;
     const new_Work_Experiences = [...work_Experiences];
@@ -109,6 +118,14 @@ function Make_CV_Page() {
       education_description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit." 
     }
   ]);
+
+  const handleEducationDescriptionChange = (index, newDescription) => {
+    const updatedEducationExperiences = education_Experiences.map((experience, i) =>
+      i === index ? { ...experience, education_description: newDescription } : experience
+    );
+    setEducation_Experiences(updatedEducationExperiences);
+  };
+  
   const handleInputChange_For_Education_Experiences = (e, index) => {
     const { name, value } = e.target;
     const new_education_Experiences = [...education_Experiences];
@@ -135,6 +152,14 @@ function Make_CV_Page() {
       competence_description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", 
     }
   ]);
+
+  const handleCompetenceDescriptionChange = (index, newDescription) => {
+    const updatedCompetenciesExperiences = competencies_Experiences.map((experience, i) =>
+      i === index ? { ...experience, competence_description: newDescription } : experience
+    );
+    setCompetencies_Experiences(updatedCompetenciesExperiences);
+  };
+  
   const handleInputChange_For_Competencies_Experiences = (e, index) => {
     const { name, value } = e.target;
     const new_competencies_Experiences = [...competencies_Experiences];
@@ -222,6 +247,37 @@ function Make_CV_Page() {
     });
   };
 
+  const handleAIButtonClick = async (section, inputText, additionalInfo, index) => {
+   
+    const question = `Hjälp mig med ${section} avsnittet. Här är vad jag har hittills: ${additionalInfo}. Förbättra det: ${inputText}`;
+    const response = await chatWithAI(question);
+    
+    if (response) {
+        const improvedDescription = response.choices[0].message.content;
+        switch (section) {
+            case 'Work Experience':
+                handleJobDescriptionChange(index, improvedDescription);
+                break;
+            case 'Education':
+                handleEducationDescriptionChange(index, improvedDescription);
+                break;
+            case 'Competencies':
+                handleCompetenceDescriptionChange(index, improvedDescription);
+                break;
+            case 'About Me':
+                setAbout_Me(improvedDescription);
+                break;
+            default:
+                break;
+        }
+    } else {
+        console.error('Error getting AI response');
+    }
+};
+
+  
+
+
 
   return (
     <div className = "container">
@@ -255,107 +311,122 @@ function Make_CV_Page() {
 
         {/* Arbetslivserfarenhet-section */}
         <form className = "work-experience-section">
-  
-          <h1 className="header-section-2">
-            Arbetslivserfarenhet
-          </h1>
 
-          {work_Experiences.map((experience, index) => (
-            <Work_Experience_Form
-              key={index}
-              job_title={experience.job_title}
-              job_employer={experience.job_employer}
-              job_city={experience.job_city}
-              job_start_date={experience.job_start_date}
-              job_end_date={experience.job_end_date}
-              job_description={experience.job_description}
-              handleInputChange_For_Work_Experiences={(e) => handleInputChange_For_Work_Experiences(e, index)}
-            />
-          ))}
+<h1 className="header-section-2">
+  Arbetslivserfarenhet
+</h1>
 
-          <div className="add_new_input_fields-section">
+{work_Experiences.map((experience, index) => (
+  <div key={index}>
+    <Work_Experience_Form
+      job_title={experience.job_title}
+      job_employer={experience.job_employer}
+      job_city={experience.job_city}
+      job_start_date={experience.job_start_date}
+      job_end_date={experience.job_end_date}
+      job_description={experience.job_description}
+      handleInputChange_For_Work_Experiences={(e) => handleInputChange_For_Work_Experiences(e, index)}
+    />
+    <button 
+      type="button" 
+      className="AI-button" 
+      onClick={() => handleAIButtonClick('Work Experience', experience.job_description, `${experience.job_title}, ${experience.job_employer}, ${experience.job_city}, ${experience.job_start_date} till ${experience.job_end_date}`, index)}
+    >
+      Få hjälp av AI <i className="fa-solid fa-square-binary"></i>
+    </button>
+  </div>
+))}
+
+<div className="add_new_input_fields-section">
             <p className="add_new_input_fields-link" onClick = {handleAdd_Work_Experiences}>
-              + Lägg till ytterligare erfarenhet
-            </p>
+    + Lägg till ytterligare erfarenhet
+  </p>
             <p className="add_new_input_fields-link" onClick = {handleRemove_Work_Experiences}>
-              - Ta bort erfarenhet
-            </p>
-            <button className="AI-button">
-              Få hjälp av AI <i className = "fa-solid fa-square-binary"></i>
-            </button>
-          </div>
+    - Ta bort erfarenhet
+  </p>
+</div>
 
-          <div className="section-breaker" />   
+<div className="section-breaker" />   
 
-        </form>
+</form>
 
         {/* Utbildning-section */}
         <form className = "education-experience">
-          
-          <h1 className = "header-section-3">
-            Utbildning
-          </h1>
 
-          {education_Experiences.map((experience, index) => (
-            <Education_Form
-              key={index}
-              education_school={experience.education_school}
-              education_program={experience.education_program}
-              education_start_date={experience.education_start_date}
-              education_end_date={experience.education_end_date}
-              education_description={experience.education_description}
-              handleInputChange_For_Education_Experiences={(e) => handleInputChange_For_Education_Experiences(e, index)}
-            />
-          ))}
+          <h1 className = "header-section-3">
+  Utbildning
+</h1>
+
+{education_Experiences.map((experience, index) => (
+  <div key={index}>
+    <Education_Form
+      education_school={experience.education_school}
+      education_program={experience.education_program}
+      education_start_date={experience.education_start_date}
+      education_end_date={experience.education_end_date}
+      education_description={experience.education_description}
+      handleInputChange_For_Education_Experiences={(e) => handleInputChange_For_Education_Experiences(e, index)}
+    />
+    <button 
+      type="button" 
+      className="AI-button" 
+      onClick={() => handleAIButtonClick('Education', experience.education_description, `${experience.education_school}, ${experience.education_program}, ${experience.education_start_date} till ${experience.education_end_date}`, index)}
+    >
+      Få hjälp av AI <i className="fa-solid fa-square-binary"></i>
+    </button>
+  </div>
+))}
 
           <div className = "add_new_input_fields-section">
             <p className = "add_new_input_fields-link" onClick={handleAdd_Education_Experiences}>
               + Lägg till ytterliggare erfarenhet
-            </p>
+  </p>
             <p className="add_new_input_fields-link" onClick = {handleRemove_Education_Experiences}>
-              - Ta bort erfarenhet
-            </p>
-            <button className = "AI-button">
-              Få hjälp av AI <i className = "fa-solid fa-square-binary" id = "AI-icon"></i>
-            </button>
-          </div>
+    - Ta bort erfarenhet
+  </p>
+</div>
 
           <div className = "section-breaker" />
 
-        </form>
+</form>
 
         {/* Kompetens-section */}
         <form className = "competence-section">
-          
+
           <h1 className = "header-section-4">
-            Kompetenser
-          </h1>
-          
-          {competencies_Experiences.map((experience, index) => (
-            <Competencies_Form
-              key={index}
-              competence_name={experience.competence_name}
-              competence_level={experience.competence_level}
-              competence_description={experience.competence_description}
-              handleInputChange_For_Competencies_Experiences={(e) => handleInputChange_For_Competencies_Experiences(e, index)}
-            />
-          ))}
+  Kompetenser
+</h1>
+
+{competencies_Experiences.map((experience, index) => (
+  <div key={index}>
+    <Competencies_Form
+      competence_name={experience.competence_name}
+      competence_level={experience.competence_level}
+      competence_description={experience.competence_description}
+      handleInputChange_For_Competencies_Experiences={(e) => handleInputChange_For_Competencies_Experiences(e, index)}
+    />
+    <button 
+      type="button" 
+      className="AI-button" 
+      onClick={() => handleAIButtonClick('Competencies', experience.competence_description, `${experience.competence_name}, nivå ${experience.competence_level}`, index)}
+    >
+      Få hjälp av AI <i className="fa-solid fa-square-binary"></i>
+    </button>
+  </div>
+))}
 
           <div className = "add_new_input_fields-section">
             <p className = "add_new_input_fields-link" onClick={handleAdd_Competencies_Experiences}>
               + Lägg till ytterliggare erfarenhet
-            </p>
+  </p>
             <p className="add_new_input_fields-link" onClick = {handleRemove_Competencies_Experiences}>
-              - Ta bort erfarenhet
-            </p>
-            <button className = "AI-button">
-              Få hjälp av AI <i className = "fa-solid fa-square-binary"></i>
-            </button>
-          </div>
+    - Ta bort erfarenhet
+  </p>
+</div>
 
-          <div className = "section-breaker" />
+<div className="section-breaker" />
 
-        </form>
+</form>
 
         {/* Om mig-section */}
         <form className = "about_me-section">
@@ -370,9 +441,9 @@ function Make_CV_Page() {
           />
 
           <div className = "add_new_input_fields-section" id = "add_new_input_fields-About_Me-section">
-            <button className = "AI-button">
-              Få hjälp av AI <i className = "fa-solid fa-square-binary"></i>
-            </button>
+          <button type="button" className="AI-button" onClick={() => handleAIButtonClick('About Me', about_Me, `Min bakgrund: ${about_Me}`)}>
+      Få hjälp av AI <i className="fa-solid fa-square-binary"></i>
+    </button>
           </div>
 
         </form>
