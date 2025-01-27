@@ -101,7 +101,8 @@ namespace WebAPI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            var azureStorageConnectionString = builder.Configuration.GetConnectionString("AzureStorage");
+            //var azureStorageConnectionString = builder.Configuration.GetConnectionString("AzureStorage");
+            var azureStorageConnectionString = Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING");
             builder.Services.AddApplication().AddInfrastructure(builder.Configuration.GetConnectionString("DefaultConnection"), azureStorageConnectionString);
             builder.Services.AddDbContext<Database>();
 

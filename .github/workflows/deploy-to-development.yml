@@ -47,3 +47,6 @@ jobs:
 
       - name: Final Message
         run: echo "All checks passed. Ready to merge into development!"
+
+      - name: Export Azure Storage Connection String
+        run: echo "AZURE_STORAGE_CONNECTION_STRING=${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}" >> $GITHUB_ENV

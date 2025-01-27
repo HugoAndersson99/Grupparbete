@@ -6,6 +6,6 @@ namespace Application.Interfaces.AzureStorageIntefaces
 {
     public interface IAzureStorageService
     {
-        Task<string> UploadAsync(IFormFile file, string containerName);
+        Task<string> UploadAsync(IFormFile file, string containerName, Guid userId);
     }
 }
