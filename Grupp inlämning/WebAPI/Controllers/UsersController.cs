@@ -4,6 +4,7 @@ using Application.Queries.Users.Get.GetAll;
 using Application.Queries.Users.Get.GetById;
 using Application.Queries.Users.Login;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -20,6 +21,7 @@ namespace WebAPI.Controllers
 
         }
 
+        [Authorize]
         [HttpGet]
         [Route("getUserById/{id}")]
         public async Task<IActionResult> GetUserById(Guid id)
@@ -34,7 +36,7 @@ namespace WebAPI.Controllers
             return Ok(new { message = result.Message, data = result.Data });
         }
 
-
+        [Authorize]
         [HttpGet]
         [Route("getAllUsers")]
         public async Task<IActionResult> GetAllUsers()

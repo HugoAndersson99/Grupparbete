@@ -8,13 +8,12 @@ namespace Infrastructure.Databases
         public Database(DbContextOptions<Database> options) : base(options) { }
 
         public DbSet<User> Users { get; set; }
-       public DbSet<CV> CVs { get; set; }
+        public DbSet<CV> CVs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // Relationen mellan User och CV
             modelBuilder.Entity<CV>()
                 .HasOne(cv => cv.User)
                 .WithMany(user => user.CVs)
