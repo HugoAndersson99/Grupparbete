@@ -1,24 +1,76 @@
+
 .finished-page-container{
-  display: grid;
-  min-height: 200vh;
-}
-
-
-
-.page-text{
-  text-align: center;
-  font-family: "Inter" , serif;
-  font-weight: 800;
-  font-size: 25px;
-}
-
-.page-content{
-  justify-self: center;
-}
-
-.pdf-button{
   display: flex;
-  gap: 1rem;
-  justify-self: center;
+  justify-content: center;
+  align-items: center;
+  font-family: "Inria Serif", serif;
+  gap: 200px;
 }
 
+.finished-page-section{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation-name: slideInLeft;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+.finished-CV-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+#create_CV_Header{
+  opacity: 0;
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-delay: 400ms;
+}
+#create_CV_button{
+  opacity: 0;
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-delay: 600ms;
+}
+#my_account_button{
+  opacity: 0;
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-delay: 800ms;
+}
+
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+@keyframes slideInRight {
+  0% {
+    transform: translateX(-50px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  0% {
+    transform: translateX(50px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes rotateIn {
+  0% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}

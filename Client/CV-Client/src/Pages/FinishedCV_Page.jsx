@@ -1,38 +1,130 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../Components/Header';
-import '../Css/FinishedCV_Page.css'
-import CV from '../assets/Images/Mock upm CV.png'
+import '../Css/FinishedCV_Page.css';
 import CreateCV_Button from '../Components/CreateCV_Button';
 import MittKonto_Button from '../Components/MittKonto_Button';
+import CV_Modell from '../Components/CV_Modell.jsx';
+import { useLocation } from 'react-router-dom';
+import html2pdf from "html2pdf.js";
+import '../Css/CV_Modell.css'
+
+function FinishedCV_Page() {
+  const location = useLocation();
+  const state = location.state || {};
+  const {
+    profilePicture,
+    name,
+    address,
+    zip_code,
+    phoneNumber,
+    email,
+    linkedin,
+    otherLink,
+    about_Me,
+    work_Experiences,
+    education_Experiences,
+    competencies_Experiences,
+    leftSide_Color,
+    leftSide_ProfileImage_Color,
+    leftSide_Name_Color,
+    leftSide_Headers_Color,
+    leftSide_Border_Color,
+    leftSide_ContactInformation_Text_Color,
+    leftSide_ContactInformation_Logos_Color,
+    leftSide_Education_Header_Color,
+    leftSide_EducationInformation_Color,
+
+    rightSide_Color,
+    rightSide_Border_Color,
+    rightSide_Header_Text_Color,
+    rightSide_Header_Background_Color,
+    rightSide_Header_Shadow_Color,
+    rightSide_AboutMe_Color,
+    rightSide_Work_Title_Color,
+    rightSide_Work_Information_Color,
+    rightSide_Work_Description_Color,
+    rightSide_Competence_Skill,
+    rightSide_Competence_Description,
+    rightSide_Competence_Level_Background,
+    rightSide_Competence_Level_Foreground
+
+  } = state;
 
 
-const FinishedCV_Page = () => {
-  const navigate = useNavigate();
   
-  return(
-    <div className='finished-page-container'>
-    <div className='half-circle'></div>
-    <div className='header-container'>
-     <Header />
-    </div>
-    
-    <div className='page-text'>
-      <h1>Du är klar!<br />Här är ditt nya CV!</h1>
-    </div>
-    
-    <div className='page-content'>
-      <img src={CV} alt='CV' className='cv-pic' />
-    </div>
+  const navigate = useNavigate();
 
-    <div className='pdf-button'>
-    <CreateCV_Button text="Ladda ned pdf" />
-    <MittKonto_Button text="Till mitt konto" onClick={() => navigate("/Mitt_Konto")}/>
-    </div>
-    
 
+  async function handleCV() {
+  const element = document.querySelector("#finished_CV")
+
+  html2pdf(element)
+}
+
+  return (
+  <>
+  
+    <Header />
+    <div className="finished-page-container">
+      <div className="half-circle"></div>
+      
+      <div className="finished-page-section">
+        <h1 id = "create_CV_Header">Grattis! Här är ditt nya CV!</h1>
+        <div id = "create_CV_button">
+          <CreateCV_Button text="Ladda ned pdf"  onClick={handleCV}/>
+        </div>
+        <div id = "my_account_button">
+          <MittKonto_Button text="Till mitt konto" id = "my_account_button" onClick={() => navigate("/Mitt_Konto")}/>
+        </div>
+      </div>
+      
+      <div className="finished-CV-container" id = "finished_CV">
+        {state.name ? (
+          <CV_Modell
+            profilePicture={profilePicture}
+            name={name}
+            address={address}
+            zip_code={zip_code}
+            phoneNumber={phoneNumber}
+            email={email}
+            linkedin={linkedin}
+            otherLink={otherLink}
+            about_Me={about_Me}
+            work_Experiences={work_Experiences}
+            education_Experiences={education_Experiences}
+            competencies_Experiences={competencies_Experiences}
+            leftSide_Color = {leftSide_Color}
+            leftSide_ProfileImage_Color={leftSide_ProfileImage_Color}
+            leftSide_Name_Color={leftSide_Name_Color}
+            leftSide_Headers_Color={leftSide_Headers_Color}
+            leftSide_Border_Color = {leftSide_Border_Color}
+            leftSide_ContactInformation_Text_Color={leftSide_ContactInformation_Text_Color}
+            leftSide_ContactInformation_Logos_Color={leftSide_ContactInformation_Logos_Color}
+            leftSide_Education_Header_Color={leftSide_Education_Header_Color}
+            leftSide_EducationInformation_Color={leftSide_EducationInformation_Color}
+
+            rightSide_Color = {rightSide_Color}
+            rightSide_Border_Color = {rightSide_Border_Color}
+            rightSide_Header_Text_Color={rightSide_Header_Text_Color}
+            rightSide_Header_Background_Color={rightSide_Header_Background_Color}
+            rightSide_Header_Shadow_Color={rightSide_Header_Shadow_Color}
+            rightSide_AboutMe_Color={rightSide_AboutMe_Color}
+            rightSide_Work_Title_Color={rightSide_Work_Title_Color}
+            rightSide_Work_Information_Color={rightSide_Work_Information_Color}
+            rightSide_Work_Description_Color={rightSide_Work_Description_Color}
+            rightSide_Competence_Skill={rightSide_Competence_Skill}
+            rightSide_Competence_Description={rightSide_Competence_Description}
+            rightSide_Competence_Level_Background={rightSide_Competence_Level_Background}
+            rightSide_Competence_Level_Foreground={rightSide_Competence_Level_Foreground}
+          />
+        ) : (
+          <p>No data passed to this page! Something has gone wrong!</p>
+        )}
+      </div>
     </div>
+  </>
   );
-};
+}
 
 export default FinishedCV_Page;

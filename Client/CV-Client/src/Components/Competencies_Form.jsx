@@ -1,7 +1,12 @@
 import React from 'react';
 import '../Css/Competencies_Form.css'
 
-function Competencies_Form ({handleInputChange, competence_name, competence_level, competence_description}) {
+function Competencies_Form ({ 
+  competence_name, 
+  competence_level, 
+  competence_description,
+  handleInputChange_For_Competencies_Experiences
+}) {
     
   return (
 
@@ -17,18 +22,18 @@ function Competencies_Form ({handleInputChange, competence_name, competence_leve
                 name = "competence_name"
                 placeholder = "Namn"
                 value={competence_name}
-                onChange={handleInputChange}
+                onChange={handleInputChange_For_Competencies_Experiences}
               />
             </div>
 
             <div className = "input-group-4">
               <label htmlFor = "utbildning">Nivå</label>
               <div className = "level-bar" id = "utbildning">
-                <button type = "button" className = "level-button" id="number-1" name="competence_level" value={1} onClick={handleInputChange}>1</button>
-                <button type = "button" className = "level-button" id="number-2" name="competence_level" value={2} onClick={handleInputChange}>2</button>
-                <button type = "button" className = "level-button" id="number-3" name="competence_level" value={3} onClick={handleInputChange}>3</button>
-                <button type = "button" className = "level-button" id="number-4" name="competence_level" value={4} onClick={handleInputChange}>4</button>
-                <button type = "button" className = "level-button" id="number-5" name="competence_level" value={5} onClick={handleInputChange}>5</button>
+                <button type = "button" className = "level-button" id="number-1" name="competence_level" value={1} onClick={handleInputChange_For_Competencies_Experiences}>1</button>
+                <button type = "button" className = "level-button" id="number-2" name="competence_level" value={2} onClick={handleInputChange_For_Competencies_Experiences}>2</button>
+                <button type = "button" className = "level-button" id="number-3" name="competence_level" value={3} onClick={handleInputChange_For_Competencies_Experiences}>3</button>
+                <button type = "button" className = "level-button" id="number-4" name="competence_level" value={4} onClick={handleInputChange_For_Competencies_Experiences}>4</button>
+                <button type = "button" className = "level-button" id="number-5" name="competence_level" value={5} onClick={handleInputChange_For_Competencies_Experiences}>5</button>
               </div>
             </div>
 
@@ -40,7 +45,7 @@ function Competencies_Form ({handleInputChange, competence_name, competence_leve
               name = "competence_description"
               placeholder = "Beskrivning"
               value={competence_description}
-              onChange={handleInputChange}
+              onChange={handleInputChange_For_Competencies_Experiences}
               />
             </div>
 
