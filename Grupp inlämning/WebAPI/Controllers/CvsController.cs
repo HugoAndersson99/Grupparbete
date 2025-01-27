@@ -6,7 +6,6 @@ using Application.Queries.Cvs.GetAllByUserId;
 using Application.Queries.Cvs.GetById;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -22,7 +21,7 @@ namespace WebAPI.Controllers
             _logger = logger;
         }
 
-        // POST: api/Cv
+
         [Authorize]
         [HttpPost]
         [Route("CreateNewCV")]
@@ -53,7 +52,7 @@ namespace WebAPI.Controllers
                 return StatusCode(500, "An error occurred while processing your request.");
             }
         }
-        // GET: api/Cv/{id}
+
         [Authorize]
         [HttpGet]
         [Route("GetCvById/{id}")]
@@ -78,7 +77,7 @@ namespace WebAPI.Controllers
                 return StatusCode(500, "An error occurred while processing your request.");
             }
         }
-        // PUT: api/Cv/{id}
+
         [Authorize]
         [HttpPut]
         [Route("UpdateCv/{id}")]
@@ -109,7 +108,7 @@ namespace WebAPI.Controllers
                 return StatusCode(500, "An error occurred while processing your request.");
             }
         }
-        // DELETE: api/Cv/{id}
+
         [Authorize]
         [HttpDelete]
         [Route("DeleteCv/{id}")]
@@ -126,7 +125,7 @@ namespace WebAPI.Controllers
                     return BadRequest(result.ErrorMessage);
                 }
 
-                return NoContent();  // Successfully deleted
+                return NoContent();
             }
             catch (Exception ex)
             {
@@ -134,6 +133,7 @@ namespace WebAPI.Controllers
                 return StatusCode(500, "An error occurred while processing your request.");
             }
         }
+
         [Authorize]
         [HttpGet]
         [Route("GetUsersCv/{userId}")]
@@ -142,7 +142,6 @@ namespace WebAPI.Controllers
         {
             try
             {
-                // Skicka en query för att hämta alla CV:n för en specifik användare
                 var result = await _mediator.Send(new GetAllCVsByUserIdQuery(userId));
 
                 if (result == null || !result.Data.Any())

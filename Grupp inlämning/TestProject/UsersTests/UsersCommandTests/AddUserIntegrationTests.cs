@@ -19,9 +19,8 @@ namespace TestProject.UsersTests.UsersCommandTests
         [SetUp]
         public void Setup()
         {
-            // Skapa en in-memory-databas för test
             var options = new DbContextOptionsBuilder<Database>()
-                .UseInMemoryDatabase(Guid.NewGuid().ToString()) // Unik databas för varje testkörning
+                .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .Options;
 
             _database = new Database(options);

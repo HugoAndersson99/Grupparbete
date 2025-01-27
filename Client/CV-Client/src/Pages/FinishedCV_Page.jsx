@@ -6,8 +6,10 @@ import CreateCV_Button from '../Components/CreateCV_Button';
 import MittKonto_Button from '../Components/MittKonto_Button';
 import CV_Modell from '../Components/CV_Modell.jsx';
 import { useLocation } from 'react-router-dom';
-import html2pdf from "html2pdf.js";
 import '../Css/CV_Modell.css'
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
+
 
 function FinishedCV_Page() {
   const location = useLocation();
@@ -55,12 +57,35 @@ function FinishedCV_Page() {
   
   const navigate = useNavigate();
 
+  const printRef = React.useRef(null);
 
-  async function handleCV() {
-  const element = document.querySelector("#finished_CV")
+  const handleDownloadPDF = async () => {
+    const element = printRef.current;
+    if(!element){
+      return;
+    }
 
-  html2pdf(element)
-}
+
+    const canvas = await html2canvas(element, {
+      scale: 3
+    });
+    const data = canvas.toDataURL("image/png");
+
+    const pdf = new jsPDF({
+      orientation: "portrait",
+      unit: "px",
+      format: "a4"
+    });
+
+    const imgProperties = pdf.getImageProperties(data);
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
+
+    pdf.addImage(data, "PNG", 0, 0, pdfWidth, pdfHeight);
+    pdf.save("example.pdf")
+  };
+  
+
 
   return (
   <>
@@ -72,14 +97,14 @@ function FinishedCV_Page() {
       <div className="finished-page-section">
         <h1 id = "create_CV_Header">Grattis! Här är ditt nya CV!</h1>
         <div id = "create_CV_button">
-          <CreateCV_Button text="Ladda ned pdf"  onClick={handleCV}/>
+          <CreateCV_Button text="Ladda ned pdf"  onClick={handleDownloadPDF}/>
         </div>
         <div id = "my_account_button">
           <MittKonto_Button text="Till mitt konto" id = "my_account_button" onClick={() => navigate("/Mitt_Konto")}/>
         </div>
       </div>
       
-      <div className="finished-CV-container" id = "finished_CV">
+      <div className="finished-CV-container" id = "finished_CV" ref = {printRef}>
         {state.name ? (
           <CV_Modell
             profilePicture={profilePicture}
