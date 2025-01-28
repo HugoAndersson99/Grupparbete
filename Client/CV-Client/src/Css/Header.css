@@ -5,10 +5,7 @@
   padding: 1rem;
   font-family: "Inter" , serif;
   font-weight: 800;
-  font-size: 16px;
-  
-  ;
-  
+  font-size: 16px; 
 }
 
 .header-logo {
@@ -18,3 +15,9 @@
   margin-left: 20px; 
   margin-right: 10px;
 }
+.header-logo:hover {
+cursor: pointer;
+}
+.header:hover {
+  cursor: pointer;
+  }

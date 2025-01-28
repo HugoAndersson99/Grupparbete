@@ -34,8 +34,6 @@ html, body {
   gap: 1rem;
 }
 
-
-
 .home {
   margin-top: 100px;
   display: flex;
@@ -130,7 +128,7 @@ html, body {
 }
 
 .testimonial img{
-  top: 910px;
+  top: 889px;
   position: absolute;
   margin-left: -50px;
 }

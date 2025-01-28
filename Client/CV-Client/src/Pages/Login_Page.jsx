@@ -8,10 +8,14 @@ function Login_Page() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
+
 
   const handleLogin = async (event) => {
     event.preventDefault();
+    setErrorMessage('');
+    setShowError(false);
 
     const loginData = {
       email: email,
@@ -25,15 +29,19 @@ function Login_Page() {
       sessionStorage.setItem('authToken', result.token);
       navigate('/Mitt_Konto'); 
     } else {
-      setErrorMessage(result.message); 
-    }
+      setErrorMessage(result.message);
+      setTimeout(() => setShowError(true), 0);
+    } 
+    
   };
 
   return (
+  <>
+    <Header />
     <div className="login-container">
       <div className="half-circle"></div>
       <div className="header-container">
-        <Header />
+
       </div>
       <div className="login-box">
         <h1 className="login-title">Logga in</h1>
@@ -56,7 +64,6 @@ function Login_Page() {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button className="login-button" onClick={handleLogin}>Fortsätt</button>
-        {errorMessage && <div className="error-message">{errorMessage}</div>}
       </div>
       <div className="login-footer">
         Inte registrerad?{' '}
@@ -64,7 +71,14 @@ function Login_Page() {
           Klicka här
         </span>
       </div>
+      {errorMessage && (
+        <div className={`error-message ${showError ? 'fade-in' : ''}`}>
+          {errorMessage}
+        </div>
+      )}
+      <div className="half-circle-2"></div>
     </div>
+  </>
   );
 }
 

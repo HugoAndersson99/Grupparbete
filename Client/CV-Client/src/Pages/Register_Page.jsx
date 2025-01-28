@@ -14,7 +14,6 @@ function Register_Page() {
 
   const handleRegister = async (event) => {
     event.preventDefault();
-    setErrorMessage('');
     setSuccessMessage('');
 
     if (password !== repeatPassword) {
@@ -40,10 +39,12 @@ function Register_Page() {
   };
 
   return (
+  <>
+    <Header />
     <div className='register-container'>
       <div className="half-circle"></div>
       <div className='header-container'>
-        <Header />
+
       </div>
       <div className='register-box'>
         <h1 className='register-title'>Registrera dig!</h1>
@@ -75,10 +76,13 @@ function Register_Page() {
           onChange={(e) => setRepeatPassword(e.target.value)}
         />
         <button className='register-button' onClick={handleRegister}>Fortsätt</button>
-        {errorMessage && <div className="error-message">{errorMessage}</div>}
-        {successMessage && <div className="success-message">{successMessage}</div>}
+
       </div>
+      {errorMessage && <div className="error-message">{errorMessage}</div>}
+      {successMessage && <div className="success-message">{successMessage}</div>}
+      <div className="half-circle-2"></div>
     </div>
+  </>
   );
 }
 

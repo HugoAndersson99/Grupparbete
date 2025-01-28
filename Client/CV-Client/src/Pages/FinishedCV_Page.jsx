@@ -53,8 +53,6 @@ function FinishedCV_Page() {
 
   } = state;
 
-
-  
   const navigate = useNavigate();
 
   const printRef = React.useRef(null);
@@ -64,7 +62,6 @@ function FinishedCV_Page() {
     if(!element){
       return;
     }
-
 
     const canvas = await html2canvas(element, {
       scale: 3
@@ -85,7 +82,6 @@ function FinishedCV_Page() {
     pdf.save("example.pdf")
   };
   
-
 
   return (
   <>

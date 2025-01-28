@@ -30,4 +30,12 @@
   margin-bottom: 0.5rem;
   text-align: left;
 }
+.footer-section a{
+  color:black;
+  text-decoration: none;
+}
+.footer-section a:hover{
+  color:#C77DEA;
+  text-decoration: none;
+}
 
