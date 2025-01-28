@@ -47,9 +47,13 @@ function CV_Modell({
             <div className = "left-side" style={{ backgroundColor: leftSide_Color }}>
 
 
-                <div className = "profile-image">
-                    <img className = "profile-image-img" src = {profilePicture} style = {{border: `4px solid ${leftSide_ProfileImage_Color}`}}></img>
-                </div>
+            <div className="profile-image">
+                <div
+                    className="profile-image-img"
+                    style={{ backgroundImage: `url(${profilePicture})`, border: `4px solid ${leftSide_ProfileImage_Color}`}}
+                ></div>
+            </div>
+
 
                 <div className = "name-CV" style={{ color: leftSide_Name_Color}}>
                     <h2>

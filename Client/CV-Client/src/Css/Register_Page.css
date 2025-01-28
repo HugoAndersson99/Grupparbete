@@ -1,10 +1,9 @@
 .register-container{
-  display: grid;                
-  min-height: 100vh;       
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
-
-
-
 .header-container {
   display: flex;
   justify-content: space-between;
@@ -25,11 +24,21 @@
   filter: blur(200px); 
   z-index: -1; 
 }
-
-
+.half-circle-2 {
+  position: fixed;
+  bottom: -400px;
+  right: -400px;
+  width: 860px;
+  height: 830px;
+  background: rgba(199, 125, 234, 0.7);
+  border-top-right-radius: 100%;
+  border-top-left-radius: 100%;
+  border-bottom-left-radius: 100%;
+  filter: blur(200px);
+  z-index: -1;
+}
 
 .register-box {
- margin-top: 100px;
   display: grid;
   grid-template-rows: 1fr 2fr 1fr;
   width: 705px;
@@ -40,7 +49,6 @@
   position: relative;
   gap: 5px;
   justify-self: center;
-  margin-bottom: 100px;
 }
 
 .register-title {
@@ -52,8 +60,6 @@
   justify-content: center;
   align-items: center;
 }
-
-
 
 .register-box h2 {
   font-family: "Inter" , serif;
@@ -70,8 +76,15 @@
   border: 1px solid #ccc;
   padding: 10px;
   font-size: 16px;
+  font-weight: bold;
   background-color: #d9d9d9;
   outline: none;
+}
+.register-input:hover {
+  background: #C77DEA;
+}
+.register-input:focus {
+  background: #C77DEA;
 }
 
 .register-button {
@@ -86,8 +99,52 @@
   font-weight: 800;
   margin-top: 20px;
   align-self: flex-start;
+  transition: background-color 0.9s ease, color 0.9s ease;
 }
 
 .register-button:hover {
   background-color: #8f57ff;
+  transition: background-color 0.9s ease, color 0.9s ease;
+}
+
+.error-message {
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+  background-color: aliceblue;
+  color: red;
+  border: 2px solid red;
+  border-radius: 5px;
+  max-width: 80%;
+  margin: 10px auto;
+
+  opacity: 0;
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-delay: 800ms;
+}
+.success-message{
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+  background-color: aliceblue;
+  color: rgb(0, 187, 22);
+  border: 2px solid rgb(0, 187, 22);
+  border-radius: 5px;
+  max-width: 80%;
+  margin: 10px auto;
+
+  opacity: 0;
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-delay: 800ms;
+}
+
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
 }
