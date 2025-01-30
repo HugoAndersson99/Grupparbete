@@ -17,7 +17,7 @@ namespace TestProject.UsersTests.UsersQueryTests
         private IUserRepository _userRepository;
         private Database _dbContext;
         private ILogger<GetAllUsersQueryHandler> _logger;
-        private IMemoryCache _cache;
+       // private IMemoryCache _cache;
 
         [SetUp]
         public void Setup()
@@ -29,16 +29,14 @@ namespace TestProject.UsersTests.UsersQueryTests
             _dbContext = new Database(options);
             _userRepository = new UserRepository(_dbContext, NullLogger<UserRepository>.Instance);
             _logger = new LoggerFactory().CreateLogger<GetAllUsersQueryHandler>();
-            _cache = new MemoryCache(new MemoryCacheOptions());
 
-            _handler = new GetAllUsersQueryHandler(_userRepository, _logger, _cache);
+            _handler = new GetAllUsersQueryHandler(_userRepository, _logger);
         }
 
         [TearDown]
         public void TearDown()
         {
             _dbContext.Dispose();
-            _cache.Dispose();
         }
 
         [Test]

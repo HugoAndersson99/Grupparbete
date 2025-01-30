@@ -21,9 +21,9 @@ namespace TestProject.CvsTests.CvsQueryTests
         public void Setup()
         {
             _mockCvRepository = A.Fake<ICvRepository>();
-            _mockCache = A.Fake<IMemoryCache>();
+           // _mockCache = A.Fake<IMemoryCache>();
             _mockLogger = A.Fake<ILogger<GetAllCVsByUserIdQueryHandler>>();
-            _handler = new GetAllCVsByUserIdQueryHandler(_mockCvRepository, _mockLogger, _mockCache);
+            _handler = new GetAllCVsByUserIdQueryHandler(_mockCvRepository, _mockLogger);
         }
 
         [TearDown]

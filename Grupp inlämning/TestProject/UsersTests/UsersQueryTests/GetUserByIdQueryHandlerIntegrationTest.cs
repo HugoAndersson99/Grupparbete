@@ -31,7 +31,7 @@ namespace TestProject.UsersTests.UsersQueryTests
             _logger = new LoggerFactory().CreateLogger<GetUserByIdQueryHandler>();
             _cache = new MemoryCache(new MemoryCacheOptions());
 
-            _handler = new GetUserByIdQueryHandler(_userRepository, _logger, _cache);
+            _handler = new GetUserByIdQueryHandler(_userRepository, _logger);
         }
 
         [TearDown]

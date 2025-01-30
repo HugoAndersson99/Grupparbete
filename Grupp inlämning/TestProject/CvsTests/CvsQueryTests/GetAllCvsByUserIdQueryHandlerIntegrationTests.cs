@@ -17,7 +17,6 @@ namespace TestProject.CvsTests.CvsQueryTests
         private ICvRepository _cvRepository;
         private Database _dbContext;
         private ILogger<GetAllCVsByUserIdQueryHandler> _logger;
-        private IMemoryCache _memoryCache;
 
         [SetUp]
         public void Setup()
@@ -29,15 +28,13 @@ namespace TestProject.CvsTests.CvsQueryTests
             _dbContext = new Database(options);
             _cvRepository = new CvRepository(_dbContext, NullLogger<CvRepository>.Instance);
             _logger = new LoggerFactory().CreateLogger<GetAllCVsByUserIdQueryHandler>();
-            _memoryCache = new MemoryCache(new MemoryCacheOptions());
-            _handler = new GetAllCVsByUserIdQueryHandler(_cvRepository, _logger, _memoryCache);
+            _handler = new GetAllCVsByUserIdQueryHandler(_cvRepository, _logger);
         }
 
         [TearDown]
         public void TearDown()
         {
             _dbContext.Dispose();
-            _memoryCache.Dispose();
         }
 
         [Test]
@@ -61,7 +58,7 @@ namespace TestProject.CvsTests.CvsQueryTests
             Assert.Contains(cv1, result.Data.ToList());
             Assert.Contains(cv2, result.Data.ToList());
 
-            Assert.IsTrue(_memoryCache.TryGetValue($"CVs_User_{userId}", out _));
+            //Assert.IsTrue(_memoryCache.TryGetValue($"CVs_User_{userId}", out _));
         }
 
         [Test]
@@ -86,7 +83,7 @@ namespace TestProject.CvsTests.CvsQueryTests
             Assert.Contains(cv1, result.Data.ToList());
             Assert.Contains(cv2, result.Data.ToList());
 
-            Assert.IsTrue(_memoryCache.TryGetValue($"CVs_User_{userId}", out _));
+           // Assert.IsTrue(_memoryCache.TryGetValue($"CVs_User_{userId}", out _));
         }
 
         [Test]

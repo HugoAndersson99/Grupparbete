@@ -17,7 +17,7 @@ namespace TestProject.CvsTests.CvsQueryTests
         private ICvRepository _cvRepository;
         private Database _dbContext;
         private ILogger<GetCvByIdQueryHandler> _logger;
-        private IMemoryCache _cache;
+       //private IMemoryCache _cache;
 
         [SetUp]
         public void Setup()
@@ -29,9 +29,9 @@ namespace TestProject.CvsTests.CvsQueryTests
             _dbContext = new Database(options);
             _cvRepository = new CvRepository(_dbContext, NullLogger<CvRepository>.Instance);
             _logger = new LoggerFactory().CreateLogger<GetCvByIdQueryHandler>();
-            _cache = new MemoryCache(new MemoryCacheOptions());
+           // _cache = new MemoryCache(new MemoryCacheOptions());
 
-            _handler = new GetCvByIdQueryHandler(_cvRepository, _logger, _cache);
+            _handler = new GetCvByIdQueryHandler(_cvRepository, _logger);
 
             var testUser = new User
             {
@@ -47,7 +47,7 @@ namespace TestProject.CvsTests.CvsQueryTests
         public void TearDown()
         {
             _dbContext.Dispose();
-            _cache.Dispose();
+            //_cache.Dispose();
         }
 
         [Test]
@@ -60,7 +60,7 @@ namespace TestProject.CvsTests.CvsQueryTests
             await _dbContext.SaveChangesAsync();
 
             string cacheKey = $"CV_{cvId}";
-            _cache.Set(cacheKey, cv, TimeSpan.FromMinutes(5));
+           // _cache.Set(cacheKey, cv, TimeSpan.FromMinutes(5));
 
             var query = new GetCvByIdQuery(cvId);
 
@@ -95,8 +95,8 @@ namespace TestProject.CvsTests.CvsQueryTests
             Assert.AreEqual("http://example.com/sample.pdf", result.Data.PdfUrl);
             Assert.AreEqual(testUserId, result.Data.UserId);
 
-            var cachedCV = _cache.Get<CV>($"CV_{id}");
-            Assert.IsNotNull(cachedCV);
+           // var cachedCV = _cache.Get<CV>($"CV_{id}");
+          //  Assert.IsNotNull(cachedCV);
         }
 
         [Test]

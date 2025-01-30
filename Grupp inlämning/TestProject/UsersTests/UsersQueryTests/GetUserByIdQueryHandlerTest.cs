@@ -21,7 +21,7 @@ namespace TestProject.UsersTests.UsersQueryTests
             _mockUserRepository = A.Fake<IUserRepository>();
             _mockCache = A.Fake<IMemoryCache>();
             _mockLogger = A.Fake<ILogger<GetUserByIdQueryHandler>>();
-            _handler = new GetUserByIdQueryHandler(_mockUserRepository, _mockLogger, _mockCache);
+            _handler = new GetUserByIdQueryHandler(_mockUserRepository, _mockLogger);
         }
 
         [TearDown]
