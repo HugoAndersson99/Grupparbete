@@ -21,7 +21,7 @@ namespace WebAPI.Controllers
 
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         [Route("getUserById/{id}")]
         public async Task<IActionResult> GetUserById(Guid id)
@@ -36,7 +36,7 @@ namespace WebAPI.Controllers
             return Ok(new { message = result.Message, data = result.Data });
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         [Route("getAllUsers")]
         public async Task<IActionResult> GetAllUsers()
