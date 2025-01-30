@@ -102,7 +102,7 @@ namespace WebAPI
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            //builder.Services.AddSwaggerGen();
 
             //var azureStorageConnectionString = builder.Configuration.GetConnectionString("AzureStorage");
             var azureStorageConnectionString = Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING");
@@ -134,12 +134,12 @@ namespace WebAPI
 
 
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Grupp Tre v1");
+                c.SwaggerEndpoint("https://cvapplikation-gvefeagjdzb2bqf2.swedencentral-01.azurewebsites.net/swagger/v1/swagger.json", "Grupp Tre v1");
             });
 
             app.UseRouting();
