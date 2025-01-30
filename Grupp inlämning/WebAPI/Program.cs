@@ -139,7 +139,7 @@ namespace WebAPI
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Grupp");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Grupp Tre v1");
             });
 
             app.UseRouting();
