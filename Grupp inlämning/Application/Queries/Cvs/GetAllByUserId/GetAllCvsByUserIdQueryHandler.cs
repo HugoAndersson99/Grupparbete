@@ -10,43 +10,41 @@ namespace Application.Queries.Cvs.GetAllByUserId
     {
         private readonly ICvRepository _cvRepository;
         private readonly ILogger<GetAllCVsByUserIdQueryHandler> _logger;
-        private readonly IMemoryCache _cache;
 
-        public GetAllCVsByUserIdQueryHandler(ICvRepository cvRepository,ILogger<GetAllCVsByUserIdQueryHandler> logger,IMemoryCache cache)
+        public GetAllCVsByUserIdQueryHandler(ICvRepository cvRepository,ILogger<GetAllCVsByUserIdQueryHandler> logger)
         {
             _cvRepository = cvRepository;
             _logger = logger;
-            _cache = cache;
         }
 
         public async Task<OperationResult<IEnumerable<CV>>> Handle(GetAllCVsByUserIdQuery request, CancellationToken cancellationToken)
         {
-            string cacheKey = $"CVs_User_{request.UserId}";
-            if (_cache.TryGetValue(cacheKey, out IEnumerable<CV> cachedCVs))
-            {
-                _logger.LogInformation("Fetching CVs from cache for user {UserId}", request.UserId);
-                return OperationResult<IEnumerable<CV>>.Success(cachedCVs);
-            }
 
             _logger.LogInformation("Fetching CVs from database for user {UserId}", request.UserId);
-            var result = await _cvRepository.GetAllByUserIdAsync(request.UserId);
-
-            if (result.IsSuccess && result.Data != null)
+            try
             {
-                _cache.Set(cacheKey, result.Data, new MemoryCacheEntryOptions
+
+
+                var result = await _cvRepository.GetAllByUserIdAsync(request.UserId);
+
+                if (result.IsSuccess && result.Data != null)
                 {
-                    SlidingExpiration = TimeSpan.FromMinutes(10),
-                    AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1)
-                });
-
-                _logger.LogInformation("CVs cached for user {UserId}", request.UserId);
+                    _logger.LogInformation("Successfully retrieved cvs from user Id: {UserId}", request.UserId);
+                    return result;
+                }
+                else
+                {
+                    _logger.LogWarning("Failed to fetch CVs for user {UserId}: {Error}", request.UserId, result.ErrorMessage);
+                    return OperationResult<IEnumerable<CV>>.Failure("Cvs not found.", "Database error.");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                _logger.LogWarning("Failed to fetch CVs for user {UserId}: {Error}", request.UserId, result.ErrorMessage);
+                _logger.LogError(ex, "Error while getting CV from user Id: {UserId}", request.UserId);
+                return OperationResult<IEnumerable<CV>>.Failure($"An error occurred: {ex.Message}", "Database error.");
             }
 
-            return result;
+            
         }
     }
 }
