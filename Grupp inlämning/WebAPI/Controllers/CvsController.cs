@@ -13,12 +13,11 @@ namespace WebAPI.Controllers
     public class CvsController : Controller
     {
         private readonly IMediator _mediator;
-        private readonly ILogger _logger;
+        
 
-        public CvsController(IMediator mediator, ILogger logger)
+        public CvsController(IMediator mediator)
         {
             _mediator = mediator;
-            _logger = logger;
         }
 
 
@@ -29,7 +28,6 @@ namespace WebAPI.Controllers
         {
             if (cvDto == null)
             {
-                _logger.LogWarning("CreateCv failed: CvDto is null.");
                 return BadRequest("CV data is required.");
             }
 
@@ -40,7 +38,6 @@ namespace WebAPI.Controllers
 
                 if (!result.IsSuccess)
                 {
-                    _logger.LogWarning("CreateCv failed: {ErrorMessage}", result.ErrorMessage);
                     return BadRequest(result.ErrorMessage);
                 }
 
@@ -48,7 +45,6 @@ namespace WebAPI.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error while creating CV.");
                 return StatusCode(500, "An error occurred while processing your request.");
             }
         }
@@ -65,7 +61,6 @@ namespace WebAPI.Controllers
 
                 if (cv == null)
                 {
-                    _logger.LogWarning("GetCvById failed: No CV found with Id {CvId}", id);
                     return NotFound("CV not found.");
                 }
 
@@ -73,7 +68,6 @@ namespace WebAPI.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error while retrieving CV by Id.");
                 return StatusCode(500, "An error occurred while processing your request.");
             }
         }
@@ -85,7 +79,6 @@ namespace WebAPI.Controllers
         {
             if (cvDto == null || id != cvDto.Id)
             {
-                _logger.LogWarning("UpdateCv failed: Invalid CV Id or CV data.");
                 return BadRequest("CV data is invalid.");
             }
 
@@ -96,7 +89,6 @@ namespace WebAPI.Controllers
 
                 if (!result.IsSuccess)
                 {
-                    _logger.LogWarning("UpdateCv failed: {ErrorMessage}", result.ErrorMessage);
                     return BadRequest(result.ErrorMessage);
                 }
 
@@ -104,7 +96,6 @@ namespace WebAPI.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error while updating CV.");
                 return StatusCode(500, "An error occurred while processing your request.");
             }
         }
@@ -121,7 +112,6 @@ namespace WebAPI.Controllers
 
                 if (!result.IsSuccess)
                 {
-                    _logger.LogWarning("DeleteCv failed: {ErrorMessage}", result.ErrorMessage);
                     return BadRequest(result.ErrorMessage);
                 }
 
@@ -129,7 +119,6 @@ namespace WebAPI.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error while deleting CV.");
                 return StatusCode(500, "An error occurred while processing your request.");
             }
         }
@@ -137,7 +126,7 @@ namespace WebAPI.Controllers
         [Authorize]
         [HttpGet]
         [Route("GetUsersCv/{userId}")]
-        [ResponseCache(CacheProfileName = "DefaultCache")]
+        //[ResponseCache(CacheProfileName = "DefaultCache")]
         public async Task<IActionResult> GetAllCvsFromUser(Guid userId)
         {
             try
@@ -146,7 +135,6 @@ namespace WebAPI.Controllers
 
                 if (result == null || !result.Data.Any())
                 {
-                    _logger.LogWarning("No CVs found for user with Id: {UserId}.", userId);
                     return NotFound("No CVs found for the specified user.");
                 }
 
@@ -154,7 +142,6 @@ namespace WebAPI.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error while retrieving CVs for user with Id: {UserId}.", userId);
                 return StatusCode(500, "An error occurred while processing your request.");
             }
         }
