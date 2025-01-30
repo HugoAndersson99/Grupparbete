@@ -105,10 +105,9 @@ namespace WebAPI
             //builder.Services.AddSwaggerGen();
 
             //var azureStorageConnectionString = builder.Configuration.GetConnectionString("AzureStorage");
-            //var azureStorageConnectionString = Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING");
-            var azureStorageConnectionString = "DefaultEndpointsProtocol=https;AccountName=cvpdfcontainer;AccountKey=oxYkTDEKQI9i8WC/pm2aP1sERlnTZsPildZotRBybV1g/p08aOz3IA/c7wshtGM+93XfyheTdBIp+AStAgVx8w==;EndpointSuffix=core.windows.net";
-            //var azureDbConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-            var azureDbConnectionString = "Server=tcp:grupptre.database.windows.net,1433;Initial Catalog=Grupp;Persist Security Info=False;User ID=GruppTre;Password=CvApplikation!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;";
+            var azureStorageConnectionString = Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING");
+
+            var azureDbConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
             if (string.IsNullOrEmpty(azureDbConnectionString))
             {
                 azureDbConnectionString = Environment.GetEnvironmentVariable("SQLAZURECONNSTR_GRUPP_DB");
