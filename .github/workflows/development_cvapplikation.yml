@@ -64,6 +64,6 @@ jobs:
           app-name: 'CvApplikation'
           slot-name: 'Production'
           package: .
-          app-settings: |
+          publish-profile: |
             SQLAZURECONNSTR_GRUPP_DB=${{ secrets.SQLAZURECONNSTR_GRUPP_DB }}
             AZURE_STORAGE_CONNECTION_STRING=${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
