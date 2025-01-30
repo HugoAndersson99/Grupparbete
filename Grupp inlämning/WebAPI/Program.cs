@@ -121,13 +121,20 @@ namespace WebAPI
 
             // Configure the HTTP request pipeline.
             
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            
+            //    app.UseSwagger();
+            //    app.UseSwaggerUI();
 
 
-            //app.UseHttpsRedirection();
 
+            app.UseHttpsRedirection();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Grupp");
+            });
+
+            app.UseRouting();
             app.UseAuthorization();
 
             app.MapControllers();
