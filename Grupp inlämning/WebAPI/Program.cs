@@ -30,8 +30,11 @@ namespace WebAPI
             });
 
             // Add services to the container.
+            //var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+            //byte[] secretkey = Encoding.ASCII.GetBytes(jwtSettings["SecretKey"]!);
             var jwtSettings = builder.Configuration.GetSection("JwtSettings");
-            byte[] secretkey = Encoding.ASCII.GetBytes(jwtSettings["SecretKey"]!);
+            string secretKey = jwtSettings["SecretKey"] ?? throw new Exception("JWT SecretKey saknas i konfigurationen!");
+            byte[] secretkey = Encoding.ASCII.GetBytes(secretKey);
 
             builder.Services.AddAuthentication(options =>
             {
