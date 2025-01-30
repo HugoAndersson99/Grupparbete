@@ -22,7 +22,7 @@ namespace WebAPI
             {
                 options.AddPolicy("AllowFrontend", policy =>
                 {
-                    policy.WithOrigins("http://localhost:5173") 
+                    policy.WithOrigins("http://localhost:5173", "https://grupparbete-topaz.vercel.app/") 
                           .AllowAnyMethod()
                           .AllowAnyHeader()
                           .AllowCredentials(); 
@@ -106,7 +106,12 @@ namespace WebAPI
 
             //var azureStorageConnectionString = builder.Configuration.GetConnectionString("AzureStorage");
             var azureStorageConnectionString = Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING");
-            builder.Services.AddApplication().AddInfrastructure(builder.Configuration.GetConnectionString("DefaultConnection"), azureStorageConnectionString);
+            var azureDbConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+            if (string.IsNullOrEmpty(azureDbConnectionString))
+            {
+                azureDbConnectionString = Environment.GetEnvironmentVariable("SQLAZURECONNSTR_GRUPP_DB");
+            }
+            builder.Services.AddApplication().AddInfrastructure(azureDbConnectionString, azureStorageConnectionString);
             builder.Services.AddDbContext<Database>();
 
             builder.Services.Configure<BlobSettings>(builder.Configuration.GetSection("BlobSettings"));
