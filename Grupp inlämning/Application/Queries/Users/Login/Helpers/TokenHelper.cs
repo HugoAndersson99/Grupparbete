@@ -18,7 +18,13 @@ namespace Application.Queries.Users.Login.Helpers
 
         public virtual string GenerateJwtToken(User user)
         {
-            var key = Encoding.ASCII.GetBytes(s: configuration["JwtSettings:SecretKey"]!);
+            //var key = Encoding.ASCII.GetBytes(s: configuration["JwtSettings:SecretKey"]!);
+
+            var secretKey = Environment.GetEnvironmentVariable("JwtSettings__SecretKey")
+                    ?? configuration["JwtSettings:SecretKey"]
+                    ?? throw new Exception("JWT SecretKey saknas i konfigurationen!");
+
+            var key = Encoding.ASCII.GetBytes(secretKey);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {

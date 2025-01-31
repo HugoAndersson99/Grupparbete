@@ -14,7 +14,7 @@ function Work_Experience_Form ({
     
     return (
 
-        <div className="work-experience-form">
+        <form className="work-experience-form">
 
             <div className="input-fields-2">
 
@@ -25,6 +25,7 @@ function Work_Experience_Form ({
                         id="jobbtitel" 
                         name = "job_title"
                         placeholder="Jobbtitel" 
+                        maxLength="30"
                         value={job_title}
                         onChange={handleInputChange_For_Work_Experiences}
                     />
@@ -37,6 +38,7 @@ function Work_Experience_Form ({
                     id="arbetsgivare" 
                     name = "job_employer"
                     placeholder="Arbetsgivare" 
+                    maxLength="20"
                     value={job_employer}
                     onChange={handleInputChange_For_Work_Experiences}
                     />
@@ -48,7 +50,8 @@ function Work_Experience_Form ({
                     type="text" 
                     id="stad" 
                     name = "job_city"
-                    placeholder="Postnummer"
+                    placeholder="Stad"
+                    maxLength="30"
                     value={job_city}
                     onChange={handleInputChange_For_Work_Experiences} 
                     />
@@ -59,7 +62,7 @@ function Work_Experience_Form ({
                 <div className="input-group-2">
                     <label htmlFor="startdatum-arbete">Startdatum</label>
                     <input 
-                    type="text" 
+                    type="date" 
                     id="startdatum-arbete" 
                     name ="job_start_date"
                     placeholder="21-4-19" 
@@ -71,7 +74,7 @@ function Work_Experience_Form ({
                 <div className="input-group-2">
                     <label htmlFor="slutdatum-arbete">Slutdatum</label>
                     <input 
-                    type="text" 
+                    type="date" 
                     id="slutdatum-arbete"
                     name ="job_end_date"
                     placeholder="13-3-15" 
@@ -93,7 +96,7 @@ function Work_Experience_Form ({
                 
             </div> 
              
-        </div>
+        </form>
     );
 };
 

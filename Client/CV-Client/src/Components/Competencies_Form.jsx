@@ -4,13 +4,12 @@ import '../Css/Competencies_Form.css'
 function Competencies_Form ({ 
   competence_name, 
   competence_level, 
-  competence_description,
   handleInputChange_For_Competencies_Experiences
 }) {
-    
+  
   return (
 
-        <div className = "competencies-form">
+        <form className = "competencies-form">
 
           <div className = "input-fields-4">
             
@@ -21,6 +20,7 @@ function Competencies_Form ({
                 id = "namn-kompetens"
                 name = "competence_name"
                 placeholder = "Namn"
+                maxLength="10"
                 value={competence_name}
                 onChange={handleInputChange_For_Competencies_Experiences}
               />
@@ -37,21 +37,9 @@ function Competencies_Form ({
               </div>
             </div>
 
-            <div className = "input-group-4" id = "beskrivning-kompetens-container">
-              <label htmlFor = "beskrivning-kompetens">Beskrivning</label>
-              <textarea 
-              type = "textarea" 
-              id = "beskrivning-kompetens" 
-              name = "competence_description"
-              placeholder = "Beskrivning"
-              value={competence_description}
-              onChange={handleInputChange_For_Competencies_Experiences}
-              />
-            </div>
-
           </div>
 
-        </div>
+        </form>
     );
 };
 

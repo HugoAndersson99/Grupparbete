@@ -9,24 +9,20 @@ import Contact_Information_Form from '../Components/Contact_Information_Form.jsx
 import CV_Modell from '../Components/CV_Modell.jsx';
 import { useNavigate } from "react-router-dom";
 import { chatWithAI } from '../Services/OpenAI_API.jsx';
-import { createCv } from '../Services/CV_API';
-import { useAuth } from '../Services/AuthContext';
-import { jwtDecode } from "jwt-decode";
 
 function Make_CV_Page() {
 
-  const { authToken } = useAuth();
   const navigate = useNavigate();
   const [profilePicture, setProfilePicture] = useState(Picture_model);
 
   {/*--------------------Contact information-Section--------------------*/}
-  const [name, setName] = useState("Katt Kattson");
-  const [address, setAddress] = useState("Göterborg gatan 45");
-  const [zip_code, setZip_Code] = useState("690 05");
-  const [phoneNumber, setPhoneNumber] = useState("0789 567385");
-  const [email, setEmail] = useState("Minhotmail.com");
-  const [linkedin, setLinkedIn] = useState("www.linkedIn.se");
-  const [otherLink, setOtherLink] = useState("www.minadress.se");
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  const [zip_code, setZip_Code] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [linkedin, setLinkedIn] = useState("");
+  const [otherLink, setOtherLink] = useState("");
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -40,7 +36,7 @@ function Make_CV_Page() {
   };
 
   {/*--------------------About Me-Section--------------------*/}
-  const [about_Me, setAbout_Me] = useState("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nec tortor sed metus fermentum tincidunt. Nam accumsan libero id malesuada dignissim.Mauris dictum convallis ipsum id tincidunt. Nulla facilisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam auctor sapien sed justo convallis, vitae interdum sapien dapibus. Sed nec semper justo. Curabitur varius magna in ipsum malesuada, quis accumsan felis ornare. Integer quis ipsum ac justo pulvinar vulputate sed in risus. Vivamus eget lacus pharetra, volutpat est vel, pretium arcu.");
+  const [about_Me, setAbout_Me] = useState("");
 
   {/* Function to update props when input changes for Contact Information and About Me*/}
   const handleInputChange = (inputEvent) => {
@@ -77,14 +73,14 @@ function Make_CV_Page() {
 
   {/*--------------------Work-experience-Section--------------------*/}
   const [work_Experiences, setWork_Experiences] = useState([
-    { 
-      job_title: "Lärare", 
-      job_employer: "Haga Skolan", 
-      job_city: "Norrköping", 
-      job_start_date: "12-03-2010", 
-      job_end_date: "30-11-2021", 
-      job_description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit." 
-    }
+    // { 
+    //   job_title: "", 
+    //   job_employer: "", 
+    //   job_city: "", 
+    //   job_start_date: "", 
+    //   job_end_date: "", 
+    //   job_description: "" 
+    // }
   ]);
 
   const handleJobDescriptionChange = (index, newDescription) => {
@@ -114,22 +110,14 @@ function Make_CV_Page() {
 
   {/*--------------------Education-Section--------------------*/}
   const [education_Experiences, setEducation_Experiences] = useState([
-    { 
-      education_school: "Socionom", 
-      education_program: "Linköpings Universitet", 
-      education_start_date: "12-03-2010", 
-      education_end_date: "30-11-2021", 
-      education_description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit." 
-    }
+    // { 
+    //   education_school: "", 
+    //   education_program: "", 
+    //   education_start_date: "", 
+    //   education_end_date: "", 
+    // }
   ]);
 
-  const handleEducationDescriptionChange = (index, newDescription) => {
-    const updatedEducationExperiences = education_Experiences.map((experience, i) =>
-      i === index ? { ...experience, education_description: newDescription } : experience
-    );
-    setEducation_Experiences(updatedEducationExperiences);
-  };
-  
   const handleInputChange_For_Education_Experiences = (e, index) => {
     const { name, value } = e.target;
     const new_education_Experiences = [...education_Experiences];
@@ -139,7 +127,7 @@ function Make_CV_Page() {
   const handleAdd_Education_Experiences = () => {
     setEducation_Experiences([
       ...education_Experiences,
-      { education_school: '', education_program: '', education_start_date: '', education_end_date: '', education_description: ''}
+      { education_school: '', education_program: '', education_start_date: '', education_end_date: ''}
     ]);
   };
   const handleRemove_Education_Experiences = () => {
@@ -150,19 +138,11 @@ function Make_CV_Page() {
 
   {/*--------------------Competencies-Section--------------------*/}
   const [competencies_Experiences, setCompetencies_Experiences] = useState([
-    { 
-      competence_name: "C#", 
-      competence_level: "", 
-      competence_description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", 
-    }
+    // { 
+    //   competence_name: "", 
+    //   competence_level: "" 
+    // }
   ]);
-
-  const handleCompetenceDescriptionChange = (index, newDescription) => {
-    const updatedCompetenciesExperiences = competencies_Experiences.map((experience, i) =>
-      i === index ? { ...experience, competence_description: newDescription } : experience
-    );
-    setCompetencies_Experiences(updatedCompetenciesExperiences);
-  };
   
   const handleInputChange_For_Competencies_Experiences = (e, index) => {
     const { name, value } = e.target;
@@ -173,7 +153,7 @@ function Make_CV_Page() {
   const handleAdd_Competencies_Experiences = () => {
     setCompetencies_Experiences([
       ...competencies_Experiences,
-      { competence_name: "", competence_level: "", competence_description: ""}
+      { competence_name: "", competence_level: ""}
     ]);
   };
   const handleRemove_Competencies_Experiences = () => {
@@ -204,7 +184,6 @@ function Make_CV_Page() {
   const [rightSide_Work_Information_Color, setRightSide_Work_Information_Color] = useState("#59574A");
   const [rightSide_Work_Description_Color, setRightSide_Work_Description_Color] = useState("#59574A");
   const [rightSide_Competence_Skill, setRightSide_Competence_Skill] = useState("#59574A");
-  const [rightSide_Competence_Description, setRightSide_Competence_Description] = useState("#59574A");
   const [rightSide_Competence_Level_Background, setRightSide_Competence_Level_Background] = useState("#EEF2CF");
   const [rightSide_Competence_Level_Foreground, setRightSide_Competence_Level_Foreground] = useState("#F2CFBB");
   
@@ -288,7 +267,7 @@ function Make_CV_Page() {
 
   const handleAIButtonClick = async (section, inputText, additionalInfo, index) => {
    
-    const question = `Hjälp mig med ${section} avsnittet. Här är vad jag har hittills: ${additionalInfo}. Förbättra det: ${inputText}`;
+    const question = `Kan du ge mig en beskrivning i detta fält, ${section}. Baserat dels på vad som står här, ${additionalInfo} och det jag skrivit innan om jag har skrivit någonting: ${inputText}. Jag vill ha svar på svenska, tack! Skriv inte ut den information du baserar svaren på.`;
     const response = await chatWithAI(question);
     
     if (response) {
@@ -296,12 +275,6 @@ function Make_CV_Page() {
         switch (section) {
             case 'Work Experience':
                 handleJobDescriptionChange(index, improvedDescription);
-                break;
-            case 'Education':
-                handleEducationDescriptionChange(index, improvedDescription);
-                break;
-            case 'Competencies':
-                handleCompetenceDescriptionChange(index, improvedDescription);
                 break;
             case 'About Me':
                 setAbout_Me(improvedDescription);
@@ -404,16 +377,8 @@ function Make_CV_Page() {
               education_program={experience.education_program}
               education_start_date={experience.education_start_date}
               education_end_date={experience.education_end_date}
-              education_description={experience.education_description}
               handleInputChange_For_Education_Experiences={(e) => handleInputChange_For_Education_Experiences(e, index)}
             />
-            <button 
-              type="button" 
-              className="AI-button" 
-              onClick={() => handleAIButtonClick('Education', experience.education_description, `${experience.education_school}, ${experience.education_program}, ${experience.education_start_date} till ${experience.education_end_date}`, index)}
-            >
-              Få hjälp av AI <i className="fa-solid fa-square-binary"></i>
-            </button>
           </div>
           ))}
 
@@ -442,16 +407,8 @@ function Make_CV_Page() {
             <Competencies_Form
               competence_name={experience.competence_name}
               competence_level={experience.competence_level}
-              competence_description={experience.competence_description}
               handleInputChange_For_Competencies_Experiences={(e) => handleInputChange_For_Competencies_Experiences(e, index)}
             />
-            <button 
-              type="button" 
-              className="AI-button" 
-              onClick={() => handleAIButtonClick('Competencies', experience.competence_description, `${experience.competence_name}, nivå ${experience.competence_level}`, index)}
-            >
-              Få hjälp av AI <i className="fa-solid fa-square-binary"></i>
-            </button>
           </div>
           ))}
 
@@ -479,21 +436,21 @@ function Make_CV_Page() {
             about_Me={about_Me}
             handleInputChange={handleInputChange}
           />
-
-          <div className = "add_new_input_fields-section" id = "add_new_input_fields-About_Me-section">
-            <button type="button" className="AI-button" onClick={() => handleAIButtonClick('About Me', about_Me, `Min bakgrund: ${about_Me}`)}>
-              Få hjälp av AI <i className="fa-solid fa-square-binary"></i>
-            </button>
-          </div>
+          
+          <button 
+            type="button" 
+            className="AI-button" 
+            onClick={() => handleAIButtonClick('About Me', about_Me, `Min bakgrund: ${about_Me}`)}
+          >
+            Få hjälp av AI <i className="fa-solid fa-square-binary"></i>
+          </button>
 
         </form>
 
         <div className = "submit-button-container">
-
           <button className = "submit_CV-button" onClick={handleSubmitCV}>
             Färdig!
           </button>
-
         </div>
 
       </div>
@@ -507,6 +464,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="leftSide-color"
+              name=" Vänster- Bakgrund"
               value={leftSide_Color}
               onChange={(e) => setLeftSide_Color(e.target.value)}
             />
@@ -516,6 +474,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="leftSide-Border-color"
+              name=" Vänster- Avskiljare"
               value={leftSide_Border_Color}
               onChange={(e) => setLeftSide_Border_Color(e.target.value)}
             />
@@ -525,6 +484,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="leftSide-ProfileImage"
+              name=" Vänster- BildRam"
               value={leftSide_ProfileImage_Color}
               onChange={(e) => setLeftSide_ProfileImage_Color(e.target.value)}
             />
@@ -534,6 +494,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="leftSide-Name"
+              name=" Vänster- Namn"
               value={leftSide_Name_Color}
               onChange={(e) => setLeftSide_Name_Color(e.target.value)}
             />
@@ -543,6 +504,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="leftSide-Headers"
+              name=" Vänster- Rubriker"
               value={leftSide_Headers_Color}
               onChange={(e) => setLeftSide_Headers_Color(e.target.value)}
             />
@@ -552,6 +514,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="leftSide-ContactInformation-Text"
+              name=" Vänster- Kontaktuppgifter (Text)"
               value={leftSide_ContactInformation_Text_Color}
               onChange={(e) => setLeftSide_ContactInformation_Text_Color(e.target.value)}
             />
@@ -561,6 +524,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="leftSide-ContactInformation-Logos"
+              name=" Vänster- Kontaktuppgifter (Logos)"
               value={leftSide_ContactInformation_Logos_Color}
               onChange={(e) => setLeftSide_ContactInformation_Logos_Color(e.target.value)}
             />
@@ -570,6 +534,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="leftSide-Education-Header"
+              name=" Vänster- Utbildning (Rubrik)"
               value={leftSide_Education_Header_Color}
               onChange={(e) => setLeftSide_Education_Header_Color(e.target.value)}
             />
@@ -579,6 +544,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="leftSide-Education-Information"
+              name=" Vänster- Utbildning (Text)"
               value={leftSide_EducationInformation_Color}
               onChange={(e) => setLeftSide_EducationInformation_Color(e.target.value)}
             />
@@ -588,6 +554,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="rightSide-color"
+              name=" Höger- bakgrund"
               value={rightSide_Color}
               onChange={(e) => setRightSide_Color(e.target.value)}
             />
@@ -597,6 +564,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="rightSide-Border-color"
+              name=" Höger- Avskiljare"
               value={rightSide_Border_Color}
               onChange={(e) => setRighSide_Border_Color(e.target.value)}
             />
@@ -606,6 +574,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="rightSide-Header-Text-color"
+              name=" Höger- Rubriker"
               value={rightSide_Header_Text_Color}
               onChange={(e) => setRightSide_Header_Text_Color(e.target.value)}
             />
@@ -615,6 +584,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="rightSide-Header-Background-color"
+              name=" Höger- Rubriker (Bakgrund)"
               value={rightSide_Header_Background_Color}
               onChange={(e) => setRightSide_Header_Background_Color(e.target.value)}
             />
@@ -624,6 +594,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="rightSide-Header-Shadow-color"
+              name=" Höger- Rubriker (Skugga)"
               value={rightSide_Header_Shadow_Color}
               onChange={(e) => setrightSide_Header_Shadow_Color(e.target.value)}
             />
@@ -633,6 +604,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="rightSide-AboutMe-color"
+              name=" Höger- Profil (Text)"
               value={rightSide_AboutMe_Color}
               onChange={(e) => setrightSide_AboutMe_Color(e.target.value)}
             />
@@ -642,6 +614,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="rightSide-Work-Title-color"
+              name=" Höger- Arbetslivserf. (Rubrik)"
               value={rightSide_Work_Title_Color}
               onChange={(e) => setRightSide_Work_Title_Color(e.target.value)}
             />
@@ -651,6 +624,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="rightSide-Work-Information-color"
+              name=" Höger- Arbetslivserf. (Sub-Rubrik)"
               value={rightSide_Work_Information_Color}
               onChange={(e) => setRightSide_Work_Information_Color(e.target.value)}
             />
@@ -660,6 +634,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="rightSide-Work-Description-color"
+              name=" Höger- Arbetslivserf. (Text)"
               value={rightSide_Work_Description_Color}
               onChange={(e) => setRightSide_Work_Description_Color(e.target.value)}
             />
@@ -669,25 +644,16 @@ function Make_CV_Page() {
             <input
               type="color"
               id="rightSide-Competence-Skill-color"
+              name=" Höger- Kompetens (Namn)"
               value={rightSide_Competence_Skill}
               onChange={(e) => setRightSide_Competence_Skill(e.target.value)}
             />
           </div>
-
-          <div className="color-picker">
-            <input
-              type="color"
-              id="rightSide-Competence-Descriptioncolor"
-              value={rightSide_Competence_Description}
-              onChange={(e) => setRightSide_Competence_Description(e.target.value)}
-            />
-          </div>
-
-
           <div className="color-picker">
             <input
               type="color"
               id="rightSide-Competence-Level-Background-color"
+              name=" Höger- Kompetens (LevelBar-Bakgrund)"
               value={rightSide_Competence_Level_Background}
               onChange={(e) => setRightSide_Competence_Level_Background(e.target.value)}
             />
@@ -697,6 +663,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="rightSide-Competence-Level-Foreground-color"
+              name=" Höger- Kompetens (LevelBar-Förgrund)"
               value={rightSide_Competence_Level_Foreground}
               onChange={(e) => setRightSide_Competence_Level_Foreground(e.target.value)}
             />
@@ -739,7 +706,6 @@ function Make_CV_Page() {
             rightSide_Work_Information_Color={rightSide_Work_Information_Color}
             rightSide_Work_Description_Color={rightSide_Work_Description_Color}
             rightSide_Competence_Skill={rightSide_Competence_Skill}
-            rightSide_Competence_Description={rightSide_Competence_Description}
             rightSide_Competence_Level_Background={rightSide_Competence_Level_Background}
             rightSide_Competence_Level_Foreground={rightSide_Competence_Level_Foreground}
           />
