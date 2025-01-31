@@ -22,70 +22,70 @@ namespace WebAPI
             {
                 options.AddPolicy("AllowFrontend", policy =>
                 {
-                    policy.WithOrigins("http://localhost:5173", "https://grupparbete-topaz.vercel.app/") 
+                    policy.WithOrigins("http://localhost:5173", "https://grupparbete-topaz.vercel.app")
                           .AllowAnyMethod()
                           .AllowAnyHeader()
-                          .AllowCredentials(); 
+                          .AllowCredentials();
                 });
             });
 
             // Add services to the container.
             //var jwtSettings = builder.Configuration.GetSection("JwtSettings");
             //byte[] secretkey = Encoding.ASCII.GetBytes(jwtSettings["SecretKey"]!);
-           //var jwtSettings = builder.Configuration.GetSection("JwtSettings");
-           //string secretKey = jwtSettings["SecretKey"] ?? throw new Exception("JWT SecretKey saknas i konfigurationen!");
-           //byte[] secretkey = Encoding.ASCII.GetBytes(secretKey);
-           //
-           //builder.Services.AddAuthentication(options =>
-           //{
-           //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-           //    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-           //}).AddJwtBearer(options =>
-           //{
-           //    options.TokenValidationParameters = new TokenValidationParameters
-           //    {
-           //        ValidateIssuer = false,
-           //        ValidateAudience = false,
-           //        ValidateLifetime = true,
-           //        ValidateIssuerSigningKey = true,
-           //        IssuerSigningKey = new SymmetricSecurityKey(secretkey)
-           //    };
-           //});
+            //var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+            //string secretKey = jwtSettings["SecretKey"] ?? throw new Exception("JWT SecretKey saknas i konfigurationen!");
+            //byte[] secretkey = Encoding.ASCII.GetBytes(secretKey);
+            //
+            //builder.Services.AddAuthentication(options =>
+            //{
+            //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //}).AddJwtBearer(options =>
+            //{
+            //    options.TokenValidationParameters = new TokenValidationParameters
+            //    {
+            //        ValidateIssuer = false,
+            //        ValidateAudience = false,
+            //        ValidateLifetime = true,
+            //        ValidateIssuerSigningKey = true,
+            //        IssuerSigningKey = new SymmetricSecurityKey(secretkey)
+            //    };
+            //});
 
-           // builder.Services.AddAuthorization(options =>
-           // {
-           //     options.AddPolicy("Admin", policy =>
-           //     {
-           //         policy.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
-           //         policy.RequireAuthenticatedUser();
-           //     });
-           // });
+            // builder.Services.AddAuthorization(options =>
+            // {
+            //     options.AddPolicy("Admin", policy =>
+            //     {
+            //         policy.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
+            //         policy.RequireAuthenticatedUser();
+            //     });
+            // });
 
             builder.Services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Grupp Tre", Version = "v1" });
 
-               // c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-               // {
-               //     Description = "Authorize with your bearer token that generates when you login",
-               //     Type = SecuritySchemeType.Http,
-               //     Scheme = "bearer"
-               // });
-               //
-               // c.AddSecurityRequirement(new OpenApiSecurityRequirement
-               // {
-               //     {
-               //         new OpenApiSecurityScheme
-               //         {
-               //             Reference = new OpenApiReference
-               //             {
-               //                 Type = ReferenceType.SecurityScheme,
-               //                 Id= "Bearer"
-               //             }
-               //         },
-               //         Array.Empty<string>()
-               //     }
-               // });
+                // c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                // {
+                //     Description = "Authorize with your bearer token that generates when you login",
+                //     Type = SecuritySchemeType.Http,
+                //     Scheme = "bearer"
+                // });
+                //
+                // c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                // {
+                //     {
+                //         new OpenApiSecurityScheme
+                //         {
+                //             Reference = new OpenApiReference
+                //             {
+                //                 Type = ReferenceType.SecurityScheme,
+                //                 Id= "Bearer"
+                //             }
+                //         },
+                //         Array.Empty<string>()
+                //     }
+                // });
             });
 
             builder.Services.AddControllers(options =>
@@ -126,10 +126,10 @@ namespace WebAPI
             var app = builder.Build();
 
             // Konfigurera CORS i pipeline
-            app.UseCors("AllowFrontend"); 
+            app.UseCors("AllowFrontend");
 
             // Configure the HTTP request pipeline.
-            
+
             //    app.UseSwagger();
             //    app.UseSwaggerUI();
 
