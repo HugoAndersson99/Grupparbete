@@ -17,6 +17,9 @@
     flex-shrink: 1;
     flex-basis: 49.5%;
 }
+#startdatum-arbete, #slutdatum-arbete {
+    font-family: Arial, sans-serif;
+}
 #beskrivning-arbete-container textarea {
     background-color: #EBEAEA;
     border: none;

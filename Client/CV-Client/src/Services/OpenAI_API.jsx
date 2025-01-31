@@ -1,6 +1,6 @@
 export const chatWithAI = async (question) => {
   try {
-      const url = new URL('http://localhost:5166/api/OpenAi/ChatToChatGPT');
+      const url = new URL('https://cvapplikation-gvefeagjdzb2bqf2.swedencentral-01.azurewebsites.net/api/OpenAi/ChatToChatGPT');
       url.searchParams.append('questionForChat', question);
 
       const response = await fetch(url, {

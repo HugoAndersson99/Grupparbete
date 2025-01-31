@@ -1,12 +1,11 @@
 ﻿using Application.Interfaces.RepositoryInterfaces;
 using Application.Queries.Cvs.GetAllByUserId;
 using Domain.Models;
-using Infrastructure.Repositories;
 using Infrastructure.Databases;
+using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace TestProject.CvsTests.CvsQueryTests
 {
@@ -17,7 +16,6 @@ namespace TestProject.CvsTests.CvsQueryTests
         private ICvRepository _cvRepository;
         private Database _dbContext;
         private ILogger<GetAllCVsByUserIdQueryHandler> _logger;
-        private IMemoryCache _memoryCache;
 
         [SetUp]
         public void Setup()
@@ -29,19 +27,17 @@ namespace TestProject.CvsTests.CvsQueryTests
             _dbContext = new Database(options);
             _cvRepository = new CvRepository(_dbContext, NullLogger<CvRepository>.Instance);
             _logger = new LoggerFactory().CreateLogger<GetAllCVsByUserIdQueryHandler>();
-            _memoryCache = new MemoryCache(new MemoryCacheOptions());
-            _handler = new GetAllCVsByUserIdQueryHandler(_cvRepository, _logger, _memoryCache);
+            _handler = new GetAllCVsByUserIdQueryHandler(_cvRepository, _logger);
         }
 
         [TearDown]
         public void TearDown()
         {
             _dbContext.Dispose();
-            _memoryCache.Dispose();
         }
 
         [Test]
-        public async Task Handle_ShouldReturnCVsFromDatabase_WhenNotInCache()
+        public async Task Handle_ShouldReturnCVs_WhenExistingInDatabase()
         {
             // Arrange
             var userId = Guid.NewGuid();
@@ -60,12 +56,10 @@ namespace TestProject.CvsTests.CvsQueryTests
             Assert.AreEqual(2, result.Data.Count());
             Assert.Contains(cv1, result.Data.ToList());
             Assert.Contains(cv2, result.Data.ToList());
-
-            Assert.IsTrue(_memoryCache.TryGetValue($"CVs_User_{userId}", out _));
         }
 
         [Test]
-        public async Task Handle_ShouldReturnCVsFromCache_WhenAlreadyCached()
+        public async Task Handle_ShouldReturnCVsFromDatabaseOnSubsequentRequest()
         {
             // Arrange
             var userId = Guid.NewGuid();
@@ -74,19 +68,22 @@ namespace TestProject.CvsTests.CvsQueryTests
             _dbContext.CVs.AddRange(cv1, cv2);
             await _dbContext.SaveChangesAsync();
 
-            var query = new GetAllCVsByUserIdQuery (userId);
+            var query = new GetAllCVsByUserIdQuery(userId);
 
-            await _handler.Handle(query, CancellationToken.None);
-
-            var result = await _handler.Handle(query, CancellationToken.None);
+            // Act
+            var resultFirstRequest = await _handler.Handle(query, CancellationToken.None);
+            var resultSecondRequest = await _handler.Handle(query, CancellationToken.None);
 
             // Assert
-            Assert.IsTrue(result.IsSuccess);
-            Assert.AreEqual(2, result.Data.Count());
-            Assert.Contains(cv1, result.Data.ToList());
-            Assert.Contains(cv2, result.Data.ToList());
+            Assert.IsTrue(resultFirstRequest.IsSuccess);
+            Assert.AreEqual(2, resultFirstRequest.Data.Count());
+            Assert.Contains(cv1, resultFirstRequest.Data.ToList());
+            Assert.Contains(cv2, resultFirstRequest.Data.ToList());
 
-            Assert.IsTrue(_memoryCache.TryGetValue($"CVs_User_{userId}", out _));
+            Assert.IsTrue(resultSecondRequest.IsSuccess);
+            Assert.AreEqual(2, resultSecondRequest.Data.Count());
+            Assert.Contains(cv1, resultSecondRequest.Data.ToList());
+            Assert.Contains(cv2, resultSecondRequest.Data.ToList());
         }
 
         [Test]
@@ -101,7 +98,8 @@ namespace TestProject.CvsTests.CvsQueryTests
 
             // Assert
             Assert.IsFalse(result.IsSuccess);
-            Assert.AreEqual("No CVs found.", result.ErrorMessage); 
+            Assert.AreEqual("Cvs not found.", result.ErrorMessage);
         }
     }
 }
+

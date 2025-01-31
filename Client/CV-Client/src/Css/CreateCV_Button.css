@@ -8,11 +8,13 @@
   font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
   height: 61px;
   width: 162px;
+  transition: background-color 0.9s ease, color 0.9s ease;
 }
 
 .create-cv-button:hover {
-  background-color: #ffc107;
+  background-color: #C77DEA;
+  color: white;
+  transition: background-color 0.9s ease, color 0.9s ease;
 }

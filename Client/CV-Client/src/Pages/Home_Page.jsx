@@ -11,6 +11,7 @@ import screen from '../assets/Images/Screen.png';
 import folder from '../assets/Images/Folder.png';
 import CreateCV_Button from '../Components/CreateCV_Button';
 import LoggaIn_Button from '../Components/LoggaIn_Button';
+import Website_Logo from '../Components/Website_Logo';
 
 const Home_Page = () => {
   const navigate = useNavigate();
@@ -34,14 +35,15 @@ const Home_Page = () => {
           <CreateCV_Button text="Skapa CV" onClick={handleCreateCV} />
         </div>
       </div>
-      
+
       <section className="home">
         <div className="home-content">
           <h1>Skapa Ditt CV<br />Med Hjälp Av<br />AI!</h1>
           <p>Antagligen den bästa hjälpen<br />du kan få på nätet.</p>
           <CreateCV_Button text="Skapa CV" onClick={handleCreateCV} />
         </div>
-        <img src={diagram} alt="Diagram" className="home-chart" />
+        {/*<img src={diagram} alt="Diagram" className="home-chart" />*/}
+        <Website_Logo />
       </section>
 
       <h2 className="testimonials-title">Se Vad Andra Användare Tycker!</h2> 
@@ -81,6 +83,7 @@ const Home_Page = () => {
             <CreateCV_Button text="Skapa CV" onClick={handleCreateCV} />
           </div>
         </div>
+        <div className="half-circle-2"></div>
       </section>
 
       <Footer />

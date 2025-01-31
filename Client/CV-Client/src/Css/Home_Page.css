@@ -128,7 +128,7 @@ html, body {
 }
 
 .testimonial img{
-  top: 889px;
+  top: 850px;
   position: absolute;
   margin-left: -50px;
 }
@@ -138,6 +138,7 @@ html, body {
   padding: 4rem 2rem;
   text-align: center;
   margin-top: 100px;
+  margin-bottom: 200px;
 }
 
 .feature {
@@ -145,6 +146,7 @@ html, body {
   align-items: center;
   justify-content: center;
   margin: 2rem 0;
+
 }
 
 .feature-left {
@@ -153,6 +155,7 @@ html, body {
 }
 
 .feature-right {
+  display: flex;
   justify-content: center;
   text-align: right;
   margin-top: 3rem; 
@@ -165,7 +168,7 @@ html, body {
   flex: 1;
   max-width: 30%;
   margin: 0 1rem;
-  }
+}
 
 .feature-icon {
   max-width: 20%;

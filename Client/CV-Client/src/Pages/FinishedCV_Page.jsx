@@ -137,7 +137,58 @@ function FinishedCV_Page() {
           )}
         </div>
       </div>
+
     </>
+
+      
+      <div className="finished-CV-container" id = "finished_CV" ref = {printRef}>
+       {/*  {state.name ? (  */}
+          <CV_Modell
+            profilePicture={profilePicture}
+            name={name}
+            address={address}
+            zip_code={zip_code}
+            phoneNumber={phoneNumber}
+            email={email}
+            linkedin={linkedin}
+            otherLink={otherLink}
+            about_Me={about_Me}
+            work_Experiences={work_Experiences}
+            education_Experiences={education_Experiences}
+            competencies_Experiences={competencies_Experiences}
+
+            leftSide_Color = {leftSide_Color}
+            leftSide_ProfileImage_Color={leftSide_ProfileImage_Color}
+            leftSide_Name_Color={leftSide_Name_Color}
+            leftSide_Headers_Color={leftSide_Headers_Color}
+            leftSide_Border_Color = {leftSide_Border_Color}
+            leftSide_ContactInformation_Text_Color={leftSide_ContactInformation_Text_Color}
+            leftSide_ContactInformation_Logos_Color={leftSide_ContactInformation_Logos_Color}
+            leftSide_Education_Header_Color={leftSide_Education_Header_Color}
+            leftSide_EducationInformation_Color={leftSide_EducationInformation_Color}
+
+            rightSide_Color = {rightSide_Color}
+            rightSide_Border_Color = {rightSide_Border_Color}
+            rightSide_Header_Text_Color={rightSide_Header_Text_Color}
+            rightSide_Header_Background_Color={rightSide_Header_Background_Color}
+            rightSide_Header_Shadow_Color={rightSide_Header_Shadow_Color}
+            rightSide_AboutMe_Color={rightSide_AboutMe_Color}
+            rightSide_Work_Title_Color={rightSide_Work_Title_Color}
+            rightSide_Work_Information_Color={rightSide_Work_Information_Color}
+            rightSide_Work_Description_Color={rightSide_Work_Description_Color}
+            rightSide_Competence_Skill={rightSide_Competence_Skill}
+            rightSide_Competence_Description={rightSide_Competence_Description}
+            rightSide_Competence_Level_Background={rightSide_Competence_Level_Background}
+            rightSide_Competence_Level_Foreground={rightSide_Competence_Level_Foreground}
+          />
+        {/* ) : (
+          <p>No data passed to this page! Please fill out all the fields!</p>
+        )} */}
+      </div>
+      <div className="half-circle-2"></div>
+    </div>
+  </>
+
   );
 }
 

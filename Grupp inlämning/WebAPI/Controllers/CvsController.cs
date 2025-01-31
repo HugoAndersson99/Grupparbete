@@ -52,7 +52,6 @@ namespace WebAPI.Controllers
         [Authorize]
         [HttpGet]
         [Route("GetCvById/{id}")]
-        [ResponseCache(CacheProfileName = "DefaultCache")]
         public async Task<IActionResult> GetCvById(Guid id)
         {
             try
@@ -126,7 +125,6 @@ namespace WebAPI.Controllers
         [Authorize]
         [HttpGet]
         [Route("GetUsersCv/{userId}")]
-        //[ResponseCache(CacheProfileName = "DefaultCache")]
         public async Task<IActionResult> GetAllCvsFromUser(Guid userId)
         {
             try
