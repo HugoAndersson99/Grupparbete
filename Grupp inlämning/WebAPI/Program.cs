@@ -34,58 +34,64 @@ namespace WebAPI
             //byte[] secretkey = Encoding.ASCII.GetBytes(jwtSettings["SecretKey"]!);
             //var jwtSettings = builder.Configuration.GetSection("JwtSettings");
             //string secretKey = jwtSettings["SecretKey"] ?? throw new Exception("JWT SecretKey saknas i konfigurationen!");
-            //byte[] secretkey = Encoding.ASCII.GetBytes(secretKey);
-            //
-            //builder.Services.AddAuthentication(options =>
-            //{
-            //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //}).AddJwtBearer(options =>
-            //{
-            //    options.TokenValidationParameters = new TokenValidationParameters
-            //    {
-            //        ValidateIssuer = false,
-            //        ValidateAudience = false,
-            //        ValidateLifetime = true,
-            //        ValidateIssuerSigningKey = true,
-            //        IssuerSigningKey = new SymmetricSecurityKey(secretkey)
-            //    };
-            //});
 
-            // builder.Services.AddAuthorization(options =>
-            // {
-            //     options.AddPolicy("Admin", policy =>
-            //     {
-            //         policy.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
-            //         policy.RequireAuthenticatedUser();
-            //     });
-            // });
+
+            var secretKey = Environment.GetEnvironmentVariable("JwtSettings__SecretKey") // Hämta från Azure miljövariabel
+                 ?? builder.Configuration["JwtSettings:SecretKey"] // Fallback till appsettings.json
+                 ?? throw new Exception("JWT SecretKey saknas i konfigurationen!");
+
+            byte[] secretkey = Encoding.ASCII.GetBytes(secretKey);
+            
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(secretkey)
+                };
+            });
+
+             builder.Services.AddAuthorization(options =>
+             {
+                 options.AddPolicy("Admin", policy =>
+                 {
+                     policy.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
+                     policy.RequireAuthenticatedUser();
+                 });
+             });
 
             builder.Services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Grupp Tre", Version = "v1" });
 
-                // c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                // {
-                //     Description = "Authorize with your bearer token that generates when you login",
-                //     Type = SecuritySchemeType.Http,
-                //     Scheme = "bearer"
-                // });
-                //
-                // c.AddSecurityRequirement(new OpenApiSecurityRequirement
-                // {
-                //     {
-                //         new OpenApiSecurityScheme
-                //         {
-                //             Reference = new OpenApiReference
-                //             {
-                //                 Type = ReferenceType.SecurityScheme,
-                //                 Id= "Bearer"
-                //             }
-                //         },
-                //         Array.Empty<string>()
-                //     }
-                // });
+                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                 {
+                     Description = "Authorize with your bearer token that generates when you login",
+                     Type = SecuritySchemeType.Http,
+                     Scheme = "bearer"
+                 });
+                
+                 c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                 {
+                     {
+                         new OpenApiSecurityScheme
+                         {
+                             Reference = new OpenApiReference
+                             {
+                                 Type = ReferenceType.SecurityScheme,
+                                 Id= "Bearer"
+                             }
+                         },
+                         Array.Empty<string>()
+                     }
+                 });
             });
 
             builder.Services.AddControllers(options =>
