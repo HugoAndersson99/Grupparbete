@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../Components/Header';
 import '../Css/Login_Page.css';
-import { loginUser } from '../Services/User_API';
-import { useAuth } from '../Services/AuthContext';
+import { loginUser } from '../Services/User_API'; 
 
 function Login_Page() {
-  const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -28,8 +26,8 @@ function Login_Page() {
 
     if (result.success) {
       
-      login(result.token);
-      navigate('/MittKonto'); 
+      sessionStorage.setItem('authToken', result.token);
+      navigate('/Mitt_Konto'); 
     } else {
       setErrorMessage(result.message);
       setTimeout(() => setShowError(true), 0);
