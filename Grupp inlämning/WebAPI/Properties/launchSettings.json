@@ -5,7 +5,8 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "AZURE_STORAGE_CONNECTION_STRING": "DefaultEndpointsProtocol=https;AccountName=cvpdfcontainer;AccountKey=oxYkTDEKQI9i8WC/pm2aP1sERlnTZsPildZotRBybV1g/p08aOz3IA/c7wshtGM+93XfyheTdBIp+AStAgVx8w==;EndpointSuffix=core.windows.net"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "http://localhost:5166"
