@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from "react";
 import '../Css/CV_Modell.css'
+
 
 function CV_Modell({
     profilePicture, 
@@ -35,10 +36,266 @@ function CV_Modell({
     rightSide_Work_Information_Color,
     rightSide_Work_Description_Color,
     rightSide_Competence_Skill,
-    rightSide_Competence_Description,
     rightSide_Competence_Level_Background,
     rightSide_Competence_Level_Foreground
+    
 }) {
+
+    const [contactInfoFontSize, setContactInfoFontSize] = useState(16);
+    const [educationFontSize, setducationFontSize] = useState(16);
+    const [nameFontSize, setNameFontSize] = useState(16);
+    const educationRef = useRef(null);
+    const contactInfoRef = useRef(null);
+    const nameRef = useRef(null);
+
+    const [profileFontSize, setProfileFontSize] = useState(16);
+    const [workFontSize, setWorkFontSize] = useState(16);
+    const [competencyFontSize, setCompetencyFontSize] = useState(16);
+    const profileRef = useRef(null);
+    const workRef = useRef(null);
+    const competencyRef = useRef(null);
+
+
+     //--------------------Change Work-CV-Text--------------------//
+     useEffect(() => {
+        if (!competencyRef.current) return;
+    
+        const checkOverflow = () => {
+            const element = competencyRef.current;
+            if (!element) return;
+    
+            const { scrollWidth, clientWidth, scrollHeight, clientHeight } = element;
+            return scrollWidth > clientWidth || scrollHeight > clientHeight;
+        };
+    
+        const adjustFontSize = () => {
+            let newSize = competencyFontSize;
+            let element = competencyRef.current;
+            if (!element) return;
+    
+            while (checkOverflow() && newSize > 6) {
+                newSize--;
+                element.style.fontSize = `${newSize}px`;
+            }
+    
+            while (!checkOverflow() && newSize < 16) {
+                newSize++;
+                element.style.fontSize = `${newSize}px`;
+                if (checkOverflow()) {
+                    newSize--;
+                    element.style.fontSize = `${newSize}px`;
+                    break;
+                }
+            }
+    
+            if (newSize !== competencyFontSize) {
+                setCompetencyFontSize(newSize);
+            }
+        };
+    
+        adjustFontSize();
+        }, [work_Experiences]);
+
+    //--------------------Change Work-CV-Text--------------------//
+    useEffect(() => {
+        if (!workRef.current) return;
+    
+        const checkOverflow = () => {
+            const element = workRef.current;
+            if (!element) return;
+    
+            const { scrollWidth, clientWidth, scrollHeight, clientHeight } = element;
+            return scrollWidth > clientWidth || scrollHeight > clientHeight;
+        };
+    
+        const adjustFontSize = () => {
+            let newSize = workFontSize;
+            let element = workRef.current;
+            if (!element) return;
+    
+            while (checkOverflow() && newSize > 6) {
+                newSize--;
+                element.style.fontSize = `${newSize}px`;
+            }
+    
+            while (!checkOverflow() && newSize < 16) {
+                newSize++;
+                element.style.fontSize = `${newSize}px`;
+                if (checkOverflow()) {
+                    newSize--;
+                    element.style.fontSize = `${newSize}px`;
+                    break;
+                }
+            }
+    
+            if (newSize !== workFontSize) {
+                setWorkFontSize(newSize);
+            }
+        };
+    
+        adjustFontSize();
+        }, [work_Experiences]);
+
+     //--------------------Change Profile-CV-Text--------------------//
+    useEffect(() => {
+    if (!profileRef.current) return;
+
+    const checkOverflow = () => {
+        const element = profileRef.current;
+        if (!element) return;
+
+        const { scrollWidth, clientWidth, scrollHeight, clientHeight } = element;
+        return scrollWidth > clientWidth || scrollHeight > clientHeight;
+    };
+
+    const adjustFontSize = () => {
+        let newSize = profileFontSize;
+        let element = profileRef.current;
+        if (!element) return;
+
+        while (checkOverflow() && newSize > 6) {
+            newSize--;
+            element.style.fontSize = `${newSize}px`;
+        }
+
+        while (!checkOverflow() && newSize < 16) {
+            newSize++;
+            element.style.fontSize = `${newSize}px`;
+            if (checkOverflow()) { 
+                newSize--;
+                element.style.fontSize = `${newSize}px`;
+                break;
+            }
+        }
+
+        if (newSize !== profileFontSize) {
+            setProfileFontSize(newSize);
+        }
+    };
+
+    adjustFontSize();
+    }, [about_Me]);
+
+ //--------------------Change Name-CV-Text--------------------//
+ useEffect(() => {
+    if (!nameRef.current) return;
+
+    const checkOverflow = () => {
+        const element = nameRef.current;
+        if (!element) return;
+
+        const { scrollWidth, clientWidth, scrollHeight, clientHeight } = element;
+        return scrollWidth > clientWidth || scrollHeight > clientHeight;
+    };
+
+    const adjustFontSize = () => {
+        let newSize = nameFontSize;
+        let element = nameRef.current;
+        if (!element) return;
+
+        while (checkOverflow() && newSize > 6) {
+            newSize--;
+            element.style.fontSize = `${newSize}px`;
+        }
+
+        while (!checkOverflow() && newSize < 24) {
+            newSize++;
+            element.style.fontSize = `${newSize}px`;
+            if (checkOverflow()) {
+                newSize--;
+                element.style.fontSize = `${newSize}px`;
+                break;
+            }
+        }
+
+        if (newSize !== nameFontSize) {
+            setNameFontSize(newSize);
+        }
+    };
+
+    adjustFontSize();
+    }, [name]);
+
+    //--------------------Change Contact-Information-CV-Text--------------------//
+    useEffect(() => {
+        if (!contactInfoRef.current) return;
+
+        const checkOverflow = () => {
+            const element = contactInfoRef.current;
+            if (!element) return;
+
+            const { scrollWidth, clientWidth, scrollHeight, clientHeight } = element;
+            return scrollWidth > clientWidth || scrollHeight > clientHeight;
+        };
+
+        const adjustFontSize = () => {
+            let newSize = contactInfoFontSize;
+            let element = contactInfoRef.current;
+            if (!element) return;
+
+            while (checkOverflow() && newSize > 6) {
+                newSize--;
+                element.style.fontSize = `${newSize}px`;
+            }
+
+            while (!checkOverflow() && newSize < 16) {
+                newSize++;
+                element.style.fontSize = `${newSize}px`;
+                if (checkOverflow()) {
+                    newSize--;
+                    element.style.fontSize = `${newSize}px`;
+                    break;
+                }
+            }
+
+            if (newSize !== contactInfoFontSize) {
+                setContactInfoFontSize(newSize);
+            }
+        };
+
+        adjustFontSize();
+    }, [address, zip_code, phoneNumber, email, linkedin, otherLink, ]);
+
+    //--------------------Change Education-CV-Text--------------------//
+    useEffect(() => {
+        if (!educationRef.current) return;
+
+        const checkOverflow = () => {
+            const element = educationRef.current;
+            if (!element) return;
+
+            const { scrollWidth, clientWidth, scrollHeight, clientHeight } = element;
+            return scrollWidth > clientWidth || scrollHeight > clientHeight;
+        };
+
+        const adjustFontSize = () => {
+            let newSize = educationFontSize;
+            let element = educationRef.current;
+            if (!element) return;
+
+            while (checkOverflow() && newSize > 6) {
+                newSize--;
+                element.style.fontSize = `${newSize}px`;
+            }
+
+            while (!checkOverflow() && newSize < 16) {
+                newSize++;
+                element.style.fontSize = `${newSize}px`;
+                if (checkOverflow()) { 
+                    newSize--;
+                    element.style.fontSize = `${newSize}px`;
+                    break;
+                }
+            }
+
+            if (newSize !== educationFontSize) {
+                setducationFontSize(newSize);
+            }
+        };
+
+        adjustFontSize();
+    }, [education_Experiences]);
+
 
     return (
         <div className = "CV-container" id='CV-modell'>
@@ -47,15 +304,15 @@ function CV_Modell({
             <div className = "left-side" style={{ backgroundColor: leftSide_Color }}>
 
 
-            <div className="profile-image">
-                <div
-                    className="profile-image-img"
-                    style={{ backgroundImage: `url(${profilePicture})`, border: `4px solid ${leftSide_ProfileImage_Color}`}}
-                ></div>
-            </div>
+                <div className="profile-image">
+                    <div
+                        className="profile-image-img"
+                        style={{ backgroundImage: `url(${profilePicture})`, border: `4px solid ${leftSide_ProfileImage_Color}`}}
+                    ></div>
+                </div>
 
 
-                <div className = "name-CV" style={{ color: leftSide_Name_Color}}>
+                <div className = "name-CV" ref={nameRef} style={{ color: leftSide_Name_Color}}>
                     <h2>
                         {name}
                     </h2>
@@ -67,7 +324,7 @@ function CV_Modell({
                     Contact Info
                 </h3>
 
-                <div className = "contact-information-CV" style={{ color: leftSide_ContactInformation_Text_Color }}>
+                <div className = "contact-information-CV" ref={contactInfoRef} style={{ color: leftSide_ContactInformation_Text_Color }}>
                     {address && (
                         <h3>
                             <i className="fa-solid fa-location-dot" style={{ color: leftSide_ContactInformation_Logos_Color}}></i><p>{address}</p>
@@ -103,34 +360,35 @@ function CV_Modell({
                 <h3 className = "left_side-CV-header" style={{ color: leftSide_Headers_Color}}>
                     Utbildning
                 </h3>
-                
-                <div className = "education-CV" style={{ color: leftSide_EducationInformation_Color}}>
-                    {education_Experiences.map((experience, index) => (
-                        <div key={index}>
-                            <h2 className = "education_program-CV" style={{ color: leftSide_Education_Header_Color}}>{experience.education_program}</h2>
-                            <p className = "education_school-CV">{experience.education_school}</p>
-                            <div className = "education_dates-CV">
-                                <p>{experience.education_start_date}<span className="dash" style={{ color: leftSide_Education_Header_Color}}>-</span></p>
-                                <p>{experience.education_end_date}</p>
+
+                <div className = "education-CV" ref={educationRef} style={{ color: leftSide_EducationInformation_Color,fontSize: `${educationFontSize}px`}}>
+
+                        {education_Experiences.map((experience, index) => (
+                            <div key={index} >
+                                <h2  className = "education_program-CV" style={{ color: leftSide_Education_Header_Color}}>{experience.education_program}</h2>
+                                <p className = "education_school-CV">{experience.education_school}</p>
+                                <div className = "education_dates-CV">
+                                    <p>{experience.education_start_date}<span className="dash" style={{ color: leftSide_Education_Header_Color}}>-</span></p>
+                                    <p>{experience.education_end_date}</p>
+                                </div>
                             </div>
-                            <p>{experience.education_description}</p>
-                        </div>
-                    ))}
+                        ))}
+
                 </div>
-    
+
             </div>
 
             <div className = "right-side" style={{ backgroundColor: rightSide_Color }}>
                 
                 <h3 className = "right_side-CV-header" style={{ color: rightSide_Header_Text_Color, background: rightSide_Header_Background_Color, textShadow: `2px 2px 4px ${rightSide_Header_Shadow_Color}`}}>Profile</h3>
 
-                <div className = "about_Me-CV" style={{ color: rightSide_AboutMe_Color}}>
+                <div className = "about_Me-CV" ref={profileRef} style={{ color: rightSide_AboutMe_Color}}>
                     <p>{about_Me}</p>
                 </div>
 
                 <h3 className = "right_side-CV-header" style={{ color: rightSide_Header_Text_Color, background: rightSide_Header_Background_Color, textShadow: `2px 2px 4px ${rightSide_Header_Shadow_Color}`}}>Work Experience</h3>
 
-                <div className = "work-experience-CV">
+                <div className = "work-experience-CV" ref={workRef}>
                     {work_Experiences.map((experience, index) => (
                         <div key={index}>
                             <h2 className="job_title-CV" style={{ color: rightSide_Work_Title_Color }}>
@@ -152,7 +410,7 @@ function CV_Modell({
 
                 <h3 className = "right_side-CV-header" style={{ color: rightSide_Header_Text_Color, background: rightSide_Header_Background_Color, textShadow: `2px 2px 4px ${rightSide_Header_Shadow_Color}`}}>Competencies</h3>
 
-                <div className = "competencies-CV">
+                <div className = "competencies-CV" ref={competencyRef}>
                     {competencies_Experiences.map((experience, index) => (
                         <div key={index}>
                             <div className = "name_and_level_of_skill-CV">
@@ -184,7 +442,6 @@ function CV_Modell({
                                     </div>
                                 )}
                             </div>  
-                            <p className = "competence_description" style={{ color: rightSide_Competence_Description}}>{experience.competence_description}</p>
                         </div>
                     ))}
                 </div>

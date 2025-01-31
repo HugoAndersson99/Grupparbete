@@ -4,7 +4,6 @@ import '../Css/Competencies_Form.css'
 function Competencies_Form ({ 
   competence_name, 
   competence_level, 
-  competence_description,
   handleInputChange_For_Competencies_Experiences
 }) {
     
@@ -35,18 +34,6 @@ function Competencies_Form ({
                 <button type = "button" className = "level-button" id="number-4" name="competence_level" value={4} onClick={handleInputChange_For_Competencies_Experiences}>4</button>
                 <button type = "button" className = "level-button" id="number-5" name="competence_level" value={5} onClick={handleInputChange_For_Competencies_Experiences}>5</button>
               </div>
-            </div>
-
-            <div className = "input-group-4" id = "beskrivning-kompetens-container">
-              <label htmlFor = "beskrivning-kompetens">Beskrivning</label>
-              <textarea 
-              type = "textarea" 
-              id = "beskrivning-kompetens" 
-              name = "competence_description"
-              placeholder = "Beskrivning"
-              value={competence_description}
-              onChange={handleInputChange_For_Competencies_Experiences}
-              />
             </div>
 
           </div>
