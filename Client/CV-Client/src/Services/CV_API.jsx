@@ -51,7 +51,8 @@ export const deleteCv = async (id) => {
 export const getUserCvs = async (userId) => {
   try {
     const token = sessionStorage.getItem('authToken');
-    const response = await fetch(`http://localhost:5166/api/Cvs/GetUsersCv/${userId}`, {
+    const response = await fetch(`http://localhost:5166/api/Cvs/GetUsersCv/${userId}`
+, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,

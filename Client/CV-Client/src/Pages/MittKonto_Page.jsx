@@ -9,21 +9,31 @@ import { useAuth } from '../Services/AuthContext';
 
 const MittKonto_Page = () => {
   const navigate = useNavigate();
-  const { authToken } = useAuth();
-  const [userCvs, setUserCvs] = useState([]);
-  const [error, setError] = useState('');
+const { authToken } = useAuth();
+const [userCvs, setUserCvs] = useState(null); 
+const [error, setError] = useState('');
 
   const userId = authToken ? JSON.parse(atob(authToken.split('.')[1])).nameid : null;
 
   const fetchCvs = async () => {
+    if (!authToken || !userId) {
+      console.error("Ingen användare inloggad.");
+      setError("Du måste vara inloggad för att se dina CVs.");
+      return;
+    }
+  
     try {
+      console.log("Hämtar CVs för userId:", userId);
       const result = await getUserCvs(userId);
+      console.log("CV-lista från servern:", result.data);
+  
       if (result.success) {
         setUserCvs(result.data);
       } else {
         setError(result.message || "Misslyckades att hämta CVs.");
       }
     } catch (error) {
+      console.error("Fel vid hämtning av CVs:", error);
       setError("Ett fel uppstod. Försök igen senare.");
     }
   };
@@ -35,7 +45,7 @@ const MittKonto_Page = () => {
   const handleDeleteCv = async (cvId) => {
     const confirmDelete = window.confirm("Är du säker på att du vill radera detta CV?");
     if (!confirmDelete) return;
-
+  
     try {
       const result = await deleteCv(cvId);
       if (result.success) {
@@ -44,6 +54,7 @@ const MittKonto_Page = () => {
         setError(result.message || "Misslyckades att radera CV.");
       }
     } catch (error) {
+      console.error("Fel vid radering av CV:", error);
       setError("Ett fel uppstod vid radering.");
     }
   };
@@ -54,11 +65,11 @@ const MittKonto_Page = () => {
       <div className='header-container'>
         <Header />
       </div>
-
+  
       <div className="content">
         <h1 className="welcome-text">Välkommen tillbaka</h1>
         {error && <p className="error-message">{error}</p>}
-
+  
         <div className="cv-section">
           <div className="cv-header">
             <h1 className="cv-title">Dina CVs</h1>
@@ -68,7 +79,7 @@ const MittKonto_Page = () => {
               onClick={() => navigate('/Build_CV')}
             />
           </div>
-
+  
           <div className="cv-list">
             {userCvs && userCvs.length === 0 ? (
               <p>Du har inga sparade CVs.</p>
@@ -88,6 +99,6 @@ const MittKonto_Page = () => {
       <Footer />
     </div>
   );
-};
-
+}
 export default MittKonto_Page;
+
