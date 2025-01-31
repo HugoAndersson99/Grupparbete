@@ -10,7 +10,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
-    public class CvsController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class CvsController : ControllerBase
     {
         private readonly IMediator _mediator;
         

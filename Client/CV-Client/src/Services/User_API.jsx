@@ -1,6 +1,6 @@
 export const loginUser = async (loginData) => {
   try {
-    const response = await fetch('https://cvapplikation-gvefeagjdzb2bqf2.swedencentral-01.azurewebsites.net/api/Users/Login', {
+    const response = await fetch('http://localhost:5166/api/users/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -26,7 +26,7 @@ export const loginUser = async (loginData) => {
 
 export const registerUser = async (newUser) => {
   try {
-    const response = await fetch('https://cvapplikation-gvefeagjdzb2bqf2.swedencentral-01.azurewebsites.net/api/Users/AddNewUser', {
+    const response = await fetch('http://localhost:5166/api/users/addNewUser', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

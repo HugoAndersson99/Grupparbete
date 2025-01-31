@@ -188,45 +188,81 @@ function Make_CV_Page() {
   const [rightSide_Competence_Level_Foreground, setRightSide_Competence_Level_Foreground] = useState("#F2CFBB");
   
 
-  const handleSubmitCV = () => {
-    navigate("/Finish", {
-      state: {
-        profilePicture,
-        name,
-        address,
-        zip_code,
-        phoneNumber,
-        email,
-        linkedin,
-        otherLink,
-        about_Me,
-        work_Experiences,
-        education_Experiences,
-        competencies_Experiences,
-        leftSide_Color,
-        leftSide_ProfileImage_Color,
-        leftSide_Name_Color,
-        leftSide_Headers_Color,
-        leftSide_Border_Color,
-        leftSide_ContactInformation_Text_Color,
-        leftSide_ContactInformation_Logos_Color,
-        leftSide_Education_Header_Color,
-        leftSide_EducationInformation_Color,
-
-        rightSide_Color,
-        rightSide_Border_Color,
-        rightSide_Header_Text_Color,
-        rightSide_Header_Background_Color,
-        rightSide_Header_Shadow_Color,
-        rightSide_AboutMe_Color,
-        rightSide_Work_Title_Color,
-        rightSide_Work_Information_Color,
-        rightSide_Work_Description_Color,
-        rightSide_Competence_Skill,
-        rightSide_Competence_Level_Background,
-        rightSide_Competence_Level_Foreground
-      },
-    });
+  const handleSubmitCV = async () => {
+    if (!authToken) {
+      alert("Fel: Ingen användare inloggad.");
+      return;
+    }
+  
+    
+    let userId;
+    try {
+      const decodedToken = jwtDecode(authToken);  
+      userId = decodedToken.nameid;  
+    } catch (error) {
+      console.error("Fel vid avkodning av JWT:", error);
+      alert("Fel vid inloggning, försök igen.");
+      return;
+    }
+  
+    if (!userId) {
+      alert("Fel: Kunde inte hitta användarens ID.");
+      return;
+    }
+  
+    
+    const cvData = {
+      title: `CV - ${name}`,
+      userId: userId,  
+      pdfUrl: "",
+    };
+  
+    
+    const result = await createCv(cvData);
+  
+    if (result.success) {
+      navigate("/Finish", {
+        state: {
+          profilePicture,
+          name,
+          address,
+          zip_code,
+          phoneNumber,
+          email,
+          linkedin,
+          otherLink,
+          about_Me,
+          work_Experiences,
+          education_Experiences,
+          competencies_Experiences,
+          leftSide_Color,
+          leftSide_ProfileImage_Color,
+          leftSide_Name_Color,
+          leftSide_Headers_Color,
+          leftSide_Border_Color,
+          leftSide_ContactInformation_Text_Color,
+          leftSide_ContactInformation_Logos_Color,
+          leftSide_Education_Header_Color,
+          leftSide_EducationInformation_Color,
+          rightSide_Color,
+          rightSide_Border_Color,
+          rightSide_Header_Text_Color,
+          rightSide_Header_Background_Color,
+          rightSide_Header_Shadow_Color,
+          rightSide_AboutMe_Color,
+          rightSide_Work_Title_Color,
+          rightSide_Work_Information_Color,
+          rightSide_Work_Description_Color,
+          rightSide_Competence_Skill,
+          rightSide_Competence_Description,
+          rightSide_Competence_Level_Background,
+          rightSide_Competence_Level_Foreground,
+          cvId: result.data.id,
+        },
+      });
+    } else {
+      alert(`Fel: ${result.message}`);
+    }
   };
 
   const handleAIButtonClick = async (section, inputText, additionalInfo, index) => {

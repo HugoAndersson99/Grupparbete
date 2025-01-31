@@ -6,7 +6,56 @@ import CreateCV_Button from '../Components/CreateCV_Button';
 import '../Css/MittKonto_Page.css';
 
 const MittKonto_Page = () => {
-const navigate = useNavigate();
+  const navigate = useNavigate();
+const { authToken } = useAuth();
+const [userCvs, setUserCvs] = useState(null); 
+const [error, setError] = useState('');
+
+  const userId = authToken ? JSON.parse(atob(authToken.split('.')[1])).nameid : null;
+
+  const fetchCvs = async () => {
+    if (!authToken || !userId) {
+      console.error("Ingen användare inloggad.");
+      setError("Du måste vara inloggad för att se dina CVs.");
+      return;
+    }
+  
+    try {
+      console.log("Hämtar CVs för userId:", userId);
+      const result = await getUserCvs(userId);
+      console.log("CV-lista från servern:", result.data);
+  
+      if (result.success) {
+        setUserCvs(result.data);
+      } else {
+        setError(result.message || "Misslyckades att hämta CVs.");
+      }
+    } catch (error) {
+      console.error("Fel vid hämtning av CVs:", error);
+      setError("Ett fel uppstod. Försök igen senare.");
+    }
+  };
+
+  useEffect(() => {
+    fetchCvs();
+  }, [authToken, userId]);
+
+  const handleDeleteCv = async (cvId) => {
+    const confirmDelete = window.confirm("Är du säker på att du vill radera detta CV?");
+    if (!confirmDelete) return;
+  
+    try {
+      const result = await deleteCv(cvId);
+      if (result.success) {
+        setUserCvs((prevCvs) => prevCvs.filter((cv) => cv.id !== cvId));
+      } else {
+        setError(result.message || "Misslyckades att radera CV.");
+      }
+    } catch (error) {
+      console.error("Fel vid radering av CV:", error);
+      setError("Ett fel uppstod vid radering.");
+    }
+  };
 
   return (
     <div className="mitt-konto-page">
@@ -51,6 +100,6 @@ const navigate = useNavigate();
       <Footer />
     </div>
   );
-};
-
+}
 export default MittKonto_Page;
+
