@@ -144,6 +144,7 @@ function FinishedCV_Page() {
           <p>No data passed to this page! Please fill out all the fields!</p>
         )} */}
       </div>
+      <div className="half-circle-2"></div>
     </div>
   </>
   );

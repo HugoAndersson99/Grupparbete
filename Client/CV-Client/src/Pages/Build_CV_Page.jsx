@@ -428,6 +428,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="leftSide-color"
+              name=" Vänster- Bakgrund"
               value={leftSide_Color}
               onChange={(e) => setLeftSide_Color(e.target.value)}
             />
@@ -437,6 +438,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="leftSide-Border-color"
+              name=" Vänster- Avskiljare"
               value={leftSide_Border_Color}
               onChange={(e) => setLeftSide_Border_Color(e.target.value)}
             />
@@ -446,6 +448,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="leftSide-ProfileImage"
+              name=" Vänster- BildRam"
               value={leftSide_ProfileImage_Color}
               onChange={(e) => setLeftSide_ProfileImage_Color(e.target.value)}
             />
@@ -455,6 +458,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="leftSide-Name"
+              name=" Vänster- Namn"
               value={leftSide_Name_Color}
               onChange={(e) => setLeftSide_Name_Color(e.target.value)}
             />
@@ -464,6 +468,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="leftSide-Headers"
+              name=" Vänster- Rubriker"
               value={leftSide_Headers_Color}
               onChange={(e) => setLeftSide_Headers_Color(e.target.value)}
             />
@@ -473,6 +478,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="leftSide-ContactInformation-Text"
+              name=" Vänster- Kontaktuppgifter (Text)"
               value={leftSide_ContactInformation_Text_Color}
               onChange={(e) => setLeftSide_ContactInformation_Text_Color(e.target.value)}
             />
@@ -482,6 +488,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="leftSide-ContactInformation-Logos"
+              name=" Vänster- Kontaktuppgifter (Logos)"
               value={leftSide_ContactInformation_Logos_Color}
               onChange={(e) => setLeftSide_ContactInformation_Logos_Color(e.target.value)}
             />
@@ -491,6 +498,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="leftSide-Education-Header"
+              name=" Vänster- Utbildning (Rubrik)"
               value={leftSide_Education_Header_Color}
               onChange={(e) => setLeftSide_Education_Header_Color(e.target.value)}
             />
@@ -500,6 +508,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="leftSide-Education-Information"
+              name=" Vänster- Utbildning (Text)"
               value={leftSide_EducationInformation_Color}
               onChange={(e) => setLeftSide_EducationInformation_Color(e.target.value)}
             />
@@ -509,6 +518,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="rightSide-color"
+              name=" Höger- bakgrund"
               value={rightSide_Color}
               onChange={(e) => setRightSide_Color(e.target.value)}
             />
@@ -518,6 +528,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="rightSide-Border-color"
+              name=" Höger- Avskiljare"
               value={rightSide_Border_Color}
               onChange={(e) => setRighSide_Border_Color(e.target.value)}
             />
@@ -527,6 +538,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="rightSide-Header-Text-color"
+              name=" Höger- Rubriker"
               value={rightSide_Header_Text_Color}
               onChange={(e) => setRightSide_Header_Text_Color(e.target.value)}
             />
@@ -536,6 +548,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="rightSide-Header-Background-color"
+              name=" Höger- Rubriker (Bakgrund)"
               value={rightSide_Header_Background_Color}
               onChange={(e) => setRightSide_Header_Background_Color(e.target.value)}
             />
@@ -545,6 +558,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="rightSide-Header-Shadow-color"
+              name=" Höger- Rubriker (Skugga)"
               value={rightSide_Header_Shadow_Color}
               onChange={(e) => setrightSide_Header_Shadow_Color(e.target.value)}
             />
@@ -554,6 +568,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="rightSide-AboutMe-color"
+              name=" Höger- Profil (Text)"
               value={rightSide_AboutMe_Color}
               onChange={(e) => setrightSide_AboutMe_Color(e.target.value)}
             />
@@ -563,6 +578,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="rightSide-Work-Title-color"
+              name=" Höger- Arbetslivserf. (Rubrik)"
               value={rightSide_Work_Title_Color}
               onChange={(e) => setRightSide_Work_Title_Color(e.target.value)}
             />
@@ -572,6 +588,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="rightSide-Work-Information-color"
+              name=" Höger- Arbetslivserf. (Sub-Rubrik)"
               value={rightSide_Work_Information_Color}
               onChange={(e) => setRightSide_Work_Information_Color(e.target.value)}
             />
@@ -581,6 +598,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="rightSide-Work-Description-color"
+              name=" Höger- Arbetslivserf. (Text)"
               value={rightSide_Work_Description_Color}
               onChange={(e) => setRightSide_Work_Description_Color(e.target.value)}
             />
@@ -590,6 +608,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="rightSide-Competence-Skill-color"
+              name=" Höger- Kompetens (Namn)"
               value={rightSide_Competence_Skill}
               onChange={(e) => setRightSide_Competence_Skill(e.target.value)}
             />
@@ -598,6 +617,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="rightSide-Competence-Level-Background-color"
+              name=" Höger- Kompetens (LevelBar-Bakgrund)"
               value={rightSide_Competence_Level_Background}
               onChange={(e) => setRightSide_Competence_Level_Background(e.target.value)}
             />
@@ -607,6 +627,7 @@ function Make_CV_Page() {
             <input
               type="color"
               id="rightSide-Competence-Level-Foreground-color"
+              name=" Höger- Kompetens (LevelBar-Förgrund)"
               value={rightSide_Competence_Level_Foreground}
               onChange={(e) => setRightSide_Competence_Level_Foreground(e.target.value)}
             />

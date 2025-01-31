@@ -6,10 +6,10 @@ function Competencies_Form ({
   competence_level, 
   handleInputChange_For_Competencies_Experiences
 }) {
-    
+  
   return (
 
-        <div className = "competencies-form">
+        <form className = "competencies-form">
 
           <div className = "input-fields-4">
             
@@ -20,6 +20,7 @@ function Competencies_Form ({
                 id = "namn-kompetens"
                 name = "competence_name"
                 placeholder = "Namn"
+                maxLength="10"
                 value={competence_name}
                 onChange={handleInputChange_For_Competencies_Experiences}
               />
@@ -38,7 +39,7 @@ function Competencies_Form ({
 
           </div>
 
-        </div>
+        </form>
     );
 };
 

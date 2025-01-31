@@ -78,9 +78,9 @@
     background-color: #F0E56B;
     height: 50px;
     width: auto;
-  }
+}
   
-  .level-button {
+.level-button {
     flex: 1;
     background-color: #F0E56B;
     color: rgb(0, 0, 0);
@@ -91,22 +91,21 @@
     padding: 10px 0;
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
-  }
+}
   
-  .level-button:hover {
+.level-button:hover {
     background-color: #C77DEA;
     transition: background-color 0.9s ease, color 0.9s ease;
-  }
+}
   
-  .level-button:focus {
+.level-button:focus {
     background-color:  #C77DEA;
     color: rgb(255, 255, 255);
     transition: background-color 0.9s ease, color 0.9s ease;
-  }
+}
   
-  /* New styles for when the button is active */
-  .level-button.active {
+.level-button:focus {
     background-color: #C77DEA;
     color: rgb(255, 255, 255);
-  }
+}
   

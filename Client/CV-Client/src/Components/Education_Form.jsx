@@ -9,7 +9,7 @@ function Education_Form ({
     handleInputChange_For_Education_Experiences
 }) {
     return (
-        <div className = "Education-form">
+        <form className = "Education-form">
 
             <div className = "input-fields-3">
 
@@ -20,7 +20,8 @@ function Education_Form ({
                     type = "text" 
                     id = "utbildning" 
                     name = "education_program"
-                    placeholder = "Utbildning "
+                    placeholder = "Utbildning"
+                    maxLength="30"
                     value={education_program}
                     onChange={handleInputChange_For_Education_Experiences}
                 />
@@ -33,6 +34,7 @@ function Education_Form ({
                     id = "skola" 
                     name = "education_school"
                     placeholder = "Skola"
+                    maxLength="25"
                     value={education_school}
                     onChange={handleInputChange_For_Education_Experiences}
                 />
@@ -43,7 +45,7 @@ function Education_Form ({
                 <div className = "input-group-3">
                 <label htmlFor = "startdatum-skola">Startdatum</label>
                 <input 
-                    type = "text" 
+                    type = "date" 
                     id = "startdatum-skola" 
                     name = "education_start_date"
                     placeholder = "12-2-12"
@@ -55,7 +57,7 @@ function Education_Form ({
                 <div className = "input-group-3">
                 <label htmlFor = "sludatum-skola">Slutdatum</label>
                 <input 
-                    type = "text" 
+                    type = "date" 
                     id = "sludatum-skola" 
                     name = "education_end_date"
                     placeholder = "21-4-19"
@@ -66,7 +68,7 @@ function Education_Form ({
 
             </div>
             
-        </div>
+        </form>
     );
 };
 
