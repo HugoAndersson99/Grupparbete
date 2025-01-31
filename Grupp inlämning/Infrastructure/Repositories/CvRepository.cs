@@ -28,7 +28,6 @@ namespace Infrastructure.Repositories
 
                 _logger.LogInformation("Successfully added CV with Id: {CVId} for UserId: {UserId}", cv.Id, cv.UserId);
                 return OperationResult<bool>.Success(true, "CV added successfully.");
-                _database.Update(cv);
             }
             catch (Exception ex)
             {

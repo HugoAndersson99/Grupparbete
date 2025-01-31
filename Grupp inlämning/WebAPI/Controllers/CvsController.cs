@@ -52,7 +52,7 @@ namespace WebAPI.Controllers
         //[Authorize]
         [HttpGet]
         [Route("GetCvById/{id}")]
-        [ResponseCache(CacheProfileName = "DefaultCache")]
+        //[ResponseCache(CacheProfileName = "DefaultCache")]
         public async Task<IActionResult> GetCvById(Guid id)
         {
             try

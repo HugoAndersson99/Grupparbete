@@ -17,7 +17,6 @@ namespace TestProject.UsersTests.UsersQueryTests
         private IUserRepository _userRepository;
         private Database _dbContext;
         private ILogger<GetAllUsersQueryHandler> _logger;
-       // private IMemoryCache _cache;
 
         [SetUp]
         public void Setup()
