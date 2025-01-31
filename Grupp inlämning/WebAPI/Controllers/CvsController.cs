@@ -21,7 +21,7 @@ namespace WebAPI.Controllers
         }
 
 
-       // [Authorize]
+        [Authorize]
         [HttpPost]
         [Route("CreateNewCV")]
         public async Task<IActionResult> CreateCv([FromBody] CvDto cvDto)
@@ -49,10 +49,9 @@ namespace WebAPI.Controllers
             }
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpGet]
         [Route("GetCvById/{id}")]
-        //[ResponseCache(CacheProfileName = "DefaultCache")]
         public async Task<IActionResult> GetCvById(Guid id)
         {
             try
@@ -72,7 +71,7 @@ namespace WebAPI.Controllers
             }
         }
 
-       // [Authorize]
+        [Authorize]
         [HttpPut]
         [Route("UpdateCv/{id}")]
         public async Task<IActionResult> UpdateCv(Guid id, [FromBody] CvDto cvDto)
@@ -100,7 +99,7 @@ namespace WebAPI.Controllers
             }
         }
 
-       // [Authorize]
+        [Authorize]
         [HttpDelete]
         [Route("DeleteCv/{id}")]
         public async Task<IActionResult> DeleteCv(Guid id)
@@ -123,10 +122,9 @@ namespace WebAPI.Controllers
             }
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpGet]
         [Route("GetUsersCv/{userId}")]
-        //[ResponseCache(CacheProfileName = "DefaultCache")]
         public async Task<IActionResult> GetAllCvsFromUser(Guid userId)
         {
             try
