@@ -101,7 +101,7 @@ function FinishedCV_Page() {
       </div>
       
       <div className="finished-CV-container" id = "finished_CV" ref = {printRef}>
-        {state.name ? (
+       {/*  {state.name ? (  */}
           <CV_Modell
             profilePicture={profilePicture}
             name={name}
@@ -115,6 +115,7 @@ function FinishedCV_Page() {
             work_Experiences={work_Experiences}
             education_Experiences={education_Experiences}
             competencies_Experiences={competencies_Experiences}
+
             leftSide_Color = {leftSide_Color}
             leftSide_ProfileImage_Color={leftSide_ProfileImage_Color}
             leftSide_Name_Color={leftSide_Name_Color}
@@ -139,9 +140,9 @@ function FinishedCV_Page() {
             rightSide_Competence_Level_Background={rightSide_Competence_Level_Background}
             rightSide_Competence_Level_Foreground={rightSide_Competence_Level_Foreground}
           />
-        ) : (
-          <p>No data passed to this page! Something has gone wrong!</p>
-        )}
+        {/* ) : (
+          <p>No data passed to this page! Please fill out all the fields!</p>
+        )} */}
       </div>
     </div>
   </>
