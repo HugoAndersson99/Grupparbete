@@ -3,11 +3,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    opacity: 0;
-    animation-name: fadeIn;
-    animation-duration: 1s;
-    animation-fill-mode: forwards;
-    animation-delay: 100ms;
+
 }
 @keyframes fadeIn {
     0% {opacity: 0;}
@@ -116,7 +112,7 @@
 .login-button {
     width: 124px;
     height: 61px;
-    background-color: #c77dea;
+    background-color: #C77DEA;
     color: black;
     border: none;
     border-radius: 5px;
@@ -130,7 +126,7 @@
 }
 
 .login-button:hover {
-    background-color: #8f57ff;
+    color: white;
     transition: background-color 0.9s ease, color 0.9s ease;
 }
 

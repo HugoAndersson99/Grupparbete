@@ -321,7 +321,7 @@ function CV_Modell({
                 <div className = "border_left-CV" style = {{borderBottom: `3px solid ${leftSide_Border_Color}`}}></div>
 
                 <h3 className = "left_side-CV-header" style={{ color: leftSide_Headers_Color}}>
-                    Contact Info
+                    Kontakt
                 </h3>
 
                 <div className = "contact-information-CV" ref={contactInfoRef} style={{ color: leftSide_ContactInformation_Text_Color }}>
@@ -380,13 +380,13 @@ function CV_Modell({
 
             <div className = "right-side" style={{ backgroundColor: rightSide_Color }}>
                 
-                <h3 className = "right_side-CV-header" style={{ color: rightSide_Header_Text_Color, background: rightSide_Header_Background_Color, textShadow: `2px 2px 4px ${rightSide_Header_Shadow_Color}`}}>Profile</h3>
+                <h3 className = "right_side-CV-header" style={{ color: rightSide_Header_Text_Color, background: rightSide_Header_Background_Color, textShadow: `2px 2px 4px ${rightSide_Header_Shadow_Color}`}}>Profil</h3>
 
                 <div className = "about_Me-CV" ref={profileRef} style={{ color: rightSide_AboutMe_Color}}>
                     <p>{about_Me}</p>
                 </div>
 
-                <h3 className = "right_side-CV-header" style={{ color: rightSide_Header_Text_Color, background: rightSide_Header_Background_Color, textShadow: `2px 2px 4px ${rightSide_Header_Shadow_Color}`}}>Work Experience</h3>
+                <h3 className = "right_side-CV-header" style={{ color: rightSide_Header_Text_Color, background: rightSide_Header_Background_Color, textShadow: `2px 2px 4px ${rightSide_Header_Shadow_Color}`}}>Arbetslivserfarenhet</h3>
 
                 <div className = "work-experience-CV" ref={workRef}>
                     {work_Experiences.map((experience, index) => (
@@ -408,7 +408,7 @@ function CV_Modell({
                     ))}
                 </div>
 
-                <h3 className = "right_side-CV-header" style={{ color: rightSide_Header_Text_Color, background: rightSide_Header_Background_Color, textShadow: `2px 2px 4px ${rightSide_Header_Shadow_Color}`}}>Competencies</h3>
+                <h3 className = "right_side-CV-header" style={{ color: rightSide_Header_Text_Color, background: rightSide_Header_Background_Color, textShadow: `2px 2px 4px ${rightSide_Header_Shadow_Color}`}}>Kompetenser</h3>
 
                 <div className = "competencies-CV" ref={competencyRef}>
                     {competencies_Experiences.map((experience, index) => (

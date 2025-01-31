@@ -205,8 +205,24 @@ i{
     .color_picker-section {
       scale: 80%;
       position: absolute;
-      top: 1%;
+      top: 3%;
       left: 49%;
+    }
+}
+@media only screen and (max-width: 1600px) {
+    .color_picker-section {
+      scale: 70%;
+      position: absolute;
+      top: -8%;
+      left: 50%;
+    }
+}
+@media only screen and (max-width: 1440px) {
+    .color_picker-section {
+      scale: 70%;
+      position: absolute;
+      top: -8%;
+      left: 50%;
     }
 }
 @media only screen and (max-width: 1280px) {
@@ -217,14 +233,37 @@ i{
       left: 50%;
     }
 }
+@media only screen and (max-width: 1366px) {
+    .color_picker-section {
+      scale: 65%;
+      position: absolute;
+      top: -20%;
+      left: 49%;
+    }
+}
 @media only screen and (max-width: 1920px) {
     .CV-modell-section {
         transform: scale(0.7);
     }
 }
+@media only screen and (max-width: 1600px) {
+    .CV-modell-section {
+        transform: scale(0.6);
+    }
+}
+@media only screen and (max-width: 1440px) {
+    .CV-modell-section {
+        transform: scale(0.6);
+    }
+}
 @media only screen and (max-width: 1280px) {
     .CV-modell-section {
         transform: scale(0.7);
+    }
+}
+@media only screen and (max-width: 1366px) {
+    .CV-modell-section {
+        transform: scale(0.5);
     }
 }
 .color-picker{
@@ -258,6 +297,21 @@ input[type="color"]::-webkit-color-swatch {
     border: none;
     border-radius: 50%;
 }
+
+
+input[type ="Color"]:hover::after {
+    content: attr(name);
+    position: absolute;
+    border-radius: 5px;
+    padding: 3px;
+    font-size: 13px;
+    top: -50%;
+    left: 110%;
+    background: #f3f0e0; 
+    z-index: 99 !important; 
+    border: 2px solid black;
+}
+
 
 .CV-modell-section {
     display: flex;

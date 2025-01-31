@@ -4,7 +4,7 @@ import '../Css/Contact_Information_Form.css'
 function Contact_Information_Form ({ profilePicture, handleImageUpload, handleInputChange, name, address, zip_code, phoneNumber, email, linkedin, otherLink}) {
 
     return (
-      <div className = "Contact_Information-Form">
+      <form className = "Contact_Information-Form">
 
         <div className = "picture-section">
           <img className = "profile-picture" src = {profilePicture} alt="Profile" />
@@ -29,6 +29,7 @@ function Contact_Information_Form ({ profilePicture, handleImageUpload, handleIn
               id="name"
               name="name"
               placeholder="Namn"
+              maxLength="30"
               value={name}
               onChange={handleInputChange}
             />
@@ -41,6 +42,7 @@ function Contact_Information_Form ({ profilePicture, handleImageUpload, handleIn
               id = "adress" 
               name="address"
               placeholder = "Adress"
+              maxLength="30" 
               value={address}
               onChange={handleInputChange}
             />
@@ -53,6 +55,8 @@ function Contact_Information_Form ({ profilePicture, handleImageUpload, handleIn
               id = "postnummer" 
               name="zip-code"
               placeholder = "Postnummer"
+              pattern="[0-9]{3}-[0-9]{2}"
+              maxLength={5} 
               value={zip_code}
               onChange={handleInputChange}
             />
@@ -65,6 +69,8 @@ function Contact_Information_Form ({ profilePicture, handleImageUpload, handleIn
               id = "telefonnummer" 
               name="phoneNumber"
               placeholder = "Telefonnummer"
+              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+              maxLength="10" 
               value={phoneNumber}
               onChange={handleInputChange}
             />
@@ -77,6 +83,7 @@ function Contact_Information_Form ({ profilePicture, handleImageUpload, handleIn
               id = "e-mail"
               name="email"
               placeholder = "E-mail"
+              maxLength="30"
               value={email}
               onChange={handleInputChange}
             />
@@ -85,10 +92,11 @@ function Contact_Information_Form ({ profilePicture, handleImageUpload, handleIn
           <div className = "input-group-1">
             <label htmlFor = "linkedIn">LinkedIn</label>
             <input 
-              type = "text" 
+              type = "url" 
               id = "linkedin" 
               name="linkedin"
               placeholder = "LinkedIn-URL"
+              maxLength="40"
               value={linkedin}
               onChange={handleInputChange}
             />
@@ -97,10 +105,11 @@ function Contact_Information_Form ({ profilePicture, handleImageUpload, handleIn
           <div className = "input-group-1" id = "länk-container">
             <label htmlFor = "länk">Annan länk</label>
             <input 
-            type = "text" 
+            type = "url" 
             id = "länk"
             name="otherLink" 
             placeholder = "Annan URL"
+            maxLength="40"
             value={otherLink}
             onChange={handleInputChange}
             />
@@ -108,7 +117,7 @@ function Contact_Information_Form ({ profilePicture, handleImageUpload, handleIn
 
         </div>
 
-      </div>
+      </form>
     );
 };
 

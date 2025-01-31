@@ -20,6 +20,7 @@
 .upload-image-input{
     display: none;
 }
+
 .picture-section{
     display: flex;
     flex-direction: column;
@@ -43,4 +44,19 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.9s ease, color 0.9s ease;
+}
+.custom-image-upload-button:hover{
+    background: #C77DEA;
+    color: white;
+    transition: background-color 0.9s ease, color 0.9s ease;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
 }
