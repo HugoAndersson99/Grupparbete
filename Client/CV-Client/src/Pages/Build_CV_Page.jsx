@@ -9,9 +9,13 @@ import Contact_Information_Form from '../Components/Contact_Information_Form.jsx
 import CV_Modell from '../Components/CV_Modell.jsx';
 import { useNavigate } from "react-router-dom";
 import { chatWithAI } from '../Services/OpenAI_API.jsx';
+import { createCv } from '../Services/CV_API';
+import { useAuth } from '../Services/AuthContext';
+import { jwtDecode } from "jwt-decode";
 
 function Make_CV_Page() {
 
+  const { authToken } = useAuth();
   const navigate = useNavigate();
   const [profilePicture, setProfilePicture] = useState(Picture_model);
 
@@ -212,7 +216,6 @@ function Make_CV_Page() {
         leftSide_ContactInformation_Logos_Color,
         leftSide_Education_Header_Color,
         leftSide_EducationInformation_Color,
-
         rightSide_Color,
         rightSide_Border_Color,
         rightSide_Header_Text_Color,
