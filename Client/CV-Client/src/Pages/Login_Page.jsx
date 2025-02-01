@@ -8,32 +8,33 @@ function Login_Page() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
 
 
   const handleLogin = async (event) => {
-    event.preventDefault();
-    setErrorMessage('');
-    setShowError(false);
+  event.preventDefault();
 
-    const loginData = {
-      email: email,
-      passwordHash: password, 
-    };
-
-    const result = await loginUser(loginData);
-
-    if (result.success) {
-      
-      sessionStorage.setItem('authToken', result.token);
-      navigate('/Mitt_Konto'); 
-    } else {
-      setErrorMessage(result.message);
-      setTimeout(() => setShowError(true), 0);
-    } 
-    
+  const loginData = {
+    email: email,
+    passwordHash: password, 
   };
+
+  
+
+  const result = await loginUser(loginData);
+
+ 
+
+  if (result.success) {
+    sessionStorage.setItem('authToken', result.token);
+    
+    window.location.href = "/Mitt_Konto";
+  } else {
+    
+    setErrorMessage(result.message || "Ett oväntat fel uppstod.");
+  }
+};
+
 
   return (
   <>

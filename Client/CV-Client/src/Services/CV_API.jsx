@@ -1,7 +1,7 @@
 export const createCv = async (cvData) => {
   try {
     const token = sessionStorage.getItem('authToken');
-    const response = await fetch('http://localhost:5166/api/Cvs/CreateNewCV', {
+    const response = await fetch('https://cvapplikation-gvefeagjdzb2bqf2.swedencentral-01.azurewebsites.net/api/Cvs/CreateNewCV', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -29,7 +29,7 @@ export const createCv = async (cvData) => {
 export const deleteCv = async (id) => {
   try {
     const token = sessionStorage.getItem('authToken');
-    const response = await fetch(`http://localhost:5166/api/Cvs/DeleteCv/${id}`, {
+    const response = await fetch(`https://cvapplikation-gvefeagjdzb2bqf2.swedencentral-01.azurewebsites.net/api/Cvs/DeleteCv/${id}`, {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -51,7 +51,7 @@ export const deleteCv = async (id) => {
 export const getUserCvs = async (userId) => {
   try {
     const token = sessionStorage.getItem('authToken');
-    const response = await fetch(`http://localhost:5166/api/Cvs/GetUsersCv/${userId}`
+    const response = await fetch(`https://cvapplikation-gvefeagjdzb2bqf2.swedencentral-01.azurewebsites.net/api/Cvs/GetUsersCv/${userId}`
 , {
       method: 'GET',
       headers: {
@@ -83,7 +83,7 @@ export const getUserCvs = async (userId) => {
 export const updateCv = async (id, updatedData) => {
   try {
     const token = sessionStorage.getItem("authToken");
-    const response = await fetch(`http://localhost:5166/api/Cvs/UpdateCv/${id}`, {
+    const response = await fetch(`https://cvapplikation-gvefeagjdzb2bqf2.swedencentral-01.azurewebsites.net/api/Cvs/UpdateCv/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
