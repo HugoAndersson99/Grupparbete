@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../Components/Header';
 import '../Css/Login_Page.css';
 import { loginUser } from '../Services/User_API'; 
+import { Link } from 'react-router-dom';
 
 function Login_Page() {
   const [email, setEmail] = useState('');
@@ -28,7 +29,8 @@ function Login_Page() {
   if (result.success) {
     sessionStorage.setItem('authToken', result.token);
     
-    window.location.href = "/Mitt_Konto";
+    
+    navigate('/Mitt_Konto');
   } else {
     
     setErrorMessage(result.message || "Ett oväntat fel uppstod.");
@@ -39,7 +41,7 @@ function Login_Page() {
   return (
   <>
     <Header />
-    <div className="login-container">
+    <form className="login-container">
       <div className="half-circle"></div>
       <div className="header-container">
 
@@ -78,7 +80,7 @@ function Login_Page() {
         </div>
       )}
       <div className="half-circle-2"></div>
-    </div>
+    </form>
   </>
   );
 }
