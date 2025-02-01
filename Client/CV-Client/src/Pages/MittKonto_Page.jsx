@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import CreateCV_Button from '../Components/CreateCV_Button';
 import '../Css/MittKonto_Page.css';
+import { getUserCvs, deleteCv } from '../Services/CV_API';
+import { useAuth } from '../Services/AuthContext';
 
 const MittKonto_Page = () => {
-  const navigate = useNavigate();
+const navigate = useNavigate();
 const { authToken } = useAuth();
 const [userCvs, setUserCvs] = useState(null); 
 const [error, setError] = useState('');
@@ -63,10 +65,12 @@ const [error, setError] = useState('');
       <div className='header-container'>
         <Header />
       </div>
-      
+  
       <div className="content">
         <h1 className="welcome-text">Välkommen tillbaka</h1>
-          <div className="cv-section">
+        
+  
+        <div className="cv-section">
           <div className="cv-header">
             <h1 className="cv-title">Dina CVs</h1>
             <CreateCV_Button
@@ -75,25 +79,20 @@ const [error, setError] = useState('');
               onClick={() => navigate('/Build_CV')}
             />
           </div>
+  
           <div className="cv-list">
-            <ul>
-              <li className="cv-item">
-                <span>CV_example1.pdf</span>
-                <button className="delete-button">X</button>
-              </li>
-              <li className="cv-item">
-                <span>CV_example2.pdf</span>
-                <button className="delete-button">X</button>
-              </li>
-              <li className="cv-item">
-                <span>CV_example3.pdf</span>
-                <button className="delete-button">X</button>
-              </li>
-              <li className="cv-item">
-                <span>CV_example4.pdf</span>
-                <button className="delete-button">X</button>
-              </li>
-            </ul>
+            {userCvs && userCvs.length === 0 ? (
+              <p>Du har inga sparade CVs.</p>
+            ) : (
+              <ul>
+                {userCvs && userCvs.map((cv) => (
+                  <li key={cv.id} className="cv-item">
+                    <span>{cv.title || "CV utan titel"}</span>
+                    <button className="delete-button" onClick={() => handleDeleteCv(cv.id)}>X</button>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
       </div>

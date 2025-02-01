@@ -8,6 +8,7 @@ using Microsoft.OpenApi.Models;
 using Microsoft.Extensions.DependencyInjection;
 using System.Text;
 using Infrastructure.Configurations;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace WebAPI
 {
@@ -147,6 +148,12 @@ namespace WebAPI
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Grupp Tre v1");
+            });
+
+            app.Use(async (context, next) =>
+            {
+                context.Features.Get<IHttpMaxRequestBodySizeFeature>().MaxRequestBodySize = 50 * 1024 * 1024; // 50 MB
+                await next();
             });
 
             app.UseRouting();
