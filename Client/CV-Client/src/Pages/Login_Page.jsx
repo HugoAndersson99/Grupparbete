@@ -3,12 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../Components/Header';
 import '../Css/Login_Page.css';
 import { loginUser } from '../Services/User_API'; 
+import { useAuth } from '../Services/AuthContext';
 
 function Login_Page() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
+  const { login } = useAuth();
 
 
   const handleLogin = async (event) => {
@@ -26,11 +28,9 @@ function Login_Page() {
  
 
   if (result.success) {
-    sessionStorage.setItem('authToken', result.token);
-    
-     window.location.href = "/Mitt_Konto";
+    login(result.token); 
+    navigate('/Mitt_Konto');
   } else {
-    
     setErrorMessage(result.message || "Ett oväntat fel uppstod.");
   }
 };
@@ -72,11 +72,7 @@ function Login_Page() {
           Klicka här
         </span>
       </div>
-      {errorMessage && (
-        <div className={`error-message ${showError ? 'fade-in' : ''}`}>
-          {errorMessage}
-        </div>
-      )}
+      
       <div className="half-circle-2"></div>
     </div>
   </>

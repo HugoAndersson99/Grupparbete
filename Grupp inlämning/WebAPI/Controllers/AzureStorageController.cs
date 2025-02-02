@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
-    public class AzureStorageController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class AzureStorageController : ControllerBase
     {
         private readonly IAzureStorageService _azureStorageService;
 
