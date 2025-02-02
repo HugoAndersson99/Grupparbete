@@ -8,10 +8,10 @@ import { getUserCvs, deleteCv } from '../Services/CV_API';
 import { useAuth } from '../Services/AuthContext';
 
 const MittKonto_Page = () => {
-const navigate = useNavigate();
-const { authToken } = useAuth();
-const [userCvs, setUserCvs] = useState(null); 
-const [error, setError] = useState('');
+  const navigate = useNavigate();
+  const { authToken } = useAuth();
+  const [userCvs, setUserCvs] = useState(null); 
+  const [error, setError] = useState('');
 
   const userId = authToken ? JSON.parse(atob(authToken.split('.')[1])).nameid : null;
 
@@ -68,7 +68,6 @@ const [error, setError] = useState('');
   
       <div className="content">
         <h1 className="welcome-text">Välkommen tillbaka</h1>
-        
   
         <div className="cv-section">
           <div className="cv-header">
@@ -87,7 +86,9 @@ const [error, setError] = useState('');
               <ul>
                 {userCvs && userCvs.map((cv) => (
                   <li key={cv.id} className="cv-item">
-                    <span>{cv.title || "CV utan titel"}</span>
+                    <a href={cv.pdfUrl} target="_blank" rel="noopener noreferrer" className="cv-link">
+                      {cv.title || "CV utan titel"}
+                    </a>
                     <button className="delete-button" onClick={() => handleDeleteCv(cv.id)}>X</button>
                   </li>
                 ))}
@@ -100,5 +101,5 @@ const [error, setError] = useState('');
     </div>
   );
 }
-export default MittKonto_Page;
 
+export default MittKonto_Page;
