@@ -38,7 +38,7 @@ namespace WebAPI.Controllers
             new { role = "system", content = "You are an assistant that helps the user to create a professional CV." },
             new { role = "user", content = questionForChat }
             },
-                max_tokens = 100
+                max_tokens = 250
             };
 
             string jsonPayload = JsonSerializer.Serialize(payload);
