@@ -26,8 +26,7 @@ namespace WebAPI.Controllers
                 return new BadRequestObjectResult("The question is required.");
             }
 
-            const string apiKey = "sk-proj-IWz5l8gw6Ls4cvpsnnrjh-AAqGIHAF55Yrlqfiom61hrkdeFV1Mp01jbJLzr" +
-                "T9BnlfzSsL1BXfT3BlbkFJ9WF7m0UhiGUWLCq4z82b31qFDo1NZdlY-dWgLjiIH_eXCn73K2bBWwluQ0A04iKwDdyoBCoZUA";
+            const string apiKey = "";
             const string apiUrl = "https://api.openai.com/v1/chat/completions";
 
             var payload = new
